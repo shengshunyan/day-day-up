@@ -2,7 +2,7 @@
 title: CSS note
 date: 2018-06-03
 categories: "CSS note"
-tags: 
+tags:
      - CSS
      - note
 ---
@@ -15,12 +15,12 @@ tags:
     pointer-events：all  //启用所有事件监听
     ```
 <!-- more -->
-3. 元素垂直居中： 
+3. 元素垂直居中：
 
-    1. 父元素高度确定的单行文本设置  height = line-height  
+    1. 父元素高度确定的单行文本设置  height = line-height
     2. inline-block
         ```
-        display: inline-block; 
+        display: inline-block;
         vertical-align: middle;
         ```
     3.  absolute定位：
@@ -39,7 +39,7 @@ tags:
         .c2 { //子
             height: 50px;
             width: 50px;
-            background-color: yellow; 
+            background-color: yellow;
             position: absolute;
             top: 0;
             bottom: 0;
@@ -47,20 +47,20 @@ tags:
             margin: auto;
         }
         ```
-    4. [flex教程](http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html)   
-    
+    4. [flex教程](http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html)
+
         ```
         //父元素
         display: flex;
         align-items: center; /*定义body的元素垂直居中*/
         justify-content: center; /*定义body的里的元素水平居中*/
-        ```  
+        ```
     5. 父容器设置为display:table ，然后将子元素也就是要垂直居中显示的元素设置为 display:table-cell （不推荐使用）
 
-4. 元素水平居中：  
+4. 元素水平居中：
 
-    1. 行内元素：设置  text-align:center  
-    2. 定宽块状元素：设置左右margin值为auto  
+    1. 行内元素：设置  text-align:center
+    2. 定宽块状元素：设置左右margin值为auto
     3. transform
         ```
         // 方法1：子元素
@@ -77,22 +77,22 @@ tags:
         .c2 { // 子
             height: 50px;
             width: 50px;
-            background-color: yellow; 
+            background-color: yellow;
             position: absolute;
             left: 0;
             right: 0;
             display: inline-block;
             margin: auto;
         }
-        ```  
+        ```
     4. flex布局
 
 5. 清除浮动：
     1. 父元素：overflow：auto;
     2. 父元素内部最后加<br style="clear:both">
 6. 元素设置为display:inline-block;之后会往下移：那是因为display:inline-block成了内联，inline box有一个叫做baseline的东西，想要更改很简单只要vertical-align: top;和vertical-align: bottom;
-7. div剩余高度自动填充：  
-    1. position:absolute 
+7. div剩余高度自动填充：
+    1. position:absolute
         ```
         #nav {
             background-color: #85d989;
@@ -107,7 +107,7 @@ tags:
             bottom: 0px;
             left: 0px;
         }
-        ```  
+        ```
     2. 也可利用CSS的calc方法实现
 
         ```
@@ -125,38 +125,38 @@ tags:
     }
     <!---- 表格 >
     table{
-        
+
     　　table-layout: fixed;
-    
+
     }
     td{
-    
+
     　　white-space: nowrap;
     　　overflow: hidden;
     　　text-overflow: ellipsis;
-    
+
     }
     ```
 9. CSS 设置table下tbody滚动条
     ```
     table tbody {
-    
+
         display:block;
-    
+
         height:195px;
-    
+
         overflow-y:scroll;
-    
+
     }
-    
+
     table thead, tbody tr {
-    
+
         display:table;
-    
+
         width:100%;
-    
+
         table-layout:fixed;
-    
+
     }
     ```
 10. pointer-events: none; // 解决元素被覆盖，元素点不上的问题
@@ -176,3 +176,36 @@ tags:
     5. 行内盒：文档流中行内、非定位子元素；
     6. z-index: 0：z-index为0或auto的定位元素， 这些元素形成了新的层叠上下文；
     7. 正z-index值：z-index 为正的定位元素，正的越大层叠等级越高；
+14. flex布局(踩坑)：
+    1. **问题描述**：flex-grow相同，但是元素宽度不是均分？
+    **原因分析**：flex-grow是分配flex容器除内容外剩余空间的比例，并不是整个容器的比例[捂脸]，所以会出现子元素flex-grow都是1，但是实际宽度不同，因为子元素本身内容所占用的宽度不同；
+    **解决方案**：所有flex-grow的子元素加上flex-basis: 0%;就是完全等比分布了，这个属性值会让父级主轴在计算剩余空间时忽略子元素的本身宽度，从而实现等比分配。简单写法就是直接定义flex: 1;
+    **拓展**：
+        ```CSS
+        当 flex 取值为一个非负数字，则该数字为 flex-grow 值，flex-shrink 取 1，flex-basis 取 0%
+        .item {flex: 1;}
+        .item {
+            flex-grow: 1;
+            flex-shrink: 1;
+            flex-basis: 0%;
+        }
+
+        .item {flex: none;}
+        .item {
+            flex-grow: 0;
+            flex-shrink: 0;
+            flex-basis: auto;
+        }
+
+        .item {flex: auto;}
+        .item {
+            flex-grow: 1;
+            flex-shrink: 1;
+            flex-basis: auto;
+        }
+        ```
+
+    2. **问题描述**：flex布局的子元素，宽度被其下的子元素撑大！
+    **原因分析**：
+        - 如果没有设置flex-basis属性，那么flex-basis的大小就是项目的width属性的大小
+        - 如果没有设置width属性，那么flex-basis的大小就是项目内容(content)的大小

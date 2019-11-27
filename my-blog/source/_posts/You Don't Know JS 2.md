@@ -1,8 +1,7 @@
 ---
-title: 你不知道的JavaScript 中 note
+title: 你不知道的JavaScript 中
 date: 2018-07-10
-categories: "你不知道的JavaScript 中"
-tags: 
+tags:
      - JavaScript
      - 读书笔记
 ---
@@ -24,7 +23,7 @@ tags:
     typeof { life: 42 } === 'object'; // true
     typeof [1, 2] === 'object'; // true
     typeof Symbol() === 'symbol'; // true
-    
+
     typeof null === 'object'; // true
     // 函数是object的一个子类型，是‘可调用对象’，它有一个内部属性[[call]]， 使其可以被调用
     typeof function a() {/* ... */} === 'function'; // true
@@ -32,7 +31,7 @@ tags:
 <!-- more -->
 2. 值和类型
     1. JavaScript中的变量是没有类型的，只有值才有；变量可以随时持有任何类型的值；
-    2. undefined: 已在作用域中声明但还没有赋值；   
+    2. undefined: 已在作用域中声明但还没有赋值；
        undeclared: 还没有在作用域中声明的变量；
     ```JavaScript
     var a;
@@ -41,7 +40,7 @@ tags:
     // 安全防范机制
     typeof xxx !== 'undefined'
     ```
-    
+
 #### 第二章 值
 
 1. 数字语法
@@ -54,8 +53,8 @@ tags:
     42..toFixed(3);
     ```
 2. 特殊数值
-    1. null: 指曾赋过值，但是目前没有值；  
-       undefined: 值从未赋过值；  
+    1. null: 指曾赋过值，但是目前没有值；
+       undefined: 值从未赋过值；
        undefined是一个标识符，可以被当作变量来使用和赋值；而null不能；
     2. void运算符: 表达式void xxx 没有返回值，因此返回结果是undefined，void并不改变表达式的结果，只是让表达式不返回值；按照惯例，我们用 void 0 来获得undefined；
 3. 特殊的数字
@@ -64,14 +63,14 @@ tags:
     var a = 2 / 'foo'; // NaN
     typeof a === 'number'; // true
     a == NaN; // false  唯一一个非自反的值
-    Number.isNaN(a); // true 
+    Number.isNaN(a); // true
     ```
     2. 无穷数: Infinity / -Infinity
     ```
     // 可用作区分0和-0的方法
     var a = 1 / 0; // Infinity
     var a = 1 / -0; // -Infinity
-    
+
     var a = Infinity / Infinity; // NaN
     var a = 1 / Infinity; // 0
     ```
@@ -80,29 +79,29 @@ tags:
     // 1. 判断是否为NaN
     var a = 2 / 'foo';
     Object.is(a, NaN); // true
-    
+
     // 2. 判断正负零
     var b = -3 * 0;
     Object.is(b, -0); // true
     Object.is(b, 0); // false
     ```
-4. 值和引用: 
+4. 值和引用:
     1. JavaScript对值和引用的赋值/传递在语法上没有区别，完全根据值得类型来决定；
-    2. 简单值总是通过值的复制的方式来赋值/传递，包括null, undefined, string, number, boolean, symbol;  
+    2. 简单值总是通过值的复制的方式来赋值/传递，包括null, undefined, string, number, boolean, symbol;
        复合值(对象和函数)，则总是通过引用复制的方式来赋值/传递；
     ```JavaScript
     var a = 2;
-    var b = a; 
+    var b = a;
     b++;
     a; // 2
     b; // 3
-    
+
     var c = [1, 2, 3];
     var d = c; // d是[1, 2, 3]的一个引用，而不是c的引用
     d.push(4);
     c; // [1, 2, 3, 4]
     d; // [1, 2, 3, 4]
-    
+
     // 由于引用指向的是值本身而非变量，所以一个引用无法改变另一个引用的指向
     function foo(x) {
         x.push(4);
@@ -112,7 +111,7 @@ tags:
     foo(a);
     a; // 是[1, 2, 3, 4] 而不是[4, 5, 6]
     ```
-    
+
 #### 第三章 原生函数
 
 1. 通过构造函数创建出来的是封装了基本类型值得封装对象；
@@ -168,7 +167,7 @@ Object.prototype.toString.call(a); // [object String]
     a; // [empty * 3]       和 [undefined, undefined, undefined]不同
     ```
     2. ...
-    
+
 #### 第四章 强制类型转换
 
 1. 值类型转换
@@ -191,7 +190,7 @@ var c = String(a); // 显式强制类型转换
         ```
     ```JavaScript
     // 因为toString和JSON.stringify很像，所以介绍一下；
-    
+
     // #1. 使用(第二个参数可以是个数组或者函数，用来筛选)
     var a = {
         b: 42,
@@ -201,7 +200,7 @@ var c = String(a); // 显式强制类型转换
     JSON.stringfy(a, function(k, v) {
         if (c !== 'c') return v;
     }); // "{"b": 42}"
-    
+
     // #2. toString和JSON.stringify的区别
     // 1. 字符串、数字、布尔值和null的toString和JSON.stringify基本相同；
     // 2. 如果传递给JSON.stringify的对象定义了toJSON()方法，那么该方法会在字符串化前调用，以便将对象转换为安全的JSON值；
@@ -218,24 +217,24 @@ var c = String(a); // 显式强制类型转换
 3. 显式强制类型转换
     1. 字符串和数字之间的显式转换: String()和Number()
     ```JavaScript
-    var a = 42; 
+    var a = 42;
     var b1 = String(a);
     var b2 = a.toString();
-    
+
     var c = '3.14';
     var d1 = Number(c);
     var d2 = +c;
-    
+
     // 1. 位运算符 | :单竖杠“|”就是转换为2进制之后相加得到的结果，配合 | 0可以取整
     3.14 | 0; // 3
-    
+
     // 2. 非运算符 ~ : ~x大致等同于-(x+1)
     // 利用只有~(-1)是0，可以优化indexOf的判断
     // bad
     if (a.indexOf('a') != -1) {/*...*/}
     // good
     if (~a.indexOf('a')) {/*...*/}
-    
+
     // ~~也可取整
     ~~-49.6; // -49
     ~~49.6; // 49
@@ -244,10 +243,10 @@ var c = String(a); // 显式强制类型转换
     ```JavaScript
     var a = '42';
     var b = '42px';
-    
+
     Number(a); // 42 -转换
     parseInt(a); // 42 -解析
-    
+
     Number(b); // NaN -转换
     parseInt(b); // 42 -解析
     ```
@@ -256,10 +255,10 @@ var c = String(a); // 显式强制类型转换
     // 在if()和三元表达式中，会自动隐式进行ToBoolean转换
     // 建议使用 Boolean() 或者 !! 来进行显式转换，提高代码可读性
     var a = 42;
-    
+
     // bad
     if (a) {/*...*/}
-    
+
     // good
     if (Boolean(a)) {/*...*/}
     ```
@@ -296,7 +295,7 @@ var c = String(a); // 显式强制类型转换
     function foo(a) {
         a = a || 'hello'; // 默认值用法
     }
-    
+
     // && 对第一个操作数执行条件判断，如果为true则返回第二个操作数，如果为false则返回第一个操作数
     a && a.say && a.say(); // 为后面的表达式把关
     ```
@@ -308,12 +307,12 @@ var c = String(a); // 显式强制类型转换
     var a = 42;
     var b = '42';
     a == b; // true 都转化为数字，再比较
-    
+
     // # 2. 其他类型和布尔类型
     var a = '42';
     var b = true;
     a == b; // false 会都转化为数字，再比较
-    
+
     // # 3. null和undefined
     null == undefined; // true
     // bad
@@ -332,7 +331,7 @@ var c = String(a); // 显式强制类型转换
             b = 4 + 38;
         }
         // 42 控制台输出42
-        
+
         // 获取结果值
         // # 1. eval (极不推荐)
         var a, b;
@@ -349,21 +348,21 @@ var c = String(a); // 显式强制类型转换
         ```
     2. 表达式的副作用
     ```JavaScript
-    var a = 42; 
+    var a = 42;
     var b = a++; // 42  ++副作用产生在表达式返回结果之后
-    
-    var a = 42; 
+
+    var a = 42;
     var b = ++a; // 43  ++副作用产生在表达式返回结果之前
-    
+
     var a = 42, b;
     b = ( a++, a );
     a; // 43
     b; // 43
-    
+
     // = 运算符的副作用是将42赋值给a
     var a, b, c;
     a = b = c = 42;
-    
+
     // 利用赋值语句的结果值
     // bad
     function vowels(str) {
@@ -388,12 +387,12 @@ var c = String(a); // 显式强制类型转换
         ```JavaScript
         // # 1. 对象常量
         var a = { foo: bar() };
-        
+
         // # 2. 只有右值(也合法, 变成了标签语句的语法)
         {
             foo: bar()
         }
-        
+
         function func() {
             bar: {
                 console.log('hello');
@@ -402,7 +401,7 @@ var c = String(a); // 显式强制类型转换
             }
             console.log('world');
         }
-        func(); 
+        func();
         // hello
         // world
         ```
@@ -421,7 +420,7 @@ var c = String(a); // 显式强制类型转换
             // ...
         } else { // 实际结构 在else后面自动加上了{}
             if (b) {
-                
+
             }
         }
         ```
@@ -458,7 +457,7 @@ console.log(foo());
 // 实现==匹配的技巧
 var a = '42';
 switch (true) {
-    case a == 10: 
+    case a == 10:
         console.log('10');
         break;
     default:
@@ -468,12 +467,12 @@ switch (true) {
 // break相关规则对default仍然适用
 var a = 10;
 switch (a) {
-    case 1: 
+    case 1:
         console.log('1');
         break;
     default:
         console.log('default');
-    case 2: 
+    case 2:
         console.log('2');
         break;
 }
@@ -514,7 +513,7 @@ a.index++;
     }
     ajax('http://url.1', foo);
     ajax('http://url.2', bar);
-    
+
     // 2. 门闩：只有第一名能取胜
     var a;
     function foo(x) {
@@ -574,7 +573,7 @@ funtion isPromise(p) {
         p !== null &&
         (
             typeof p === 'object' || typeof p === 'function'
-        ) && 
+        ) &&
         typeof p.then === 'function'
     ) {
         return true;
@@ -628,7 +627,7 @@ Promise.rece([
             ajax(url, resolve);
         });
     }
-    
+
     request('http://some.url.1/')
         .then(function(response1) {
             return request('http://some.url.2/?v=' + response1);
@@ -647,13 +646,13 @@ Promise.rece([
         }
     };
     ar rejectedPr = Promise.resolve(rejectedTh);
-    
+
     // Promise()构造器的第一个参数resolve会展开thenable(和Promise.resolve()一样)或真正的Promise；
     // Promise()构造器的第二个参数reject不会展开thenable(和Promise.resolve()一样)或真正的Promise，它会把这个值原封不动地传给拒绝理由；
     var rejectedPr = new Promise(function(resolve, reject) {
         resolve(Promise.reject('Oop'));
     });
-    
+
     rejectedPr.then(
         function fulfilled() {
             // 永远到不了这里
@@ -753,7 +752,7 @@ res.value; // 42
     ```JavaScript
     var something = (function() {
         var nextVal;
-        
+
         return {
             // for..of循环需要
             [Symbol.iterator]: function() { return this; },
@@ -768,10 +767,10 @@ res.value; // 42
             }
         }
     })();
-    
+
     for (var v of something) {
         console.log(v);
-        
+
         // 不要死循环
         if (v > 500) break;
     }
@@ -781,7 +780,7 @@ res.value; // 42
     ```JavaScript
     function *something() {
         var nextVal;
-        
+
         while(true) {
             if (nextVal === undefined) {
                 nextVal = 1;
@@ -791,10 +790,10 @@ res.value; // 42
             yield nextVal;
         }
     }
-    
+
     for (var v of something()) { // 需要调用生成器来生成迭代器
         console.log(v);
-        
+
         // 不要死循环
         if (v > 500) break;
     }

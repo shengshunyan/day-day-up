@@ -1,10 +1,8 @@
 ---
 title: JavaScript之函数式编程
 date: 2018-10-25
-categories: "JavaScript"
-tags: 
+tags:
      - JavaScript
-     - 博客
 ---
 
 1. 纯函数：无副作用(不改变参数，不依赖环境，不进行请求，I/O操作)；如map, slice等；

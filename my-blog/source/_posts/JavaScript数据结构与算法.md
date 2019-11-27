@@ -1,8 +1,7 @@
 ---
 title: 学习JavaScript数据结构与算法 note
 date: 2018-08-14
-categories: "学习JavaScript数据结构与算法"
-tags: 
+tags:
      - JavaScript
      - 读书笔记
 ---
@@ -139,7 +138,7 @@ function baseConverter(decNumber, base) {
     return baseString;
 }
 ```
-   
+
 ### 第四章 队列
 
 1. 队列的实现：先进先出
@@ -396,7 +395,7 @@ function Set() {
     this.values = function() {
         return Object.keys(items);
     };
-    
+
     /* 集合操作 */
     // 并集
     this.union = function(otherSet) {
@@ -823,7 +822,7 @@ function Graph() {
             }
         }
     };
-    
+
     // 2. 利用广度优先搜索寻找最短路径(实际问题中会有路径加权，广度优先算法就不一定合适，寻找其他算法)
     // 从v到u的距离d[u]
     // 前溯点pred[u]，用来推导出从v到其他每个顶点u的最短路径
@@ -833,7 +832,7 @@ function Graph() {
         const distance = {}; // 存储点与点之间最短距离
         const path = {}; // 存储点与点之间最短路径
         const pred = [];
-        
+
         queue.enqueue(v);
         vertices.forEach(value => {
             distance[value] = 0;
@@ -905,7 +904,7 @@ function Graph() {
     ```JavaScript
     function ArrayList() {
         let array = [];
-    
+
         this.insert = function(item) {
             array.push(item);
         };
@@ -1127,7 +1126,7 @@ function Graph() {
         return -1;
     };
     ```
-    
+
 ### 第十一章 算法模式
 
 1. 递归
@@ -1148,7 +1147,7 @@ function Graph() {
         });
     };
     printArray([1, 2, 3, 4, 5])
-    
+
     // 函数式编程
     const _forEach = function(array, action) {
         array.forEach(value => {
@@ -1161,7 +1160,7 @@ function Graph() {
     _forEach([1, 2, 3, 4, 5], logItem);
     ```
     2. JavaScript函数式工具箱：map(映射), filter(过滤), reduce(集合合并成一个值)
-    
+
 ### 第十二章 算法复杂度
 
 1. 启发式算法：局部搜索、遗传算法、启发式导航、机器学习等；可能得到的未必是最优解，但是足够解决问题；

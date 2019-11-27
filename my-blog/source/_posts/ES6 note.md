@@ -1,8 +1,7 @@
 ---
-title: ES6 note
+title: ES6
 date: 2018-06-03
-categories: "ES6教程"
-tags: 
+tags:
      - JavaScript
      - 读书笔记
 ---
@@ -98,7 +97,7 @@ let y = 2;
 // 2.函数返回多个值
 function example(){
     return {
-        foo: 1, 
+        foo: 1,
         bar: 2,
     };
 }
@@ -186,7 +185,7 @@ re.test('abc!abc!abc'); //true
 # 第六章：数值的拓展
 1. 二进制和八进制的表示法：0b(或0B)   0o(或0O)
 ```JavaScript
-0b111110111 === 503 
+0b111110111 === 503
 0o767 === 503
 ```
 2. Number.EPSILON 一个很小的数值，是一个可以接受的误差范围（两个值的差小于这个值，即可视为相等）;
@@ -230,13 +229,13 @@ funciton add (...value) {
     for (var val of values) {
         sum += val;
     }
-    
+
     return sum;
 }
 add(2, 5, 3) //10
 // rest之后不能由其他参数，不然会报错
 ```
-3. 箭头函数  
+3. 箭头函数
 [使用注意事项](http://www.zcfy.cc/article/when-not-to-use-arrow-functions-482.html)
 ```JavaScript
 // a.
@@ -251,20 +250,20 @@ var sum = (num1, num2) => {
 // 实际上，箭头函数内部根本没有自己的this
 // ES6
 function foo() {
-    setTimeout(() => 
+    setTimeout(() =>
         console.log(this.id);
     }, 100);
 }
 // ES5
 function foo() {
     var _this = this;
-    
+
     setTimeout(function(){
         console.log(_this.id);
     }, 100)
 }
 ```
-4. 绑定this（浏览器未支持，Babel转码器已支持）  
+4. 绑定this（浏览器未支持，Babel转码器已支持）
 在箭头函数不适用的场景，用来替代call、apply、bind的写法；
 ```JavaScript
 // a.
@@ -277,7 +276,7 @@ document.querySelectorAll('div.maClass')
 ::html('hahaha');
 ```
 5. 尾调用  (尾调用只在严格模式下才开启，正常模式下无效)
-    1. 尾调用——优化 
+    1. 尾调用——优化
     ```JavaScript
     // 普通函数
     function a() {
@@ -347,7 +346,7 @@ for (let [index, elem] of arr.entries()){
 ```JavaScript
 [1, 2, 3].includes(2)  //true
 ```
-5. ES6明确将数组空位转为undefined  
+5. ES6明确将数组空位转为undefined
 Array.from()和拓展运算符(...)都会把空位转化为undefined
 
 # 第九章：对象的拓展
@@ -424,7 +423,7 @@ Object.getOwnPropertyDescriptors(obj);
 ```
 8. Null传导运算符 ?. ——提案
 ```JavaScript
-// ES5 写法 
+// ES5 写法
 const firstName = (message && message.body && message.body.user) || 'default';
 // ES6 写法
 const firstName = message?.body?.user || 'default';
@@ -643,7 +642,7 @@ obj2.name = '李四'; //打印 李四, 20
 ```JavaScript
 // 1. 基本用法
 var promise = new Promise(function(resolve, reject) {
-    // ... some code 
+    // ... some code
 
     if (/* 异步操作成功 */) {
         resolve(value);
@@ -679,7 +678,7 @@ getJSON("/post/1.json")
     .catch(
         err => console.log("Rejected: ", err)
     )
-    
+
 // 3. Promise.all 方法的参数不一定是数组，但是必须具有Iterator接口
 var p = Promise.all([p1, p2, p3]);
 
@@ -694,7 +693,7 @@ Promise.all(promises).then(function(posts) {
 // 4. Promise.race 方法的参数不一定是数组，但是必须具有Iterator接口
 var p = Promise.race([p1, p2, p3]);
 ```
-2. 
+2.
 Promise.resolve(): 将现有对象转为Promise()对象
 ```JavaScript
 Promise.resolve('foo');
@@ -726,7 +725,7 @@ server.listen(0)
 4. Promise.try()：（目前一个提案）
 
 # 第十五章：Iterator和for...of循环
-1. 概念：  
+1. 概念：
     1. Iterator(遍历器)的作用：为各种数据提供一个统一的、简便的访问接口；供for...of消费；
     2. 每次调用next()方法都会返回一个包含value和done两个属性的对象；
     3. 默认的Iterator接口部署在数据结构的Symbol.iterator属性
@@ -741,12 +740,12 @@ myIterable[Symbol.iterator] = function* () {
 };
 console.log([...myIterable]); //[1, 2, 3]
 ```
-3. 遍历器对象除了具有next()方法外，还具有return()和throw()方法。  
-return()方法: 用于for...of循环提前退出（通常是因为出错，或者有break语句或者continue语句），return()方法必须返回一个对象；  
+3. 遍历器对象除了具有next()方法外，还具有return()和throw()方法。
+return()方法: 用于for...of循环提前退出（通常是因为出错，或者有break语句或者continue语句），return()方法必须返回一个对象；
 4. for...of循环
     1. 数组: for (let elem of array)
     2. Set: for (let elem of set)
-    3. Map: for (let [key, value] of Map)  
+    3. Map: for (let [key, value] of Map)
     4. 对于类数组对象，可以先Array.from(arrayLike)转为数组，再遍历；
     5. 一般对象Object: for (let [key, value] of Object.entires(object))
 5. for...of与其他遍历语法的比较
@@ -831,7 +830,7 @@ for (let n of numbers()) {
 4. Generator.prototype.throw()
 ```JavaScript
 var g = function* () {
-    try { 
+    try {
         yield ;
     } catch (e) {
         console.log('内部捕获', e);
@@ -850,7 +849,7 @@ try {
 // 第一个错误被Generator函数体内的catch语句捕获，i第二次抛出错误，由于Generator函数内部的catch已经执行过了，
 // 所以这个错误就被抛出了函数体外，被函数体外的catch语句捕获
 ```
-5. Genetator.prototype.return()  
+5. Genetator.prototype.return()
 return 方法可以返回给定的值，并终结Generator函数的遍历。
 ```JavaScript
 function* gen() {
@@ -928,7 +927,7 @@ function run(fn) {
         var result = gen.next(data);
         if(result.done) return ;
         result.value(next); //yield语句后面返回的必须是Thunk函数
-    } 
+    }
     next();
 }
 
@@ -982,8 +981,8 @@ co(function* () {
     console.log(res);
 }).catch(onerror);
     // 当然也可用Promise自身实现
-    var res = yield Promise.all([promise1, promise2]); 
-    var res = yield Promise.rece([promise1, promise2]); 
+    var res = yield Promise.all([promise1, promise2]);
+    var res = yield Promise.rece([promise1, promise2]);
 ```
 
 # 第十八章：async函数
@@ -1068,7 +1067,7 @@ var p = new Point(1, 2);
     // class不存在变量提升
 class Point {
     // constructor函数如果没有显式定义，会添加一个空的constructor方法
-    constructor(x, y) { 
+    constructor(x, y) {
         this.x = x;
         this.y = y;
     } // class里面的函数之间不需要加逗号
@@ -1130,10 +1129,10 @@ class Foo {
 1. 简介
 ```JavaScript
 class Point {
-    constructor(x, y) { 
+    constructor(x, y) {
         this.x = x;
         this.y = y;
-    } 
+    }
     toString() {
         return `( ${this.x}, ${this.y} )`;
     }
@@ -1203,7 +1202,7 @@ function readonly(target, name, descriptor) {
     return descriptor;
 }
 ```
-2. 第三方库   
+2. 第三方库
     1. core-decoration.js是一个第三方模块，提供了几个常见的修饰器；
     2. Traits-decorator 在类中混入方法，实现继承的一种新思路；
 
@@ -1254,7 +1253,7 @@ function readonly(target, name, descriptor) {
     export * from './module1.js';
     //可以用于整理页面所需所有的类库，引到一个文件下
 
-// 6. import() —— 提案 
+// 6. import() —— 提案
     // 1. 与import命令静态加载相对的，import()是动态加载的；
     // 2. 与require类似，不过require是同步加载，import()是异步加载，返回的是promise对象；
 ```

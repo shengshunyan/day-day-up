@@ -1,8 +1,7 @@
 ---
-title: 你不知道的JavaScript 下 note
+title: 你不知道的JavaScript 下
 date: 2018-07-19
-categories: "你不知道的JavaScript 下"
-tags: 
+tags:
      - JavaScript
      - 读书笔记
 ---
@@ -36,10 +35,10 @@ tags:
     // ES6 foo()会报错 ReferenceError
     {
         function foo() {
-            //... 
+            //...
         }
     }
-    foo(); 
+    foo();
     ```
 2. 默认参数
 ```JavaScript
@@ -89,7 +88,7 @@ foo(); // ReferenceError
     ```JavaScript
     // 1. x() {..} 就是 x: function() {..} 的简写形式
     // 2. 简写形式的特质：支持super
-    
+
     // ES5
     var o = {
         x: function() {
@@ -102,7 +101,7 @@ foo(); // ReferenceError
             //..
         },
     }
-    
+
     // 注意：有一种情况不能用这种简写形式(当函数里有内部递归时)
     var o = {
         something: function soemthing(x, y) {
@@ -127,7 +126,7 @@ foo(); // ReferenceError
     }
     o.id; // 10
     o.id; // 11
-    o.id = 20; 
+    o.id = 20;
     o.id; // 20
     ```
     3. 设定[[Prototype]] (不太建议使用)
@@ -202,7 +201,7 @@ var dec = 42,
     oct = 0o52, // 八进制
     hex = 0x2a, // 十六进制
     bin = 0b101010; // 二进制
-    
+
 // 强制类型转换/变换成相应的数字值
 Number('42'); // 42
 Number('0o52'); // 42
@@ -289,7 +288,7 @@ Object.getOwnPropertySymbols(o); // [Symbol(bar)]
             };
         }
     };
-    
+
     for (var v of Fib) {
         console.log(v);
         if (v > 50) break;
@@ -308,7 +307,7 @@ Object.getOwnPropertySymbols(o); // [Symbol(bar)]
     // 获取第三个元素，然后获取其余所有元素
     var [z, ...w] = it;
     // it已经消耗尽？是的
-    it.next(); // { value: undefined, done: true } 
+    it.next(); // { value: undefined, done: true }
     ```
 2. 生成器
     1. 语法：function *foo() {..}
@@ -367,7 +366,7 @@ Object.getOwnPropertySymbols(o); // [Symbol(bar)]
         var awesome = 42;
         var bar = [1, 2, 3];
         export { foo, awesome, bar };
-        
+
         // 2. 默认导出
         function foo() {
             // ..
@@ -376,33 +375,33 @@ Object.getOwnPropertySymbols(o); // [Symbol(bar)]
         export default foo;
         // 导出的是标识符foo，所以修改foo的值会改变导出值
         export { foo as default };
-        
+
         // 3. 双向绑定是不允许的，如果从一个模块导入了foo，然后修改foo的值，就会抛出错误；
         ```
         3. import
         ```JavaScript
-        // 1. 
+        // 1.
         import { foo, bar } from 'foo';
-        
+
         // 2. 导入默认导出的模块
         import foo from 'foo';
-        
+
         // 3. 混合
         // foo.js
         export default function foo() {..};
         export function bar() {..};
         // index.js
         import FOO, { bar } from 'foo';
-        
+
         // 4. 命名空间导入(暂不支持命名空间部分导入)
         import * as FOO from 'foo';
         FOO.foo();
         FOO.bar();
-        
+
         // 5. import提升
         foo();
         import { foo } from 'foo';
-        
+
         // 6. 基本形式：它加载、编译，并求值foo模块；一般来说，这种导入没什么太大的用处，可能需要模块的的一些副作用(比如把东西赋给全局变量window)
         import 'foo';
         ```
@@ -425,7 +424,7 @@ Object.getOwnPropertySymbols(o); // [Symbol(bar)]
             return this.x + this.y;
         }
     }
-    
+
     // 类似
     function Foo(a, b) {
         this.x = a;
@@ -471,7 +470,7 @@ Object.getOwnPropertySymbols(o); // [Symbol(bar)]
                 console.log('ChildB:', this.id);
             }
         }
-        
+
         var a = new ChildA();
         a.foo(); // ParentA: a    ChildA: a
         var b = new ChildB();
@@ -563,11 +562,11 @@ Object.getOwnPropertySymbols(o); // [Symbol(bar)]
             }
         }
     }
-    
+
     var arr = new NoRepeatIdArray( {id: 1}, {id: 2}, {id: 1} );
     arr.push({id: 2}, {id: 3});
     ```
-    
+
 #### 第四章 异步控制流 (你不知道的JavaScript中 Promise+生成器讲的更细)
 
 #### 第五章 集合
@@ -596,7 +595,7 @@ a.join('-'); // '10-20-30'
     var a = Array(3);
     a.length; // 3
     a[0]; // undefined
-    
+
     var b = Array.of(3);
     b.length; // 1
     b[0]; // 3
@@ -615,7 +614,7 @@ a.join('-'); // '10-20-30'
     ```JavaScript
     -0 === 0; // true
     Object.is(-0, 0); // false
-    
+
     NaN === NaN; // false
     Object.is(NaN, NaN); // true
     ```
@@ -642,7 +641,7 @@ a.join('-'); // '10-20-30'
     'foo'.repeat(3); // 'foofoofoo'
     ```
     4. 字符串检查函数：startsWith(..), endsWith(..), includes(..);
-    
+
 #### 第七章 元编程
 
 1. 函数名称
@@ -692,7 +691,7 @@ a.join('-'); // '10-20-30'
         1. 代理在先，代理在后
         ```JavaScript
         // 问题：希望预先定义好一个对象的所有属性/方法之后，访问不存在的属性名时，能够抛出一个错误
-        
+
         // 1. 代理在先
         var obj = {
                 a: 1,
@@ -721,7 +720,7 @@ a.join('-'); // '10-20-30'
         pobj.foo(); // a 3
         pobj.b = 4; // Error: No such property/method!
         pobj.bar(); // Error: No such property/method!
-        
+
         // 2. 代理在后: 把proxy对象放到主对象的[[prototype]]链中
         var obj = {
                 a: 1,
@@ -834,7 +833,7 @@ a.join('-'); // '10-20-30'
             return x !== x;
         };
     }
-    
+
     // 新语法检查：检查箭头函数语法是否支持
     try {
         new Function("( () => {} )"); // 不用Function包装的话，编译会不通过
@@ -854,7 +853,7 @@ a.join('-'); // '10-20-30'
         return (x / 2) + foo(x - 1);
     }
     foo(123456); // RangeError: Maximum call stack size exceeded
-    
+
     // 尾调用优化(TCO)
     'use strict';
     var foo = (function() {
@@ -867,7 +866,7 @@ a.join('-'); // '10-20-30'
         }
     })();
     foo(123456); // 3810376848.5
-    
+
     // 非尾调用优化：展开递归
     // 也许性能最好，但是可复用性不高，没有把循环逻辑提取出来
     'use strict';
@@ -893,7 +892,7 @@ a.join('-'); // '10-20-30'
         TCO_ENABLED = false;
     }
     ```
-    
+
 #### 第八章 ES6之后
 
 1. 异步函数：async..await(详细见ES6 note async部分)；

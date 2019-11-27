@@ -1,7 +1,6 @@
 ---
-title: JavaScript设计模式与开发实践 note
+title: JavaScript设计模式与开发实践
 date: 2019-03-15
-categories: "JavaScript设计模式与开发实践"
 tags:
      - JavaScript
      - 读书笔记
@@ -20,6 +19,7 @@ tags:
     1. 基于原型的对象委托的形式实现JavaScript对象系统；
     2. Object.create()就是原型模式的天然实现；
     3. ES6的Class只是语法糖；
+
 <!-- more -->
 
 ### 第二章 this、call和apply

@@ -1,8 +1,7 @@
 ---
-title: css揭秘 note
+title: css揭秘
 date: 2018-06-03
-categories: "css揭秘"
-tags: 
+tags:
      - CSS
      - 读书笔记
 ---
@@ -87,7 +86,7 @@ background-size: 30px 100%;
 height: 200px;
 width: 100%;
 background: hsl(20, 40%, 90%);
-background-image: 
+background-image:
     linear-gradient(90deg, #fb3 11px, transparent 0),
     linear-gradient(90deg, #ab4 23px, transparent 0),
     linear-gradient(90deg, #655 41px, transparent 0);
@@ -289,8 +288,8 @@ body, .backgroung::before {
 .backgroung {
     height: 400px;
     width: 600px;
-    background: #58a; 
-    background: 
+    background: #58a;
+    background:
         linear-gradient(to left bottom, transparent 50%, rgba(0, 0, 0, .4) 0) no-repeat 100% 0 / 2em 2em,
         linear-gradient(-135deg, transparent 1.5em, #58a 0);
 }
@@ -417,7 +416,7 @@ li:first-child:nth-last-child(n+2):nth-child(-n+6) ~ li {
 1. 缓动效果(模拟小球下落)
 ```
 @keyframes bounce {
-    60%, 80%, to { 
+    60%, 80%, to {
         transform: translateY(400px);
         animation-timing-function: ease-out;
     }
@@ -522,13 +521,13 @@ transform-origin: 0 0;
 
 @keyframes spin {
     from {
-        transform: 
+        transform:
             rotate(0turn)
             translateY(-150px) translateY(50%)
             rotate(1turn);
     }
     to {
-        transform: 
+        transform:
         rotate(1turn)
             translateY(-150px) translateY(50%)
             rotate(0turn);

@@ -1,19 +1,18 @@
 # Header
 
 menu:
-  主页: https://15754600159.github.io/my-blog/
+  主页: ""
   # 随笔: /tags/随笔/
 
 # SubNav
 subnav:
   github: "https://github.com/15754600159"
   zhihu: "https://www.zhihu.com/people/sheng-xia-24-14/activities"
-  douban: "https://www.douban.com/people/146126328/"
+  weibo: "https://weibo.com/u/5349904384"
+  # weixin: "#"
   # mail: "15754600159@163.com"
   # rss: "#"
-  # weibo: "#"
   #qq: "#"
-  #weixin: "#"
   #jianshu: "#"
   #segmentfault: "#"
   #bilibili: "#"
@@ -28,12 +27,12 @@ rss: /atom.xml
 # 是否需要修改 root 路径
 # 如果您的网站存放在子目录中，例如 http://yoursite.com/blog，
 # 请将您的 url 设为 http://yoursite.com/blog 并把 root 设为 /blog/。
-root: /my-blog/
+# root: /my-blog/
 
 # Content
 
 # 文章太长，截断按钮文字
-excerpt_link: more
+# excerpt_link: more
 # 文章卡片右下角常驻链接，不需要请设置为false
 show_all_link: '展开全文'
 # 数学公式
@@ -47,9 +46,9 @@ reward_type: 2
 # 打赏wording
 reward_wording: '请我吃糖果呀(鬼脸😜)'
 # 支付宝二维码图片地址，跟你设置头像的方式一样。比如：/assets/img/alipay.jpg
-alipay: 
+alipay:
 # 微信二维码图片地址
-weixin: 
+weixin:
 
 # 目录
 # 目录设定：0-不显示目录； 1-文章对应的md文件里有toc:true属性，才有目录； 2-所有文章均显示目录
@@ -68,7 +67,7 @@ google_analytics: ''
 favicon: /favicon.png
 
 #你的头像url
-avatar: /my-blog/img/avatar.jpg
+avatar: /img/avatar.jpg
 
 #是否开启分享
 share_jia: true
@@ -77,6 +76,9 @@ share_jia: true
 #不需要使用某项，直接设置值为false，或注释掉
 #具体请参考wiki：https://github.com/litten/hexo-theme-yilia/wiki/
 
+# 0. 来必力
+# livere_uid: "MTAyMC80NzcxNC8yNDIxMg=="
+
 #1、多说
 duoshuo: false
 
@@ -84,19 +86,30 @@ duoshuo: false
 wangyiyun: false
 
 #3、畅言
-changyan_appid: true
-changyan_conf: true
+changyan_appid: false
+changyan_conf: false
 
 #4、Disqus 在hexo根目录的config里也有disqus_shortname字段，优先使用yilia的
 disqus: false
 
 #5、Gitment
-gitment_owner: '15754600159'      #你的 GitHub ID
-# gitment_owner: '23131442'      #你的 GitHub ID
-gitment_repo: 'my-blog'          #存储评论的 repo
-gitment_oauth:
-  client_id: '48d98ff4f118ed270626'           #client ID
-  client_secret: 'ce4ef32db654ea070cf47dedd1036bfafd17814e'       #client secret
+# gitment_owner: '15754600159'      #你的 GitHub IDvaline
+# gitment_repo: 'my-blog.github.io'          #存储评论的 repo
+# gitment_oauth:
+#   client_id: '7ac96421b33d4dd4c8f4'           #client ID
+#   client_secret: '411db54ea097d35e871259507401513167e31188'       #client secret
+
+#6、Valine
+valine:
+ appid: "vwH8Tv9O956fvU7YcwU7oN1J-gzGzoHsz"
+ appkey: "0f3BlO6PsvPuxD8KSKSupVim"
+ verify: false #验证码
+ notify: true #评论回复提醒
+ placeholder: 有话要说？ #评论框占位符
+
+ # 是否开启访问量统计功能(不蒜子)
+busuanzi:
+ enable: true
 
 # 样式定制 - 一般不需要修改，除非有很强的定制欲望…
 style:
@@ -128,4 +141,4 @@ friends:
   # 友情链接5: http://localhost:4000/
   # 友情链接6: http://localhost:4000/
 
-aboutme: 匠人、匠心<br>走在前端的路上<br><br>我偏爱电影<br>我偏爱猫
+aboutme: 匠人、匠心<br>走在前端的路上<br><br>我偏爱电影<br>我偏爱猫<br><br><br>email:15754600159@163.com<br>phone:5754600159

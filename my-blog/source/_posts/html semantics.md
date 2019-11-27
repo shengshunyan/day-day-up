@@ -1,8 +1,7 @@
 ---
 title: HTML语义化
 date: 2018-06-03
-categories: "HTML语义化"
-tags: 
+tags:
      - HTML
 ---
 写可读性更高的HTML代码！
@@ -65,7 +64,7 @@ tags:
 
     <blockquoto></blockquoto>：引述文本，默认新的一行显示。
 
-    <time></time>：标记时间。datetime属性遵循特定格式，如果忽略此属性，文本内容必须是合法的日期或者时间格式。     
+    <time></time>：标记时间。datetime属性遵循特定格式，如果忽略此属性，文本内容必须是合法的日期或者时间格式。
 
     <dfn></dfn>：定义术语元素，与定义必须紧挨着，可以在描述列表dl元素中使用。
 

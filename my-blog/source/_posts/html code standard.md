@@ -1,10 +1,8 @@
 ---
 title: HTML代码规范
 date: 2018-06-03
-categories: "HTML代码规范"
-tags: 
+tags:
      - HTML
-     - 代码规范
 ---
 目标：不管有多少参与者，代码都应该像同一个人所写
 声明：本规范中的一些规定无对错之分，只是为了统一风格和增加可读性
@@ -213,8 +211,8 @@ tags:
 *   属性应该按照特定的顺序出现以保证易读性
 
 	推荐按以下顺序书写：
-	class, type, 
-	id, name, 
+	class, type,
+	id, name,
 	for, src, href, value, data-*,
 	title, alt
 

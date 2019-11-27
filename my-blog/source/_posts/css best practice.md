@@ -1,8 +1,7 @@
 ---
 title: CSS最佳实践
 date: 2018-06-03
-categories: "CSS最佳实践"
-tags: 
+tags:
      - CSS
 ---
 基于网易NEC的一个CSS实践方案

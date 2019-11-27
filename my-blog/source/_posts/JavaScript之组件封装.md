@@ -1,10 +1,8 @@
 ---
 title: JavaScript之组件封装
 date: 2018-10-27
-categories: "JavaScript"
-tags: 
+tags:
      - JavaScript
-     - 博客
 ---
 
 ### jQuery组件封装

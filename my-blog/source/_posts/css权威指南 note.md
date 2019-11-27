@@ -1,8 +1,7 @@
 ---
-title: css权威指南 note
+title: css权威指南
 date: 2018-06-03
-categories: "css权威指南"
-tags: 
+tags:
      - CSS
      - 读书笔记
 ---
@@ -70,7 +69,7 @@ css权威指南的一些读书笔记！
         .c2 {
             height: 50px;
             width: 50px;
-            background-color: yellow; 
+            background-color: yellow;
             position: absolute;
             left: 0;
             right: 0;
@@ -100,14 +99,14 @@ css权威指南的一些读书笔记！
     2. 匿名表对象：
     ```
     // css定义一种机制，可以将'遗漏的'组件作为匿名对象插入
-    
+
     <table>
         <td>aaa</td>
         <td>bbb</td>
     </table>
-    
+
     // ...实际中会转化为...
-    
+
     <table>
         [anonymous table-row object start]
             <td>aaa</td>
@@ -125,18 +124,17 @@ css权威指南的一些读书笔记！
     ```
     5. 表大小：
     ```
-    // # 1. 宽度 
+    // # 1. 宽度
     // 1. 固定布局 table-layout: fixed;
     可手动设置表格宽度和表格单元宽度；
     不设置单元格宽度时，平分宽度；
     // 2. 自动布局 table-layout: auto;
     ```
 10. 列表与生成内容
-    1. 如果:before或:after选择器的主体是块级元素，则display属性只能接受值none, inline, block, marker，其他值都处理为block;  
+    1. 如果:before或:after选择器的主体是块级元素，则display属性只能接受值none, inline, block, marker，其他值都处理为block;
     如果:before或:after选择器的主体是行内元素，属性display只能接受值noen和inline，所有其他值都处理为inline;
-    2. content: <string> | <uri> | <attr()>  
+    2. content: <string> | <uri> | <attr()>
     ```
     a[herf]:after {content: attr(herf)}
     ```
     3. 利用:before/:after 配合counter-reset和counter-increment可以做word章节小节目录的效果；
-    

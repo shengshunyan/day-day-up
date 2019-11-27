@@ -1,8 +1,7 @@
 ---
-title: 你不知道的JavaScript 上 note
+title: 你不知道的JavaScript 上
 date: 2018-06-03
-categories: "你不知道的JavaScript 上"
-tags: 
+tags:
      - JavaScript
      - 读书笔记
 ---
@@ -16,8 +15,7 @@ tags:
 1. 编译：
     1. 分词/词法分析
     2. 解析/语法分析：生成"抽象语法树"AST
-    3. 代码生成：AST转化成一组机器指令 
-     
+    3. 代码生成：AST转化成一组机器指令
 <!-- more -->
 2. 作用域是一套规则，如果查找的目的是对变量进行赋值，就会使用LHS查询；如果目的是获取变量的值，就会使用RHS查询；
 3. var a = 2;会被分解成两个独立的步骤：
@@ -187,7 +185,7 @@ console.log(identify.call(me));
     ```JavaScript
     function foo() {
         console.log(this.a);
-    }    
+    }
     var a = 2;
     foo(); // 2
     ```
@@ -201,7 +199,7 @@ console.log(identify.call(me));
         foo,
     };
     obj.foo(); // 2
-    
+
     // 隐式丢失
     // 回调只是传递了foo函数，并没有传递隐式绑定
     // setTimeout等回调函数也是同理
@@ -231,7 +229,7 @@ console.log(identify.call(me));
         return foo.apply(obj, arguments);
     };
     bar(3); // 5
-    
+
     function foo(num2) {
         console.log(this.num1 + num2);
     }
@@ -278,7 +276,7 @@ console.log(baz.a); // 3
     }
     var a = 2;
     foo.call(null); // 2
-    
+
     // 更安全的this
     // Object.create(null)是一个空对象，不会创建Object.prototype这个委托，所以它比一般的 {} 更空；
     function foo(a, b) {
@@ -343,7 +341,7 @@ myObject.hasOwnProperty('a'); // true
 #### 第四章 类
 
 #### 第五章 原型
-1. 
+1.
     1. JavaScript中的对象有一个特殊的[[Prototype]]内置属性，就是对于其他对象的引用。
     2. 几乎所有的对象引用在创建时[[Prototype]]属性都会被赋予一个非空的值。
     3. 当你引用对象的属性时，会触发[[Get]]操作，对于默认的[[Get]]操作来说，第一步会检查对象本身是否有这个属性；如果无法在对象本身找到需要的属性，就会继续访问对象的[[Prototype]]链；找完整条[[Prototype]]链，如果还没有找到，则返回undefined；

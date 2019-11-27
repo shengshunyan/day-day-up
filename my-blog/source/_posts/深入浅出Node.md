@@ -1,8 +1,7 @@
 ---
-title: 深入浅出NodeJS note
+title: 深入浅出NodeJS
 date: 2018-08-08
-categories: "深入浅出NodeJS"
-tags: 
+tags:
      - JavaScript
      - 读书笔记
 ---
@@ -17,7 +16,6 @@ tags:
     1. CommonJS规范为JavaScript制定了一个美好的愿景，希望JavaScript能够在任何地方运行；
     2. CommonJS规范为JavaScript指明了一条非常棒的道路，规范涵盖了模块、二进制、Buffer、字符集编码、I/O流、进程环境、文件系统、套接字、单元测试、Web服务器网关接口、包管理器等；
     3. CommonJS的模块规范：模块引用、模块定义、模块标识(传递给require()方法的参数，必须是小驼峰命名)；
-    
 <!-- more -->
 
 2. Node的模块实现
@@ -73,7 +71,7 @@ tags:
     });
     ```
     4. 兼容多种模块规范：检测运行环境，包装模块；
-    
+
 ### 第三章 异步I/O
 
 1. 为什么要异步I/O:
@@ -108,7 +106,7 @@ tags:
         console.log('setImmediate延迟执行2');
     });
     console.log('正常执行');
-    
+
     正常执行
     nextTick延迟执行1
     nextTick延迟执行2
@@ -279,8 +277,8 @@ Buffer.toString([encoding], [start], [end]); // Buffer转字符串
     var rs = fs.createReadStream(test.md);
     rs.setEncoding('utf-8');
     var data = '';
-    rs.on('data', function(chunk) { 
-        data += chunk; 
+    rs.on('data', function(chunk) {
+        data += chunk;
     });
     rs.on('end', function() {
         console.log(data);
@@ -289,7 +287,7 @@ Buffer.toString([encoding], [start], [end]); // Buffer转字符串
     var chunks = [];
     var size = 0;
     var rs = fs.createReadStream(test.md);
-    rs.on('data', function(chunk) { 
+    rs.on('data', function(chunk) {
         chunks.push(chunk);
         size += chunk.length;
     });
@@ -380,7 +378,7 @@ Buffer.toString([encoding], [start], [end]); // Buffer转字符串
     };
     http.createServer(app).listen(1337, '127.0.0.1');
     console.log('Server running at http://127.0.0.1:1337/');
-    
+
     // Express之类的框架都是从app函数展开
     var app = express();
     http.createServer(app).listen(1337);
@@ -442,7 +440,7 @@ Buffer.toString([encoding], [start], [end]); // Buffer转字符串
         // 还有路径正则匹配和参数解析的部分
         var routes = [];
         var use = function(req, res) {
-            routes.push([path, action]);  
+            routes.push([path, action]);
         };
         function (req, res) {
             var pathname = url.parse(req.url).pathname;
@@ -522,7 +520,7 @@ app.get('/use/:usename', getUser); // 局部中间件
         1. 先渲染页面布局
         2. 后端持续性地数据输出
         3. 前端渲染
-        
+
 ### 第九章 玩转进程
 
 1. 服务模型地变迁：同步 -> 复制进程 -> 多线程 -> 事件驱动
@@ -552,7 +550,7 @@ app.get('/use/:usename', getUser); // 局部中间件
     for (var i = 0; i < cpus.length; i++) {
         cluster.fork();
     }
-    
+
     // worker.js (子进程)
     var http = require('http');
     http.createServer(function(req, res) {

@@ -1,10 +1,8 @@
 ---
 title: JavaScript之函数柯里化
 date: 2018-11-12
-categories: "JavaScript"
-tags: 
+tags:
      - JavaScript
-     - 博客
 ---
 
 ### 概念

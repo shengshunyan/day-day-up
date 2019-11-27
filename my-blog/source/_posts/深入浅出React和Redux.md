@@ -1,8 +1,7 @@
 ---
-title: 深入浅出React和Redux note
+title: 深入浅出React和Redux
 date: 2018-08-28
-categories: "学习深入浅出React和Redux"
-tags: 
+tags:
      - JavaScript
      - 读书笔记
 ---
@@ -18,11 +17,10 @@ tags:
 1. 易于维护组件的设计要素：高内聚，低耦合；
     1. 高内聚：逻辑紧密相关的内容放一个组件中，传统的HTML, CSS, JAVASCRIPT文件分开管理不符合高内聚的原则；
     2. 低耦合：不同组件之间的依赖关系要尽量弱化；
-
 <!-- more -->
 
 2. React组件的数据：props(组件之间), state(组件内部);
-    1. props: 
+    1. props:
         1. propTypes检查只需在开发阶段添加辅助开发，正式环境打包可以用插件去除；
         2. defaultProps可以为组件的属性设置默认值；
     2. state: setState()函数先是改变this.state的值，然后驱动组件更新；
@@ -178,7 +176,7 @@ AddUserProp.propType = {
         ```JavaScript
         import { createStore, applyMiddleware } from 'redux';
         import thunkMiddleware from 'redux-thunk';
-        
+
         const configureStore = applyMiddleware(thunkMiddleware)(createStore);
         const store = configureStore(reducer, initialState);
         ```
@@ -186,7 +184,7 @@ AddUserProp.propType = {
         ```JavaScript
         import { createStore, applyMiddleware, compose } from 'redux';
         import thunkMiddleware from 'redux-thunk';
-        
+
         const storeEnhancers = compose(
             applyMiddleware(...midlewares),
             (window && window.devToolsExtention) ? window.devToolsExtension() : f => f

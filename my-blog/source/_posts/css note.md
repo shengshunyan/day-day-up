@@ -1,10 +1,9 @@
 ---
 title: CSS note
 date: 2018-06-03
-categories: "CSS note"
+categories: "CSS"
 tags:
      - CSS
-     - note
 ---
 日常积累的CSS笔记！
 

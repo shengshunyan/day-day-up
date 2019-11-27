@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "hexo clean && hexo generate && hexo server -p 5000 -w",
-    "release": "hexo clean && hexo generate && hexo deploy"
+    "release": "hexo clean && hexo generate && node ./copy-to-server.js"
   },
   "hexo": {
     "version": "3.7.1"

@@ -1,13 +1,11 @@
 ---
 title: JavaScript之new和bind
 date: 2018-10-22
-categories: "JavaScript"
-tags: 
+tags:
      - JavaScript
-     - 博客
 ---
 
-1. new实现的功能: 
+1. new实现的功能:
     1. 返回一个返回对象的函数；
     2. 返回对象的原型链(__proto__)链上构造函数的prototype；
     3. 利用apply给构造函数指定this引用；
@@ -53,6 +51,6 @@ const foo = {
 function bar() {
     console.log(this.value);
 }
-const bindFoo = bar.bind(foo); 
+const bindFoo = bar.bind(foo);
 bindFoo(); // 1
 ```

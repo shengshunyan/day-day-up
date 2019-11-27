@@ -1,10 +1,8 @@
 ---
 title: JavaScript继承
 date: 2018-10-08
-categories: "JavaScript"
-tags: 
+tags:
      - JavaScript
-     - 博客
 ---
 
 1. 组合继承：ES5中常见的继承方式，利用构造函数和prototyoe属性实现

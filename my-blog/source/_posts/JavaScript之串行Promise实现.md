@@ -1,10 +1,8 @@
 ---
 title: JavaScript之串行Promise实现
 date: 2018-10-30
-categories: "JavaScript"
-tags: 
+tags:
      - JavaScript
-     - 博客
 ---
 
 1. 问题：Promise原生语法，then的链式调用实现的promise串行执行不太语义化(声明式)，语法稍微有点繁杂；
@@ -42,11 +40,11 @@ const runPromiseByQueue = async(promises) => {
 
 // 使用
 function createPromise(time, id) {
-    return () => new Promise(resolve => 
+    return () => new Promise(resolve =>
         setTimeout(() => {
             console.log('promise ', id);
             resolve();
-        }, time)    
+        }, time)
     )
 }
 runPromiseByQueue([

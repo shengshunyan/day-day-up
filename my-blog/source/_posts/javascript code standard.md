@@ -1,10 +1,8 @@
 ---
 title: JavaScript代码规范
 date: 2018-06-03
-categories: "JavaScript代码规范"
-tags: 
+tags:
      - JavaScript
-     - 代码规范
 ---
 目标：不管有多少参与者，代码都应该像同一个人所写
 声明：本规范中的一些规定无对错之分，只是为了统一风格和增加可读性
@@ -132,7 +130,7 @@ tags:
 ```
 	/**
 	 * 文档说明
-	 * 
+	 *
 	 * @author xxx
 	 */
 ```
@@ -141,7 +139,7 @@ tags:
 ```
 	/**
 	 * 方法说明
-	 * 
+	 *
 	 * @param 参数变量名 参数变量说明
 	 * @return 返回值说明
 	 */
@@ -337,10 +335,10 @@ tags:
 
 	错误示例：
 ```
-	var sum = 100 + 200 + 300 + 400 + 
+	var sum = 100 + 200 + 300 + 400 +
 			500 + 600 + 700 + 800;
-	var val = true && false && 
-			true && false && 
+	var val = true && false &&
+			true && false &&
 			true;
 ```
 
@@ -348,7 +346,7 @@ tags:
 
 	正确示例：
 ```
-	someMethod(arg1, arg2, arg3, 
+	someMethod(arg1, arg2, arg3,
 			arg4, arg5);
 ```
 
@@ -489,7 +487,7 @@ tags:
 	错误示例：
 ```
 	var i = 0;
-	
+
 	function doSomething(i) {
 		var i = 1;
 	}
@@ -693,7 +691,7 @@ tags:
 		function test() {
 			console.log('test');
 		}
-		
+
 		test();
 	}
 ```
@@ -730,7 +728,7 @@ tags:
 		if(i > 0) {
 			str += ',';
 		}
-		
+
 		str += items[i];
 	}
 ```

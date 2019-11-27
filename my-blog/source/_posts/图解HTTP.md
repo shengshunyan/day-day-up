@@ -1,8 +1,7 @@
 ---
-title: 图解HTTP note
+title: 图解HTTP
 date: 2018-09-17
-categories: "图解HTTP"
-tags: 
+tags:
      - 计算机基础
      - 读书笔记
 ---
@@ -17,28 +16,28 @@ tags:
     2. 传输层：(TCP, UDP);
     3. 网络层：(IP);
     4. 数据链路层：以太网；
-    5. 物理层：  
+    5. 物理层：
 <!-- more -->
 3. HTTP方法：
-    - GET: 获取资源；
-    - POST: 传输文件；
-    - PUT: 传输文件；
-    - HEAD: 获得报文首部，用以确认资源有效性及资源更新日期等；
-    - DELETE: 删除文件；
-    - OPTIONS: 询问支持的方法；
-    - TRACE: 追踪路径；
-    - CONNECT: 要求用隧道协议连接代理；
+    1. GET: 获取资源；
+    2. POST: 传输文件；
+    4. PUT: 传输文件；
+    5. HEAD: 获得报文首部，用以确认资源有效性及资源更新日期等；
+    6. DELETE: 删除文件；
+    7. OPTIONS: 询问支持的方法；
+    8. TRACE: 追踪路径；
+    9. CONNECT: 要求用隧道协议连接代理；
 4. 四种常见的 POST 提交数据方式：
     1. application/x-www-form-urlencoded (默认)：
         1. 参数形式：提交的数据按照 key1=val1&key2=val2 的方式进行编码，key 和 val 都进行了 URL 转码；
     2. multipart/form-data：
-        1. 使用表单上传文件时; 
+        1. 使用表单上传文件时;
         2. Content-Type 里指明了数据是以 mutipart/form-data 来编码，本次请求的 boundary 是什么内容;
         3. 参数形式：消息主体里按照字段个数又分为多个结构类似的部分，每部分都是以 --boundary 开始，紧接着内容描述信息，然后是回车，最后是字段具体内容（文本或二进制）。如果传输的是文件，还要包含文件名和文件类型信息。消息主体最后以 --boundary-- 标示结束。
     3. application/json：
         1. 各大浏览器都原生支持 JSON.stringify;
         2. 可以方便的提交复杂的结构化数据，特别适合 RESTful 的接口;
-        3. 参数形式：{"title":"test","sub":[1,2,3]} 
+        3. 参数形式：{"title":"test","sub":[1,2,3]}
     4. text/xml：
         1. 它是一种使用 HTTP 作为传输协议，XML 作为编码方式的远程调用规范;
         2. XML 结构还是过于臃肿，一般场景用 JSON 会更灵活方便;
@@ -52,15 +51,15 @@ tags:
     1. 1XX：接收的请求正在处理；
     2. 2XX：请求正常处理完毕；
     3. 3XX：请求需要进行附加操作以完成请求(重定向)；
-        - 304 Not Modified
+        1. 304 Not Modified
     4. 4XX：接收的请求正在处理；
-        - 400 Bad Request: 请求报文中存在语法错误；
-        - 401 Unauthorized
-        - 403 Forbidden: 资源访问被服务器拒绝了；
-        - 404 Not Found
+        1. 400 Bad Request: 请求报文中存在语法错误；
+        2. 401 Unauthorized
+        3. 403 Forbidden: 资源访问被服务器拒绝了；
+        4. 404 Not Found
     5. 5XX：接收的请求正在处理；
-        - 500 Internal Server Error
-        - 503 Server Unavailable：服务器正忙，无法处理请求；
+        1. 500 Internal Server Error
+        2. 503 Server Unavailable：服务器正忙，无法处理请求；
 
 ### 第5章 与HTTP协作的web服务器
 

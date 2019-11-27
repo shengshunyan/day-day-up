@@ -1,10 +1,8 @@
 ---
 title: JavaScript之斐波那契序列
 date: 2018-10-14
-categories: "算法"
-tags: 
+tags:
      - JavaScript
-     - 博客
 ---
 
 1. 问题：N级台阶（比如100级），每次可走1步或者2步，求总共有多少种走法？

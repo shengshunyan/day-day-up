@@ -7,14 +7,14 @@ title: Guoshi o`s blog
 subtitle:
 description: There are some notes during book reading !
 keywords:
-author: guoshi o
+author: 果实o
 language:
 timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://15754600159.github.io/my-blog/
-root: /my-blog/
+# url: https://15754600159.github.io/my-blog/
+# root: /my-blog/
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 
@@ -43,7 +43,7 @@ highlight:
   line_number: true
   auto_detect: false
   tab_replace:
-  
+
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
 # per_page: Posts displayed per page. (0 = disable pagination)
@@ -52,7 +52,7 @@ index_generator:
   path: ''
   per_page: 10
   order_by: -date
-  
+
 # Category & Tag
 default_category: uncategorized
 category_map:
@@ -77,12 +77,11 @@ theme: yilia
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
-deploy:
-  type: git
-  repo: https://github.com/15754600159/my-blog.git
-  branch: master
+# deploy:
+#   type: git
+#   repo: https://github.com/15754600159/my-blog.git
+#   branch: master
 
-# theme: yilia
 jsonContent:
   meta: false
   pages: false

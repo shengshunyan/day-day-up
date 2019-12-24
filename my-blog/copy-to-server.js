@@ -14,7 +14,7 @@ const execCmd = function (cmd, cb) {
 
 // config
 const originIp = '129.204.110.90'
-const publicPath = '/var/www/html'
+const publicPath = '/opt/application/blog'
 const cmdArr = [
     `ssh root@${originIp} 'rm -rf ${publicPath}; mkdir ${publicPath}'`,
     `scp -r ./public/* root@${originIp}:${publicPath}`

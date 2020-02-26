@@ -105,6 +105,9 @@ gitlab-ci-multi-runner register
 # 2. 输入gitlab-ci token：gitlab项目setting -> CICD -> runner -> token复制
 # 4. 输入gitlab-ci tags：runner标识，之后用于job选择哪个runner运行
 # 其他随意，默认就行
+
+# 删除runner
+gitlab-runner verify --delete -u URL -t TOKEN
 ```
 之后你就能在gitlab项目上setting -> CICD -> runner里看到可用的runnner节点
 ![1.png](https://i.loli.net/2020/02/23/6ZHVKmnUyeG2I87.png)

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,17 +8,43 @@
     <title>Document</title>
     <script type="text/javascript" src="./util//jquery-3.4.1.js"></script>
 </head>
+
 <body>
     <h1>hello world</h1>
 
+    <button onclick="login()">登录</button>
+    <button onclick="getUser()">是否登录</button>
+
     <script type="text/javascript">
         console.log('send a request');
-        $.ajax({
-            url: 'http://test.shengshunyan.xyz:4444/icon1.jpg',
-            success(data) {
-                console.log('success')
-            }
-        })
+        function login() {
+            $.ajax({
+                url: '/login',
+                success(data) {
+                    console.log('success')
+                }
+            })
+        }
+        function getUser() {
+            $.ajax({
+                url: '/getUser',
+                success(data) {
+                    // console.log(data)
+                    if (data.code === 302) {
+                        window.location.href = data.data.url
+                    } else {
+                        console.log(data)
+                    }
+                }
+            })
+        }
+        // $.ajax({
+        //     url: '/data',
+        //     success(data) {
+        //         console.log('success')
+        //     }
+        // })
     </script>
 </body>
+
 </html>

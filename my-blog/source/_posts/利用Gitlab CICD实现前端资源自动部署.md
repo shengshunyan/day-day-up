@@ -119,7 +119,7 @@ gitlab-runner verify --delete -u URL -t TOKEN
 wget https://npm.taobao.org/mirrors/node/v12.16.1/node-v12.16.1-linux-x64.tar.xz
 # 解压
 xz -d node-v12.16.1-linux-x64.tar.xz 
-tar node-v12.16.1-linux-x64.tar 
+tar -xvf node-v12.16.1-linux-x64.tar 
 # 将node包移到/usr/local/node下
 mv [node解压出来的文件夹] /usr/local/node
 # 创建软链

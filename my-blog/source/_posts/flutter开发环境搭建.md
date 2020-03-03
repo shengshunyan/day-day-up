@@ -67,25 +67,16 @@ flutter create my_app
 ### 一、Android—— Android Studio
 1. 安装时proxy确认窗点取消就行
 2. configure -> SDK tools -> 显示隐藏项目 -> 勾选SDK tools选项
-
     <img src="https://i.loli.net/2020/03/02/9T3dhvAQrnau6JD.png" width="400" height="250" />  
-
 3. configure -> plugins -> 下载flutter插件
-
     <img src="https://i.loli.net/2020/03/02/AT3BumfXGrUSNYt.png" width="400" height="300" /> 
-    
 4. 启动 Android Studio>Tools>Android>AVD Manager 并选择 Create Virtual Device.
     3. 选择一个设备并选择 Next
     4. 为要模拟的Android版本选择一个系统映像(踩坑：选择Q运行调试有问题，选择Pie就可以运行调试项目)
-    
         <img src="https://i.loli.net/2019/06/27/5d149031d94c716754.png" width="400" height="250" /> 
-
     5. 添加完成后，用vscode打开flutter示例项目，启动Android模拟器
-    
         <img src="https://i.loli.net/2019/06/27/5d1491ee57fa485704.png" width="400" height="250" /> 
-        
         <img src="https://i.loli.net/2019/06/27/5d1492592bb3b32518.png" width="200" height="300" /> 
-        
     6. 运行flutter示例项目
     ```
     cd my_app
@@ -101,31 +92,28 @@ flutter create my_app
 ### 二、平台设置：IOS—— Xcode
 1. 从App Store中安装Xcode
 2. 配置Xcode命令行工具
-```
-sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer
-
-```
+    ```
+    sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer
+    ```
 3. 通过Xcode许可协议
-```
-sudo xcodebuild -license
-```
+    ```
+    sudo xcodebuild -license
+    ```
 4. 打开终端模拟器
-```
-open -a Simulator
-```
-<img src="https://i.loli.net/2019/06/27/5d148de09234884312.png" width="200" height="400" />  
-
+    ```
+    open -a Simulator
+    ```
+    <img src="https://i.loli.net/2019/06/27/5d148de09234884312.png" width="200" height="400" />  
 5. 运行flutter示例项目
-```
-cd my_app
-flutter run
-```
+    ```
+    cd my_app
+    flutter run
+    ```
 6. IOS真机测试：涉及收费项目
 
 ### 三、vscode也可以作为编辑器
 1. VSCode编辑器插件安装：点击安装Flutter插件会自动帮你把Dart插件也一起安装；
-
-<img src="https://i.loli.net/2019/06/27/5d148975b04a911750.png" width="200" height="250" />  
+    <img src="https://i.loli.net/2019/06/27/5d148975b04a911750.png" width="200" height="250" />  
 
     
 ## 调试终端快捷键：

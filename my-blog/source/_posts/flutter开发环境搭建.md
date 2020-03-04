@@ -114,7 +114,16 @@ flutter create my_app
 ### 三、vscode也可以作为编辑器
 1. VSCode编辑器插件安装：点击安装Flutter插件会自动帮你把Dart插件也一起安装；
     <img src="https://i.loli.net/2019/06/27/5d148975b04a911750.png" width="200" height="250" />  
-
+2. 还是得安装、配置Xcode（第二步）
+3. 打开终端模拟器
+    ```
+    open -a Simulator
+    ```
+4. 运行flutter示例项目
+    ```
+    cd my_app
+    flutter run
+    ```
     
 ## 调试终端快捷键：
 1. R: 热加载，查看预览效果；

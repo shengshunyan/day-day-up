@@ -1,6 +1,8 @@
 ---
 title: 利用Node.js实现简易的sso流程
 date: 2020-02-27
+keywords: Node.js, sso, 单点登录
+cover: https://i.loli.net/2020/02/27/zH3YRU7Km8kb6c4.jpg
 tags:
      - JavaScript
 ---

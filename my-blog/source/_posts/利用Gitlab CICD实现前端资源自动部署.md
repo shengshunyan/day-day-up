@@ -1,6 +1,8 @@
 ---
 title: 利用Gitlab CICD实现前端资源自动部署
 date: 2020-02-04
+keywords: gitlab, CI, CD, 自动部署
+cover: https://file.moetu.org/images/2020/03/08/gitlab63371bbcd179f14a.jpg
 tags:
      - 计算机基础
 ---
@@ -21,7 +23,6 @@ sudo yum install postfix
 sudo systemctl enable postfix
 sudo systemctl start postfix
 ```
-<!-- more -->
 
 ### 3. 设置gitlab安装源
 如果在国内的话，可以尝试使用清华大学的源。

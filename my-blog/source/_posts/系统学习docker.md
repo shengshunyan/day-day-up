@@ -1,6 +1,8 @@
 ---
 title: 系统学习docker
 date: 2020-02-23
+keywords: docker, 容器
+cover: https://file.moetu.org/images/2020/03/08/docker127d61318b651d1f.jpg
 tags:
      - 计算机基础
 ---

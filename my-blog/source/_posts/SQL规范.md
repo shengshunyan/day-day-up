@@ -1,6 +1,8 @@
 ---
 title: SQL规范
 date: 2020-03-04
+keywords: SQL
+cover: https://file.moetu.org/images/2020/03/08/u3436285410386919805fm26gp08369a0c6596ca3c8.png
 tags:
      - 计算机基础
 ---

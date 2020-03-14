@@ -1,58 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import './App.css';
-import { Button, Table } from 'antd';
+import { Button } from 'antd';
+import Child from './Child'
 
 function App() {
-    const dataSource = [
-        {
-            key: '1',
-            name: '胡彦斌',
-            age: 32,
-            address: '西湖区湖底公园1号',
-        },
-        {
-            key: '2',
-            name: '胡彦祖',
-            age: 42,
-            address: '西湖区湖底公园1号',
-        },
-    ];
-    const columns = [
-        {
-            title: '姓名',
-            dataIndex: 'name',
-            key: 'name',
-        },
-        {
-            title: '年龄',
-            dataIndex: 'age',
-            key: 'age',
-        },
-        {
-            title: '住址',
-            dataIndex: 'address',
-            key: 'address',
-        },
-    ];
-    const onTableChange = () => {
+    const [count, setCount] = useState(0)
 
+    useEffect(() => {
+        console.log('effect')
+    }, [])
+
+    const testFn = useCallback(() => {
+        // do something
+    }, [])
+
+    const handleClick = () => {
+        setCount(count => count + 1)
     }
 
     return (
         <div className="App">
-            <Button type="primary">Button</Button>
-            <Table
-                columns={[]}
-                dataSource={[]}
-                rowKey="taskSequence"
-                onChange={onTableChange}
-                pagination={{
-                    defaultPageSize: 10,
-                    defaultCurrent: 1,
-                    total: 0,
-                    size: 'middle',
-                }}
-            />
+            {/* count: {count} */}
+            <br/>
+            <br/>
+            <Button onClick={handleClick}>click</Button>
+            <br/>
+            <br/>
+            <Child testFn={testFn}></Child>
         </div>
     );
 }

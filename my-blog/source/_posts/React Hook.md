@@ -6,10 +6,10 @@ cover: https://i.loli.net/2020/03/14/26Pfh8OveLgnDxX.jpg
 tags:
      - JavaScript
 ---
-{% note info no-icon %}
-### 参考链接：https://zhuanlan.zhihu.com/p/67087685
-{% endnote %}
 
+{% note info no-icon %}
+## 参考链接：https://zhuanlan.zhihu.com/p/67087685
+{% endnote %}
 
 ## 代码分割 & 错误处理
 

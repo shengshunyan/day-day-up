@@ -8,7 +8,7 @@ tags:
 ---
 
 
-## 一、复习单系统登录
+## 复习单系统登录
 
 HTTP是无状态的协议，这意味上一个http请求的用户状态不能直接带到下一次请求。于是乎，W3C创建了Cookie：每次发起http请求，都会带上相应的Cookie信息，用户用户信息认证；  
 
@@ -20,16 +20,16 @@ HTTP是无状态的协议，这意味上一个http请求的用户状态不能直
 - 浏览器请求时都会带上Cookie，检查有没有登录，如果已经登录则放行
 <!-- more -->
 
-## 二、多系统单点登录（同一二级域名）
+## 多系统单点登录（同一二级域名）
 Session不共享问题：把Session数据放在Redis中
 
 同一二级域名，cookie的相互设置不算跨域，如 test1.example.com 和 test2.example.com
 
 他们之间单点登录认证只用设置相应的cookie的domain即可
 
-## 三、多系统单点登录（不同二级域名，cookie操作跨域限制）
+## 多系统单点登录（不同二级域名，cookie操作跨域限制）
 
-### （一）. 成熟解决方案 CAS（Central Authentication Service）
+### 成熟解决方案 CAS（Central Authentication Service）
 
 现在我们有两个系统，分别是 www.java3y.com 和 www.java4y.com，一个 SSOwww.sso.com
 ![1.jpg](https://i.loli.net/2020/02/27/iUHkwexGmvXOdcp.jpg)
@@ -72,7 +72,7 @@ www.java4y.com?token=xxxxxxx
 
 ![4.jpg](https://i.loli.net/2020/02/27/H3bgjlieJ7RUvcT.jpg)
 
-### （二）. 利用Node.js实现简易的sso流程
+### 利用Node.js实现简易的sso流程
 
 1. [github项目：sso-with-nodeJs](https://github.com/15754600159/sso-with-nodeJs)
 2. **登录流程** 

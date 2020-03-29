@@ -12,38 +12,18 @@
 <body>
     <h1>hello world</h1>
 
-    <button onclick="login()">登录</button>
-    <button onclick="getUser()">是否登录</button>
+    <button onclick="getData()">请求</button>
 
     <script type="text/javascript">
-        console.log('send a request');
-        function login() {
+        console.log('page loaded');
+        function getData() {
             $.ajax({
-                url: '/login',
+                url: '/data',
                 success(data) {
-                    console.log('success')
+                    console.log('success', data)
                 }
             })
         }
-        function getUser() {
-            $.ajax({
-                url: '/getUser',
-                success(data) {
-                    // console.log(data)
-                    if (data.code === 302) {
-                        window.location.href = data.data.url
-                    } else {
-                        console.log(data)
-                    }
-                }
-            })
-        }
-        // $.ajax({
-        //     url: '/data',
-        //     success(data) {
-        //         console.log('success')
-        //     }
-        // })
     </script>
 </body>
 

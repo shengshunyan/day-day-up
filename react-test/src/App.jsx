@@ -1,13 +1,15 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import './App.css';
 import { Button } from 'antd';
 import Child from './Child'
 
 function App() {
     const [count, setCount] = useState(0)
+    const domRef = useRef(null)
 
     useEffect(() => {
         console.log('effect')
+        console.log(domRef)
     }, [])
 
     const testFn = useCallback(() => {
@@ -21,7 +23,7 @@ function App() {
     return (
         <div className="App">
             {/* count: {count} */}
-            <br/>
+            <br ref={domRef} />
             <br/>
             <Button onClick={handleClick}>click</Button>
             <br/>

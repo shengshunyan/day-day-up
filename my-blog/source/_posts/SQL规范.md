@@ -9,7 +9,6 @@ tags:
 
 ## 建表规约
 ![4.jpeg](https://i.loli.net/2020/03/04/FJx1vAunBkgPHcs.jpg)
-<!-- more -->
 
 ## 索引规约
 ![5.jpeg](https://i.loli.net/2020/03/04/ZiPAd5WBC8NF3qJ.jpg)

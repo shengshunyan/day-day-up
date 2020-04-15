@@ -5,6 +5,7 @@ tags:
      - JavaScript
 ---
 
+
 1. 问题：Promise原生语法，then的链式调用实现的promise串行执行不太语义化(声明式)，语法稍微有点繁杂；
 ```JavaScript
 new Promise((resolve, reject) => {
@@ -20,7 +21,7 @@ new Promise((resolve, reject) => {
         return result;
     });
 ```
-<!-- more -->
+
 2. 解决方法：a. reduce；b. async/await；
 ```JavaScript
 // 1. reduce

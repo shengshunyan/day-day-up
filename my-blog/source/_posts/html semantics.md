@@ -4,15 +4,17 @@ date: 2018-06-03
 tags:
      - HTML
 ---
+
+
+{% note info no-icon %}
 写可读性更高的HTML代码！
 *reference: https://blog.csdn.net/coco379/article/details/52938071*
+{% endnote %}
 
 ## 1. 优点
 1. 提升可访问性；
 2. SEO；
 3. 结构清晰，利于维护；
-
-<!-- more -->
 
 ## 2. 通用容器
     ```

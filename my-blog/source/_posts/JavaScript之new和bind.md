@@ -5,10 +5,12 @@ tags:
      - JavaScript
 ---
 
-1. new实现的功能:
-    1. 返回一个返回对象的函数；
-    2. 返回对象的原型链(__proto__)链上构造函数的prototype；
-    3. 利用apply给构造函数指定this引用；
+## new实现的功能:
+
+1. 返回一个返回对象的函数；
+2. 返回对象的原型链(__proto__)链上构造函数的prototype；
+3. 利用apply给构造函数指定this引用；
+
 ```JavaScript
 function _new(fn){
     return function() {
@@ -25,11 +27,13 @@ function Person(name) {
 const person = _new(Person)('aa');
 console.log(person);
 ```
-<!-- more -->
-2. bind实现的功能：
-    1. 返回一个绑定了上下文(context)的函数；
-    2. 利用apply达到绑定的目的；
-    3. 考虑new调用bind返回的函数(稍复杂)；
+
+## bind实现的功能：
+
+1. 返回一个绑定了上下文(context)的函数；
+2. 利用apply达到绑定的目的；
+3. 考虑new调用bind返回的函数(稍复杂)；
+
 ```JavaScript
 Function.prototype._bind = function(context) {
     var self = this; // self是函数

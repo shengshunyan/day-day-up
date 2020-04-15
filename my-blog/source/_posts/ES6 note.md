@@ -132,11 +132,11 @@ for (let [key, value] of map) {
 'x'.padEnd(5, 'ab'); //'xabab'
 ```
 3. 模板字符串： \`hell0 ${world}\`
-    1. 模板字符串中用到 \` 需要反斜杠转义  \\`；
-    2. 空格和换行都会被保留，用trim()可以去除；
-    3. ${}中能放变量、表达式、调用函数；
-    4. 模板字符串可以嵌套；
-    5. 标签模板功能（详细看P62）
+    - 模板字符串中用到 \` 需要反斜杠转义  \\`；
+    - 空格和换行都会被保留，用trim()可以去除；
+    - ${}中能放变量、表达式、调用函数；
+    - 模板字符串可以嵌套；
+    - 标签模板功能（详细看P62）
     ```
     var a = 5,
         b = 10;
@@ -276,7 +276,7 @@ document.querySelectorAll('div.maClass')
 ::html('hahaha');
 ```
 5. 尾调用  (尾调用只在严格模式下才开启，正常模式下无效)
-    1. 尾调用——优化
+    - 尾调用——优化
     ```JavaScript
     // 普通函数
     function a() {
@@ -290,7 +290,7 @@ document.querySelectorAll('div.maClass')
     }
     尾调用函数调用栈中的调用帧更少，节省内存；
     ```
-    2. 尾递归
+    - 尾递归
     ```JavaScript
     // 普通递归
     function factorial(n) {
@@ -606,10 +606,10 @@ person.age = 201; // 报错
 
 # 第十三章：Reflect
 1. 概述：
-    1. 将Object对象的一些明显属于语言内部的方法放到Reflect对象上。未来的新方法只在Reflect对象上部署。
-    2. 修改某些Objct方法的返回结果，变得更合理。
-    3. 让Object操作都变成函数行为。
-    4. Reflect对象的方法与Proxy对象的方法一一对应，这就使得Proxy对象可以方便调用对应的Reflect方法来完成默认行为
+    - 将Object对象的一些明显属于语言内部的方法放到Reflect对象上。未来的新方法只在Reflect对象上部署。
+    - 修改某些Objct方法的返回结果，变得更合理。
+    - 让Object操作都变成函数行为。
+    - Reflect对象的方法与Proxy对象的方法一一对应，这就使得Proxy对象可以方便调用对应的Reflect方法来完成默认行为
 2. 观察者模式
 ```JavaScript
 function observable(obj, func) {
@@ -726,10 +726,10 @@ server.listen(0)
 
 # 第十五章：Iterator和for...of循环
 1. 概念：
-    1. Iterator(遍历器)的作用：为各种数据提供一个统一的、简便的访问接口；供for...of消费；
-    2. 每次调用next()方法都会返回一个包含value和done两个属性的对象；
-    3. 默认的Iterator接口部署在数据结构的Symbol.iterator属性
-    4. 具备原生Iterator接口的数据结构：Array, Map, Set, String, 函数的arguments对象, NodeList对象;
+    - Iterator(遍历器)的作用：为各种数据提供一个统一的、简便的访问接口；供for...of消费；
+    - 每次调用next()方法都会返回一个包含value和done两个属性的对象；
+    - 默认的Iterator接口部署在数据结构的Symbol.iterator属性
+    - 具备原生Iterator接口的数据结构：Array, Map, Set, String, 函数的arguments对象, NodeList对象;
 2. Iterator接口与Generator函数
 ```JavaScript
 var myIterable = {};
@@ -743,24 +743,24 @@ console.log([...myIterable]); //[1, 2, 3]
 3. 遍历器对象除了具有next()方法外，还具有return()和throw()方法。
 return()方法: 用于for...of循环提前退出（通常是因为出错，或者有break语句或者continue语句），return()方法必须返回一个对象；
 4. for...of循环
-    1. 数组: for (let elem of array)
-    2. Set: for (let elem of set)
-    3. Map: for (let [key, value] of Map)
-    4. 对于类数组对象，可以先Array.from(arrayLike)转为数组，再遍历；
-    5. 一般对象Object: for (let [key, value] of Object.entires(object))
+    - 数组: for (let elem of array)
+    - Set: for (let elem of set)
+    - Map: for (let [key, value] of Map)
+    - 对于类数组对象，可以先Array.from(arrayLike)转为数组，再遍历；
+    - 一般对象Object: for (let [key, value] of Object.entires(object))
 5. for...of与其他遍历语法的比较
-    1. for (var index = 0; index < length; index++): 繁琐
-    2. JS为数组提供的forEach: 中途无法跳出forEach循环
+    - for (var index = 0; index < length; index++): 繁琐
+    - JS为数组提供的forEach: 中途无法跳出forEach循环
     ```JavaScript
     myArray.forEach(element => {
         console.log(element);
     });
     ```
-    3. for...in循环: 遍历以字符串作为键名；会遍历原型链上的键；会以任意顺序遍历键；
+    - for...in循环: 遍历以字符串作为键名；会遍历原型链上的键；会以任意顺序遍历键；
 
 # 第十六章：Generator函数的语法
 1. 基本概念
-    1. Generator函数是状态机，是一个遍历器对象生成函数，函数生成的遍历器继承了Generator函数prototype对象上的方法；
+    - Generator函数是状态机，是一个遍历器对象生成函数，函数生成的遍历器继承了Generator函数prototype对象上的方法；
     ```JavaScript
     function* generator() {
         yield 'hello';
@@ -773,15 +773,15 @@ return()方法: 用于for...of循环提前退出（通常是因为出错，或�
     gen.next(); // {value: 'ending', done: true}
     gen.next(); // {value: undefined, done: true}
     ```
-    2. yield表达式只能在Generator函数上下文中；
-    3. yield表达式如果用在；另一个表达式之中，必须放在括号内；
+    - yield表达式只能在Generator函数上下文中；
+    - yield表达式如果用在；另一个表达式之中，必须放在括号内；
     ```JavaScript
     function* generator() {
         console.log('hello' + yield 123); // SyntaxError
         console.log('hello' + (yield 123)); // OK
     }
     ```
-    4. yield语句本身没有返回值，或者说总是返回undefined。next方法可以带有一个参数，改参数会被当做上一条yield语句的返回值；
+    - yield语句本身没有返回值，或者说总是返回undefined。next方法可以带有一个参数，改参数会被当做上一条yield语句的返回值；
     ```JavaScript
     // yield能传出值，然后接受新值继续运算；
     function* foo(x) {
@@ -1148,8 +1148,8 @@ class ColorPoint extends Point {
 }
 ```
 2. super关键字：
-    1. 当做函数使用时 super()：super代表了父类的构造函数，但是返回的是子类的实例，因此super()在这里相当于A.prototype.constructor.call(this);
-    2. super作为对象时在普通方法中指向父类的原型对象，在静态方法中指向父类；
+    - 当做函数使用时 super()：super代表了父类的构造函数，但是返回的是子类的实例，因此super()在这里相当于A.prototype.constructor.call(this);
+    - super作为对象时在普通方法中指向父类的原型对象，在静态方法中指向父类；
 3. 类的prototype属性和__proto__属性
 ```JavaScript
 class A {
@@ -1203,8 +1203,8 @@ function readonly(target, name, descriptor) {
 }
 ```
 2. 第三方库
-    1. core-decoration.js是一个第三方模块，提供了几个常见的修饰器；
-    2. Traits-decorator 在类中混入方法，实现继承的一种新思路；
+    - core-decoration.js是一个第三方模块，提供了几个常见的修饰器；
+    - Traits-decorator 在类中混入方法，实现继承的一种新思路；
 
 # 第二十二章：Module的语法
 1. ES6模块自动采用严格模式;

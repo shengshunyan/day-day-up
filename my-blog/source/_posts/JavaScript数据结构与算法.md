@@ -5,8 +5,10 @@ tags:
      - JavaScript
      - 读书笔记
 ---
-学习JavaScript数据结构与算法的一些读书笔记！
 
+{% note info no-icon %}
+学习JavaScript数据结构与算法的一些读书笔记！
+{% endnote %}
 
 ### 第一章 JavaScript简介
 

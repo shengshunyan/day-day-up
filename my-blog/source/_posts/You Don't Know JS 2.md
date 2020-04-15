@@ -5,7 +5,10 @@ tags:
      - JavaScript
      - 读书笔记
 ---
+
+{% note info no-icon %}
 你不知道的JavaScript的一些读书笔记！
+{% endnote %}
 
 
 ### 第一部分 类型和语法
@@ -13,8 +16,8 @@ tags:
 #### 第一章 类型
 
 1. 内置类型
-    1. JavaScript内置七种类型: null, undefined, boolean, number, string, object, symbol;
-    2. typeof
+    - JavaScript内置七种类型: null, undefined, boolean, number, string, object, symbol;
+    - typeof
     ```JavaScript
     typeof undefined === 'undefined'; // true
     typeof true === 'boolean'; // true
@@ -30,8 +33,8 @@ tags:
     ```
 <!-- more -->
 2. 值和类型
-    1. JavaScript中的变量是没有类型的，只有值才有；变量可以随时持有任何类型的值；
-    2. undefined: 已在作用域中声明但还没有赋值；
+    - JavaScript中的变量是没有类型的，只有值才有；变量可以随时持有任何类型的值；
+    - undefined: 已在作用域中声明但还没有赋值；
        undeclared: 还没有在作用域中声明的变量；
     ```JavaScript
     var a;
@@ -44,7 +47,7 @@ tags:
 #### 第二章 值
 
 1. 数字语法
-    1. 对于.运算符需要特别注意，因为它是一个有效的数字字符，会被优先识别为数字字面量的一部分，然后才是对象属性访问运算符；
+    - 对于.运算符需要特别注意，因为它是一个有效的数字字符，会被优先识别为数字字面量的一部分，然后才是对象属性访问运算符；
     ```JavaScript
     // 无效语法
     42.toFixed(3); // SyntaxError
@@ -53,19 +56,19 @@ tags:
     42..toFixed(3);
     ```
 2. 特殊数值
-    1. null: 指曾赋过值，但是目前没有值；
+    - null: 指曾赋过值，但是目前没有值；
        undefined: 值从未赋过值；
        undefined是一个标识符，可以被当作变量来使用和赋值；而null不能；
-    2. void运算符: 表达式void xxx 没有返回值，因此返回结果是undefined，void并不改变表达式的结果，只是让表达式不返回值；按照惯例，我们用 void 0 来获得undefined；
+    - void运算符: 表达式void xxx 没有返回值，因此返回结果是undefined，void并不改变表达式的结果，只是让表达式不返回值；按照惯例，我们用 void 0 来获得undefined；
 3. 特殊的数字
-    1. NaN: 不是数字的数字(not a number的缩写)，意指‘坏数值’；
+    - NaN: 不是数字的数字(not a number的缩写)，意指‘坏数值’；
     ```JavaScript
     var a = 2 / 'foo'; // NaN
     typeof a === 'number'; // true
     a == NaN; // false  唯一一个非自反的值
     Number.isNaN(a); // true
     ```
-    2. 无穷数: Infinity / -Infinity
+    - 无穷数: Infinity / -Infinity
     ```
     // 可用作区分0和-0的方法
     var a = 1 / 0; // Infinity
@@ -74,7 +77,7 @@ tags:
     var a = Infinity / Infinity; // NaN
     var a = 1 / Infinity; // 0
     ```
-    3. 特殊等式: Object.is(...)用于判断两个值是否绝对相等
+    - 特殊等式: Object.is(...)用于判断两个值是否绝对相等
     ```JavaScript
     // 1. 判断是否为NaN
     var a = 2 / 'foo';
@@ -86,8 +89,8 @@ tags:
     Object.is(b, 0); // false
     ```
 4. 值和引用:
-    1. JavaScript对值和引用的赋值/传递在语法上没有区别，完全根据值得类型来决定；
-    2. 简单值总是通过值的复制的方式来赋值/传递，包括null, undefined, string, number, boolean, symbol;
+    - JavaScript对值和引用的赋值/传递在语法上没有区别，完全根据值得类型来决定；
+    - 简单值总是通过值的复制的方式来赋值/传递，包括null, undefined, string, number, boolean, symbol;
        复合值(对象和函数)，则总是通过引用复制的方式来赋值/传递；
     ```JavaScript
     var a = 2;
@@ -122,7 +125,7 @@ a intanceof String; // true
 Object.prototype.toString.call(a); // [object String]
 ```
 2. 内部属性[[Class]]
-    1. 所有typeof返回值为'object'得对象都包含一个内部属性[[Class]]，可以看作是一个内部得分类。这个属性无法直接访问，一般通过Object.prototype.toString(...)来查看
+    - 所有typeof返回值为'object'得对象都包含一个内部属性[[Class]]，可以看作是一个内部得分类。这个属性无法直接访问，一般通过Object.prototype.toString(...)来查看
     ```JavaScript
     Object.prototype.toString.call([1, 2, 3]); // "[object Array]"
     Object.prototype.toString.call(/regex/i); // "[object RegExp]"
@@ -131,34 +134,34 @@ Object.prototype.toString.call(a); // [object String]
     Object.prototype.toString.call('aaa'); // "[object String]"
     Object.prototype.toString.call(true); // "[object Boolean]"
     ```
-    2. 上例中基本类型被各自得封装对象自动包装；
+    - 上例中基本类型被各自得封装对象自动包装；
 3. 封装对象：
-    1. 强制封装：Object(...) ——不推荐使用
+    - 强制封装：Object(...) ——不推荐使用
     ```JavaScript
     var a = 'aaa';
     var b = Object(a);
     typeof b; // "Object"
     ```
-    2. 自动封装: 由于基本类型值没有.length和.toSting()这样得方法，需要通过封装对象才能访问，此时JavaScript会自动为基本类型值包装一个封装对象；
+    - 自动封装: 由于基本类型值没有.length和.toSting()这样得方法，需要通过封装对象才能访问，此时JavaScript会自动为基本类型值包装一个封装对象；
     ```JavaScript
     var a = 'aaa';
     a.length; // 3
     a.toUpperCase(); // 'AAA'
     ```
 4. 拆封对象：
-    1. valueOf(): 得到封装对象中得基本类型值；
+    - valueOf(): 得到封装对象中得基本类型值；
     ```JavaScript
     var a = new String('abc');
     a.valueOf(); // 'abc'
     ```
-    2. 隐式拆封: 在需要用到封装对象中得基本类型值得地方会发生隐式拆封；
+    - 隐式拆封: 在需要用到封装对象中得基本类型值得地方会发生隐式拆封；
     ```JavaScript
     var a = new String('abc');
     var b = a + '';
     typeof b; // 'String'
     ```
 5. 原生函数作为构造函数
-    1. Array(...)
+    - Array(...)
     ```JavaScript
     // Array构造函数只带一个参数的时候，该参数会被作为数组得预设长度(length)，非明智之举；
     // 然而数组并没有预设长度这个概念，这样只是创建了一个空数组，只不过它的length被设置成了指定的值
@@ -166,7 +169,7 @@ Object.prototype.toString.call(a); // [object String]
     a.length; // 3
     a; // [empty * 3]       和 [undefined, undefined, undefined]不同
     ```
-    2. ...
+    - ...
 
 #### 第四章 强制类型转换
 
@@ -177,7 +180,7 @@ var b = a + ''; // 隐式强制类型转换
 var c = String(a); // 显式强制类型转换
 ```
 2. 抽象值操作
-    1. ToString:
+    - ToString:
         1. null 转换为 'null';
         2. undefined 转换为 'undefined';
         3. true 转换为 'true';
@@ -205,17 +208,17 @@ var c = String(a); // 显式强制类型转换
     // 1. 字符串、数字、布尔值和null的toString和JSON.stringify基本相同；
     // 2. 如果传递给JSON.stringify的对象定义了toJSON()方法，那么该方法会在字符串化前调用，以便将对象转换为安全的JSON值；
     ```
-    2. ToNumber
+    - ToNumber
         1. true 转化为 1;
         2. false 转化为 0;
         3. undefined 转化为 NaN;
         4. null 转化为 0;
         5. 对象: 会首先检查是否有valueOf()方法，如果有并返回基本类型值，就使用该值进行强制类型转换；如果没有就使用toString()的返回值来进行强制类型转换；如果均不返回基本类型值，会产生TypeError错误；
-    3. ToBoolean
+    - ToBoolean
         1. 假值: undefined, null, false, +0 -0和NaN, '';
         2. 假值之外的都是真值；
 3. 显式强制类型转换
-    1. 字符串和数字之间的显式转换: String()和Number()
+    - 字符串和数字之间的显式转换: String()和Number()
     ```JavaScript
     var a = 42;
     var b1 = String(a);
@@ -239,7 +242,7 @@ var c = String(a); // 显式强制类型转换
     ~~-49.6; // -49
     ~~49.6; // 49
     ```
-    2. 显式解析数字字符串: 转换和解析是不同的，解析允许字符串中含有非数字字符；
+    - 显式解析数字字符串: 转换和解析是不同的，解析允许字符串中含有非数字字符；
     ```JavaScript
     var a = '42';
     var b = '42px';
@@ -250,7 +253,7 @@ var c = String(a); // 显式强制类型转换
     Number(b); // NaN -转换
     parseInt(b); // 42 -解析
     ```
-    3. 显式转换为布尔值: Boolean() 和 !! 能将值强制类型转换为布尔值
+    - 显式转换为布尔值: Boolean() 和 !! 能将值强制类型转换为布尔值
     ```JavaScript
     // 在if()和三元表达式中，会自动隐式进行ToBoolean转换
     // 建议使用 Boolean() 或者 !! 来进行显式转换，提高代码可读性
@@ -263,15 +266,15 @@ var c = String(a); // 显式强制类型转换
     if (Boolean(a)) {/*...*/}
     ```
 4. 隐式强制类型转换
-    1. 隐式的优点：能简化代码，专注于实现逻辑；
-    2. 字符串与数字之间的隐式强制类型转换
+    - 隐式的优点：能简化代码，专注于实现逻辑；
+    - 字符串与数字之间的隐式强制类型转换
     ```JavaScript
     // 如果 + 的其中一个操作数是字符串(对象另处理...)，则进行字符串拼接；否则进行数字加法
     var a = '42';
     var b = 42;
     a + b; // '4242'
     ```
-    3. 布尔值到数字的隐式强制类型转换
+    - 布尔值到数字的隐式强制类型转换
     ```JavaScript
     // 当参数只有一个true时，返回true,，否则返回false
     function onlyOne() {
@@ -283,13 +286,13 @@ var c = String(a); // 显式强制类型转换
     }
     onlyOne(true, false, false); // true
     ```
-    4. 隐式强制类型转换为布尔值: 以下情况会发生转换
+    - 隐式强制类型转换为布尔值: 以下情况会发生转换
         1. if (...)
         2. for (.., ..; ..)中第二个判断语句
         3. while (..)和do..while(..)
         4. ? : 中的条件判断语句
         5. 逻辑运算符 || 和 && 左边的操作数
-    5. || 和 &&
+    - || 和 &&
     ```JavaScript
     // || 对第一个操作数执行条件判断，如果为true则返回第一个操作数，如果为false则返回第二个操作数
     function foo(a) {
@@ -300,8 +303,8 @@ var c = String(a); // 显式强制类型转换
     a && a.say && a.say(); // 为后面的表达式把关
     ```
 5. 宽松相等和严格相等 (自我感觉，不建议用==)
-    1. 性能差别不大；
-    2. 抽象相等
+    - 性能差别不大；
+    - 抽象相等
     ```JavaScript
     // # 1. 字符串和数字
     var a = 42;
@@ -322,7 +325,7 @@ var c = String(a); // 显式强制类型转换
     ```
 #### 第五章 语法
 1. 语句和表达式
-    1. 语句的结果值
+    - 语句的结果值
         1. 每个语句都有一个结果值；
         2. 代码块{...}的结果值是其最后一个语句/表达式的结果
         ```JavaScript
@@ -346,7 +349,7 @@ var c = String(a); // 显式强制类型转换
         };
         a; // 42
         ```
-    2. 表达式的副作用
+    - 表达式的副作用
     ```JavaScript
     var a = 42;
     var b = a++; // 42  ++副作用产生在表达式返回结果之后
@@ -382,7 +385,7 @@ var c = String(a); // 显式强制类型转换
         }
     }
     ```
-    3. 上下文规则
+    - 上下文规则
         1. 大括号
         ```JavaScript
         // # 1. 对象常量
@@ -425,8 +428,8 @@ var c = String(a); // 显式强制类型转换
         }
         ```
 2. 运算符优先级
-    1. && > || > 三元运算符(? :)
-    2. 关联
+    - && > || > 三元运算符(? :)
+    - 关联
     ```JavaScript
     // 左关联 && ||
     a && b && c;
@@ -492,7 +495,7 @@ console.log(a); // ?? 有可能是2
 a.index++;
 ```
 2. 并发
-    1. 交互
+    - 交互
     ```JavaScript
     // 1. 门：等a, b都准备好了再进一步打开门
     var a, b;
@@ -534,7 +537,7 @@ a.index++;
     ajax('http://url.1', foo);
     ajax('http://url.2', bar);
     ```
-    2. 协作：取到一个长期运作的'进程'，并将其分割成多个步骤或者多批任务，使得其他并发'进程'有机会将自己的运算插入到事件循环队列中交替运行；
+    - 协作：取到一个长期运作的'进程'，并将其分割成多个步骤或者多批任务，使得其他并发'进程'有机会将自己的运算插入到事件循环队列中交替运行；
     ```JavaScript
     var res = [];
     function response(data) {
@@ -556,8 +559,8 @@ a.index++;
     ajax('http://url.2', response);
     ```
 3. 任务
-    1. 任务队列 和 事件循环队列 ？？？
-    2. Promise的异步特性是基于任务的；
+    - 任务队列 和 事件循环队列 ？？？
+    - Promise的异步特性是基于任务的；
 
 #### 第二章 回调
 
@@ -603,7 +606,7 @@ Promise.rece([
 })
 ```
 3. 可信任的Promise
-    1. Promise通过把回调的控制反转回来，把控制权放在了一个可信任的系统中
+    - Promise通过把回调的控制反转回来，把控制权放在了一个可信任的系统中
     ```JavaScript
     // 可以把不信任的Promise对象传给Promise.resolve(..)，然后会得到期望中的规范化后的安全结果
     // 不要只这么做
@@ -618,9 +621,9 @@ Promise.rece([
         });
     ```
 4. 链式流
-    1. 调用Promise的then()会自动创建一个新的Promise从调用返回；
-    2. 在完成或者拒绝函数内部，如果返回一个值或者抛出一个异常，新的返回的Promise就相应地决议
-    3. 如果完成或拒绝处理函数返回一个Promise，它将会被展开(调用它的 then() 方法)，这样一来，不管它的决议值是什么，都会成为当前then()返回的连接Promise的决议值；
+    - 调用Promise的then()会自动创建一个新的Promise从调用返回；
+    - 在完成或者拒绝函数内部，如果返回一个值或者抛出一个异常，新的返回的Promise就相应地决议
+    - 如果完成或拒绝处理函数返回一个Promise，它将会被展开(调用它的 then() 方法)，这样一来，不管它的决议值是什么，都会成为当前then()返回的连接Promise的决议值；
     ```JavaScript
     function request(url) {
         return new Promise(function(resolve, reject) {
@@ -636,7 +639,7 @@ Promise.rece([
             console.log(response2);
         });
     ```
-    4. resolve用于表达结果，可能是完成(fulfill)，也有可能是拒绝(reject)；
+    - resolve用于表达结果，可能是完成(fulfill)，也有可能是拒绝(reject)；
     ```JavaScript
     // 如果Promise.resolve()传入真正的Promise，则直接返回；
     // 如果Promise.resolve()传入的thenable，则会展开，展开如果得到一个拒绝状态，那么从Promise.resolve()返回的Promise实际上就同一个拒绝状态；
@@ -663,11 +666,11 @@ Promise.rece([
     );
     ```
 5. 错误处理
-    1. 常规最佳实践：Promise链地最后总以一个catch()结束；
-    2. 处理未捕获地情况：有些库实现了一些方法，注册一个“全局未处理拒绝”处理函数来处理未捕获地错误；
-    3. Promise的未来；你不知道的JavaScript(中) P211
+    - 常规最佳实践：Promise链地最后总以一个catch()结束；
+    - 处理未捕获地情况：有些库实现了一些方法，注册一个“全局未处理拒绝”处理函数来处理未捕获地错误；
+    - Promise的未来；你不知道的JavaScript(中) P211
 6. Promise模式
-    1. Promise.all([..]): 门
+    - Promise.all([..]): 门
         1. 数组中的值可以是Promise、thenable，甚至是立即值；
         2. 数组中的每个值都会通过Promise.resolve()过滤，以确保是一个真正的Promise；
         3. 如果数组是空，主Promise就会立即完成；
@@ -683,7 +686,7 @@ Promise.rece([
                 console.log(meg);
             })
         ```
-    2. Promise.race([..]): 门闩
+    - Promise.race([..]): 门闩
         1. 数组中的值可以是Promise、thenable，甚至是立即值；
         2. 数组中的每个值都会通过Promise.resolve()过滤，以确保是一个真正的Promise；
         3. 如果数组是空，主Promise就永远不会决议；
@@ -748,7 +751,7 @@ res = it.next(7); // 向生成器里面传递数据
 res.value; // 42
 ```
 2. 迭代器
-    1. 生产者与迭代器
+    - 生产者与迭代器
     ```JavaScript
     var something = (function() {
         var nextVal;
@@ -776,7 +779,7 @@ res.value; // 42
     }
     // 1 9 33 105 321 969
     ```
-    2. 生成器与迭代器
+    - 生成器与迭代器
     ```JavaScript
     function *something() {
         var nextVal;
@@ -890,15 +893,15 @@ var it = foo('http://some.url.1');
 #### 第五章 程序性能
 
 1. Web Worker
-    1. 环境：
+    - 环境：
         1. 无法访问主程序的任何资源；
         2. 加载额外JavaScript脚本
         ```JavaScript
         // 在worker内部
         importScripts('foo.js', 'bar.js');
         ```
-    2. 数据传递：postMessage()可以传递transferAble对象；
-    3. 共享Worker：整个站点页面实例共享的Worker(sharedWorker)；
+    - 数据传递：postMessage()可以传递transferAble对象；
+    - 共享Worker：整个站点页面实例共享的Worker(sharedWorker)；
 2. SIMD：单指令多数据是一种数据并行方式，与Web Worker的任务并行相对，重点实际上不再是把程序逻辑分成并行的块，而是并行处理数据的多个位；
 3. asm.js：js内存分配、垃圾收集和作用域访问的优化； [asm.js和Emscripten入门教程](http://www.ruanyifeng.com/blog/2017/09/asmjs_emscripten.html)
 
@@ -926,8 +929,8 @@ bench.stats.variance; // 样本方差
 ```
 3. jsPerf.com
 4. 微性能：
-    1. 你所写的代码并不总是JavaScript引擎真正运行的代码，JavaScript会对你的代码进行优化；
-    2. 不要过度执着于语句层面的优化，不要试图和JavaScript引擎比谁聪明；
+    - 你所写的代码并不总是JavaScript引擎真正运行的代码，JavaScript会对你的代码进行优化；
+    - 不要过度执着于语句层面的优化，不要试图和JavaScript引擎比谁聪明；
     ```JavaScript
     // 理论上，变量len缓存x数组的长度会提高性能
     // 但是，引擎会帮你做这件事，而你自行优化可能在V8引擎中反而会使性能下降

@@ -10,8 +10,6 @@ tags:
 2. 在官网根据不同操作系统，下载不同版本的Flutter SDK；
 3. 没有科学上网页面打开会有点慢；
 
-<!-- more -->
-
 ## macOS catalina（v10.15.x）开发环境搭建
 详细步骤参考bilibili视频：https://www.bilibili.com/video/av52490605?p=15
 

@@ -4,9 +4,14 @@ date: 2018-06-03
 tags:
      - JavaScript
 ---
-日常积累的JavaScript笔记！
 
-### 原生JavaScript
+
+{% note info no-icon %}
+日常积累的JavaScript笔记！
+{% endnote %}
+
+## 原生JavaScript
+
 1. 选择器时态问题
     ```JavaScript
     var elem = document.getElementsByClassName('div');//能选中未来的元素
@@ -67,17 +72,19 @@ tags:
     2. 将Dom Tree和CSSOM Tree结合，生成Render Tree(渲染树);
     3. 根据Render Tree渲染绘制，将像素渲染到屏幕上;
 
-### jQuery
+
+## jQuery
+
 1. jQuery的attr()对应的是html文本；prop()对应的是DOM对象;
 2. jQuery中each类似于javascript的for循环
 但不同于for循环的是在each里面不能使用break结束循环，也不能使用continue来结束本次循环，想要实现类似的功能就只能用return,
 break        用return false
 continue      用return true
 3. [jQuery数据缓存和HTML5 data-*属性](http://note.youdao.com/)
-    1. jQuery读取data-*会自动做数据类型转换，如果不想要这种转换只能使用attr()去获取原始的属性值。
-    2. jQuery读取data-*属性是懒惰的、按需的，只有真正使用这些属性的时候，jQuery才会将其加载到内存。
-    3. jQuery修改属性值，都是在内存中进行的，并不会修改 DOM。(通过js中的dataset修改时候，会刷新DOM)
-    4. data-*会被jQuery绑定到HTMLElement对象上，而不是jQuery封装后的对象上。
-    5. 最重要的一点：jQuery只会在data-*第一次被访问的时候将其加载到内存，之后再也不会重新读取了。
+    - jQuery读取data-*会自动做数据类型转换，如果不想要这种转换只能使用attr()去获取原始的属性值。
+    - jQuery读取data-*属性是懒惰的、按需的，只有真正使用这些属性的时候，jQuery才会将其加载到内存。
+    - jQuery修改属性值，都是在内存中进行的，并不会修改 DOM。(通过js中的dataset修改时候，会刷新DOM)
+    - data-*会被jQuery绑定到HTMLElement对象上，而不是jQuery封装后的对象上。
+    - 最重要的一点：jQuery只会在data-*第一次被访问的时候将其加载到内存，之后再也不会重新读取了。
 4. 问题：jQuery prop改变checkbox状态不能出发change事件；
 解决：添加change()，让它触发$("input[type='checkbox']").prop('checked', true).change();

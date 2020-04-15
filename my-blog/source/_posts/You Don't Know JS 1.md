@@ -5,22 +5,23 @@ tags:
      - JavaScript
      - 读书笔记
 ---
-你不知道的JavaScript的一些读书笔记！
 
+{% note info no-icon %}
+你不知道的JavaScript的一些读书笔记！
+{% endnote %}
 
 ### 第一部分 作用域和闭包
 
 #### 第一章 作用域
 
 1. 编译：
-    1. 分词/词法分析
-    2. 解析/语法分析：生成"抽象语法树"AST
-    3. 代码生成：AST转化成一组机器指令
-<!-- more -->
+    - 分词/词法分析
+    - 解析/语法分析：生成"抽象语法树"AST
+    - 代码生成：AST转化成一组机器指令
 2. 作用域是一套规则，如果查找的目的是对变量进行赋值，就会使用LHS查询；如果目的是获取变量的值，就会使用RHS查询；
 3. var a = 2;会被分解成两个独立的步骤：
-    1. var a在其作用域中声明变量
-    2. a = 2会查询(LHS查询)变量a并对其进行赋值
+    - var a在其作用域中声明变量
+    - a = 2会查询(LHS查询)变量a并对其进行赋值
 4. ReferenceError同作用域判别失败相关；而typeError则代表作用域判别成功了，但是对结果的操作是非法的或者不合理的；
 
 #### 第二章 词法作用域
@@ -176,12 +177,12 @@ var me = {
 console.log(identify.call(me));
 ```
 2. this:
-    1. 当一个函数被调用，会创建一个活动记录。这个活动记录会包含函数在哪被调用(调用栈)、函数的调用方式、传入的参数等信息。this就是这个记录里的一个属性，会在函数执行的过程中用到；
-    2. this既不指向函数自身，也不指向函数的词法作用域。实际上this实在函数被调用时发生的绑定，它指向什么完全取决于函数在哪里被调用了；
+    - 当一个函数被调用，会创建一个活动记录。这个活动记录会包含函数在哪被调用(调用栈)、函数的调用方式、传入的参数等信息。this就是这个记录里的一个属性，会在函数执行的过程中用到；
+    - this既不指向函数自身，也不指向函数的词法作用域。实际上this实在函数被调用时发生的绑定，它指向什么完全取决于函数在哪里被调用了；
 
 #### 第二章 this全面解析
 1. 绑定规则：
-    1. 默认绑定：独立函数调用，this的默认绑定指向全局变量(strict模式下，指向undefined)；
+    - 默认绑定：独立函数调用，this的默认绑定指向全局变量(strict模式下，指向undefined)；
     ```JavaScript
     function foo() {
         console.log(this.a);
@@ -189,7 +190,7 @@ console.log(identify.call(me));
     var a = 2;
     foo(); // 2
     ```
-    2. 隐式绑定：函数被调用时，obj对象“拥有”或者“包含”它；
+    - 隐式绑定：函数被调用时，obj对象“拥有”或者“包含”它；
     ```JavaScript
     function foo() {
         console.log(this.a);
@@ -217,7 +218,7 @@ console.log(identify.call(me));
     var a = 'oops, global';
     doFoo(obj.foo); // oops, global
     ```
-    3. 显示绑定：call, apply, bind
+    - 显示绑定：call, apply, bind
     ```JavaScript
     function foo(num2) {
         console.log(this.num1 + num2);
@@ -239,7 +240,7 @@ console.log(identify.call(me));
     var bar = foo.bind(obj);
     bar(3); // 5
     ```
-    4. new绑定：使用new来调用函数时，会自动自行下面的操作
+    - new绑定：使用new来调用函数时，会自动自行下面的操作
         1. 创建一个全新的对象；
         2. 这个对象会被执行[[Prototype]]连接；
         3. 这个新对象会绑定到函数调用的this；
@@ -268,7 +269,7 @@ console.log(obj1.a); // 2
 console.log(baz.a); // 3
 ```
 3. 绑定例外
-    1. 被忽略的this
+    - 被忽略的this
     ```JavaScript
     // 如果把null或者undefined作为this的绑定对象传入call、apply或者bind，这些值在调用时会被忽略，实际上应用的时默认绑定规则；
     function foo() {
@@ -287,7 +288,7 @@ console.log(baz.a); // 3
     var bar = foo.bind(emptyObj, 2);
     bar(3); // 2, 3
     ```
-    2. this词法(箭头函数)：优先级比new还高
+    - this词法(箭头函数)：优先级比new还高
     ```JavaScript
     function foo() {
         return (a) => {
@@ -341,13 +342,13 @@ myObject.hasOwnProperty('a'); // true
 #### 第四章 类
 
 #### 第五章 原型
-1.
-    1. JavaScript中的对象有一个特殊的[[Prototype]]内置属性，就是对于其他对象的引用。
-    2. 几乎所有的对象引用在创建时[[Prototype]]属性都会被赋予一个非空的值。
-    3. 当你引用对象的属性时，会触发[[Get]]操作，对于默认的[[Get]]操作来说，第一步会检查对象本身是否有这个属性；如果无法在对象本身找到需要的属性，就会继续访问对象的[[Prototype]]链；找完整条[[Prototype]]链，如果还没有找到，则返回undefined；
-    4. 所有普通的[[Prototype]]链最终都会指向内置的Object.prototype，它包含JavaScript中许多通用的功能，比如.toString(), .valueOf()；
-    5. ES6获取对象的原型：Object.getPrototypeOf(a);
-    6. Object.create(null);会创建一个空[[prototype]]的对象，不会受到原型链的干扰，因此非常适合用来存储数据；
+1. 理解
+    - JavaScript中的对象有一个特殊的[[Prototype]]内置属性，就是对于其他对象的引用。
+    - 几乎所有的对象引用在创建时[[Prototype]]属性都会被赋予一个非空的值。
+    - 当你引用对象的属性时，会触发[[Get]]操作，对于默认的[[Get]]操作来说，第一步会检查对象本身是否有这个属性；如果无法在对象本身找到需要的属性，就会继续访问对象的[[Prototype]]链；找完整条[[Prototype]]链，如果还没有找到，则返回undefined；
+    - 所有普通的[[Prototype]]链最终都会指向内置的Object.prototype，它包含JavaScript中许多通用的功能，比如.toString(), .valueOf()；
+    - ES6获取对象的原型：Object.getPrototypeOf(a);
+    - Object.create(null);会创建一个空[[prototype]]的对象，不会受到原型链的干扰，因此非常适合用来存储数据；
 2. 构造函数
 ```JavaScript
 // ‘构造函数’实际作用：a.__proto__ = Foo.prototype;

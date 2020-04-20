@@ -1,36 +1,39 @@
-import React, { useEffect, useState, useCallback, useRef } from 'react';
+import React, { useState } from 'react';
 import './App.css';
-import { Button } from 'antd';
 import Child from './Child'
 
-function App() {
-    const [count, setCount] = useState(0)
-    const domRef = useRef(null)
+// function App() {
+//     const [age, setAge] = useState(0)
 
-    useEffect(() => {
-        console.log('effect')
-        console.log(domRef)
-    }, [])
+//     return (
+//         <div className="App">
+//             <p>App</p>
 
-    const testFn = useCallback(() => {
-        // do something
-    }, [])
+//             {age}
+//             <button onClick={() => setAge(age + 1)}>change theme</button>
 
-    const handleClick = () => {
-        setCount(count => count + 1)
+//             <Child></Child>
+//         </div>
+//     );
+// }
+
+class App extends React.Component {
+    state = {
+        count: 1
     }
 
-    return (
-        <div className="App">
-            {/* count: {count} */}
-            <br ref={domRef} />
-            <br/>
-            <Button onClick={handleClick}>click</Button>
-            <br/>
-            <br/>
-            <Child testFn={testFn}></Child>
-        </div>
-    );
+    render() {
+        const { count } = this.state
+
+        return (
+            <div>
+                <h1>App</h1>
+                <p>{count}</p>
+                <button onClick={() => this.setState({ count: count + 1 })}>add</button>
+                <Child></Child>
+            </div>
+        )
+    }
 }
 
 export default App;

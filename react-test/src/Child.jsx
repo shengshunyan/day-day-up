@@ -1,19 +1,30 @@
 import React, { useEffect } from 'react';
 
+// const Child = () => {
 
-const Child = React.memo(({
-    testFn
-}) => {
-    console.log('child')
-    useEffect(() => {
+//     useEffect(() => {
+//         console.log('child update')
+//     })
+
+//     return (
+//         <div className="child">
+//             child
+//         </div>
+//     );
+// }
+
+// export default React.memo(Child);
+
+class Child extends React.Component {
+    componentDidUpdate() {
         console.log('child update')
-    })
+    }
 
-    return (
-        <div className="child">
-            bbb
-        </div>
-    );
-})
+    render() {
+        return (
+            <div>Child</div>
+        )
+    }
+}
 
-export default Child;
+export default Child

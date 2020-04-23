@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "hexo clean && hexo douban -m && hexo generate && hexo server -p 5000 -w",
-    "release": "hexo clean && hexo douban -m && hexo generate && node ./copy-to-server.js"
+    "start": "hexo clean && hexo douban -m && hexo generate && hexo server -p 5000 -w",
+    "deploy": "hexo clean && hexo douban -m && hexo generate && node ./copy-to-server.js"
   },
   "hexo": {
     "version": "3.7.1"

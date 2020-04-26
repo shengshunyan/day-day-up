@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import Child from './Child'
+import ErrorBoundary from './ErrorBoundary'
 
 // function App() {
 //     const [age, setAge] = useState(0)
@@ -25,13 +26,17 @@ class App extends React.Component {
     render() {
         const { count } = this.state
 
+        if (count === 3) {
+            throw new Error('I crashed!');
+        }
+
         return (
-            <div>
+            <ErrorBoundary>
                 <h1>App</h1>
                 <p>{count}</p>
                 <button onClick={() => this.setState({ count: count + 1 })}>add</button>
                 <Child></Child>
-            </div>
+            </ErrorBoundary>
         )
     }
 }

@@ -1,30 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 
-// const Child = () => {
+const Child = () => {
+    const [count, setCount] = useState(0)
 
-//     useEffect(() => {
-//         console.log('child update')
-//     })
-
-//     return (
-//         <div className="child">
-//             child
-//         </div>
-//     );
-// }
-
-// export default React.memo(Child);
-
-class Child extends React.Component {
-    componentDidUpdate() {
-        console.log('child update')
+    if (count === 3) {
+        throw new Error('child crashed!');
     }
 
-    render() {
-        return (
-            <div>Child</div>
-        )
-    }
+    return (
+        <div className="child">
+            {count}
+            <button onClick={() => setCount(count + 1)}>child add</button>
+        </div>
+    );
 }
 
-export default Child
+export default React.memo(Child);

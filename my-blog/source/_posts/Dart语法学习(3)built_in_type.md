@@ -340,3 +340,45 @@ void main() {
   print(c.runtimeType);
 }
 ```
+<br/>
+
+
+## 枚举
+
+1. 枚举类型也称为 enumerations 或 enums ， 是一种特殊的类，用于表示数量固定的常量值
+
+2. 使用枚举的 values 常量， 获取所有枚举值列表
+
+```dart
+void main() {
+  var currentSeason = Season.spring;
+  // index值从0开始累加
+  print(currentSeason.index);
+
+  switch (currentSeason) {
+    case Season.spring:
+      print('1-3月');
+      break;
+    case Season.summer:
+      print('4-6月');
+      break;
+    case Season.autumn:
+      print('7-9月');
+      break;
+    case Season.winter:
+      print('10-12月');
+      break;
+  }
+
+  // 使用枚举的 values 常量， 获取所有枚举值列表
+  List<Season> seasonValue = Season.values;
+  print(seasonValue[1] == Season.spring);
+}
+
+enum Season {
+  spring,
+  summer,
+  autumn,
+  winter,
+}
+```

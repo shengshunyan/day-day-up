@@ -42,10 +42,13 @@ tags:
     vim ～/.zprofile
     # 添加以下三行
     export PATH=${PATH}:[flutter folder path]/flutter/bin
-    export PUB_HOSTED_URL=https://mirrors.cloud.tencent.com/dart-pub
-    export FLUTTER_STORAGE_BASE_URL=https://mirrors.cloud.tencent.com/flutter
+    export PUB_HOSTED_URL=https://pub.flutter-io.cn
+    export FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn
+    # 下面两个是腾讯镜像
+    # export PUB_HOSTED_URL=https://mirrors.cloud.tencent.com/dart-pub
+    # export FLUTTER_STORAGE_BASE_URL=https://mirrors.cloud.tencent.com/flutter
     # 使文件生效
-    source $HOME/.z_profile
+    source $HOME/.zprofile
     ```
     
 ### 四、检查flutter开发环境

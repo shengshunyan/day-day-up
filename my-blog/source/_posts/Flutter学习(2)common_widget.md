@@ -224,3 +224,57 @@ scrollDirection属性可以设置列表主轴方向
     }
   }
   ```
+<br/>
+
+
+## AspectRatio 可设置宽高比
+
+AspectRatio组件的宽度和父容器一致，再按照宽高比展示高度
+
+```dart
+AspectRatio(
+  aspectRatio: 3.0/1.0,
+  child: Container(
+    color: Colors.red,
+  ),
+)
+```
+
+![4.png](https://i.loli.net/2020/05/19/kzgMJ9IsFd1xO7c.png)
+<br/>
+
+
+## Card
+
+card是常用的卡片信息展示组件
+
+```dart
+ListView(
+  children: <Widget>[
+    Card(
+      margin: EdgeInsets.all(10),
+      child: Column(
+        children: <Widget>[
+          AspectRatio(
+            aspectRatio: 20/9,
+            child: Image.network(
+              'https://img1.mukewang.com/szimg/5ad05dc00001eae705400300.jpg',
+              fit: BoxFit.cover,
+            ),
+          ),
+          ListTile(
+            leading: CircleAvatar(
+              backgroundImage: NetworkImage('https://img1.mukewang.com/szimg/5ad05dc00001eae705400300.jpg'),
+            ),
+            title: Text('XX'),
+            subtitle: Text('XXXXXX'),
+          ),
+        ],
+      ),
+    ),
+  ],
+)
+```
+
+![5.png](https://i.loli.net/2020/05/19/qJMLAn2Wf96UiZp.png)
+<br/>

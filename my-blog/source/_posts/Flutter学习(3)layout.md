@@ -125,3 +125,89 @@ row组件是单行排列，Wrap是可以自动换行的
 <br/>
 
 
+## Align 角定位布局
+
+在Container里，如果需要将内容显示在左上角，左下角，右上角，右下角，可以依赖Align 这个定位的Widget
+
+Align还可以以 alignment: Alignment(0.1, 0) 的形式定位，更细粒度
+
+```dart
+Container(
+  color: Colors.blue,
+  width: 300,
+  height: 200,
+  child: Align(
+    alignment: Alignment.bottomRight,
+    child: Text("Hello Align ",
+        style: TextStyle(fontSize: 20, color: Colors.white)),
+  ));
+```
+
+![1.png](https://i.loli.net/2020/05/19/VCesfR8HJpZDxXl.png)
+<br/>
+
+
+## Stack & Positioned 绝对定位
+
+这在css里，使用 position：absolute; 可以进行灵活得定位；在flutter里，借助stack+ positioned两个widget的组合能实现相同的效果。
+
+```dart
+Container(
+  height: 400,
+  width: 300,
+  color: Colors.red,
+  child: Stack(
+    children: <Widget>[
+      Positioned(
+        top: 20,
+        right: 10,
+        child: Icon(Icons.home, size: 40, color: Colors.white)
+      ),
+      Positioned(
+        right: 0,
+        bottom: 0,
+        child: Icon(Icons.send, size: 40, color: Colors.white,),
+      ),
+    ],
+  ),
+)
+```
+
+![2.png](https://i.loli.net/2020/05/19/WOTURb4KnMcjxIs.png)
+<br/>
+
+
+## Flex & Expanded 流式布局
+
+类似前端的flex布局。
+
+Row，Column，其实都是继承自Flex，也属于流式布局，children内也能使用Expanded组件。如果轴向不确定，使用Flex，通过修改direction的值设定轴向 如果轴向已确定，使用Row，Column，布局更简洁，更有语义化。
+
+```dart
+Flex(
+  direction: Axis.horizontal,
+  children: <Widget>[
+    Container(
+      width: 30,
+      height: 100,
+      color: Colors.blue,
+    ),
+    Expanded(
+      flex: 1,
+      child: Container(
+        height: 100.0,
+        color: Colors.red,
+      ),
+    ),
+    Expanded(
+      flex: 1,
+      child: Container(
+        height: 100.0,
+        color: Colors.green,
+      ),
+    ),
+  ],
+)
+```
+
+![3.png](https://i.loli.net/2020/05/19/8ULeBN2kP9AaduF.png)

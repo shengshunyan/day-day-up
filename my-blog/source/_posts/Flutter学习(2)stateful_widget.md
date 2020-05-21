@@ -1,6 +1,6 @@
 ---
-title: Flutter学习(4)stateful_widget
-date: 2020-05-19
+title: Flutter学习(2)stateful_widget
+date: 2020-05-17
 keywords: dart, flutter, 移动端
 cover: https://i.loli.net/2020/05/17/z5FJLBw7kjeYhgC.png
 tags:

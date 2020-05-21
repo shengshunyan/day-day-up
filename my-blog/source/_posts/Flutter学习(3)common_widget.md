@@ -1,6 +1,6 @@
 ---
-title: Flutter学习(2)common_widget
-date: 2020-05-17
+title: Flutter学习(3)common_widget
+date: 2020-05-18
 keywords: dart, flutter, 移动端
 cover: https://i.loli.net/2020/05/17/z5FJLBw7kjeYhgC.png
 tags:
@@ -86,6 +86,14 @@ Flutter 的 Button 有好几种类型
   - FlatButton：扁平化按钮 
   - OutlineButton：带边框按钮 
   - IconButton：带图标按钮
+  - Scaffold组件下的floatingActionButton可是设置界面上浮动的按钮，floatingActionButtonLocation可以设置按钮的位置
+  ```dart
+  floatingActionButton: FloatingActionButton(
+    child: Icon(Icons.add),
+    onPressed: () {},
+  ),
+  floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+  ```
 
 ```dart
 Column(children: <Widget>[
@@ -111,6 +119,264 @@ Column(children: <Widget>[
 ```
 
 ![3.png](https://i.loli.net/2020/05/18/uoRyG3x9KrOw4LF.png)
+<br/>
+
+
+## TextField
+
+html中的输入框组件在flutter中是TextField组件，一下列举了几种常见的输入框
+
+```dart
+Column(
+  children: <Widget>[
+    // 普通输入框
+    TextField(),
+
+    SizedBox(height: 10),
+
+    // 多行输入框
+    TextField(
+      maxLines: 4,
+      decoration: InputDecoration(
+        hintText: "请输入内容",
+        border: OutlineInputBorder(),
+      ),
+    ),
+
+    SizedBox(height: 10),
+
+    // 密码框
+    TextField(
+      obscureText: true,
+    ),
+
+    SizedBox(height: 10),
+    
+    // 带标签的输入框
+    TextField(
+      decoration: InputDecoration(
+        labelText: '用户名',
+      ),
+    ),
+
+    SizedBox(height: 10),
+
+    // 带图标的输入框
+    TextField(
+      decoration: InputDecoration(
+        icon: Icon(Icons.home),
+      ),
+    ),
+  ],
+)
+```
+
+![4.png](https://i.loli.net/2020/05/21/9IuvFPK4prbXCRl.png)
+
+Input组件状态控制：TextField组件的onChanged函数可以监听输入框值的变化
+
+```dart
+class InputController extends StatefulWidget {
+  InputController({Key key}) : super(key: key);
+  _InputControllerState createState() => _InputControllerState();
+}
+
+class _InputControllerState extends State<InputController> {
+  var userName;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        TextField(
+          onChanged: (value) {
+            setState(() {
+              this.userName = value;
+            });
+          },
+        ),
+        RaisedButton(
+          child: Text('提交'),
+          onPressed: () {
+            print(this.userName);
+          },
+        ),
+      ],
+    );
+  }
+}
+```
+<br/>
+
+
+## Checkbox
+
+Checkbox组件以及状态控制
+
+```dart
+class CheckboxComponeng extends StatefulWidget {
+  CheckboxComponeng({Key key}) : super(key: key);
+  _CheckboxComponengState createState() => _CheckboxComponengState();
+}
+
+class _CheckboxComponengState extends State<CheckboxComponeng> {
+  bool flag = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('checkbox'),
+      ),
+      body: Wrap(
+        children: <Widget>[
+          Checkbox(
+            value: this.flag,
+            onChanged: (value) {
+              setState(() {
+                this.flag = value;
+              });
+            },
+          ),
+          CheckboxListTile(
+            value: this.flag,
+            onChanged: (value) {
+              setState(() {
+                this.flag = value;
+              });
+            },
+            title: Text('一级标题'),
+            subtitle: Text('二级标题'),
+            secondary: Icon(Icons.help),
+          ),
+        ],
+      ),
+    );
+  }
+}
+```
+
+![5.png](https://i.loli.net/2020/05/21/Uia8AHQM7x5zBO1.png)
+<br/>
+
+
+## Radio
+
+Radio组件以及状态控制
+
+```dart
+class RadioComponeng extends StatefulWidget {
+  RadioComponeng({Key key}) : super(key: key);
+  _RadioComponengState createState() => _RadioComponengState();
+}
+
+class _RadioComponengState extends State<RadioComponeng> {
+  int sex = 1;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('radio'),
+      ),
+      body: Wrap(
+        children: <Widget>[
+          Text('男'),
+          Radio(
+            value: 1,
+            groupValue: this.sex,
+            onChanged: (value) {
+              setState(() {
+                this.sex = value;
+              });
+            },
+          ),
+          Text('女'),
+          Radio(
+            value: 2,
+            groupValue: this.sex,
+            onChanged: (value) {
+              setState(() {
+                this.sex = value;
+              });
+            },
+          ),
+          
+          RadioListTile(
+            value: 1,
+            groupValue: this.sex,
+            onChanged: (value) {
+              setState(() {
+                this.sex = value;
+              });
+            },
+            selected: this.sex == 1,
+            title: Text('男'),
+            subtitle: Text('性别'),
+            secondary: Icon(Icons.help),
+          ),
+          RadioListTile(
+            value: 2,
+            groupValue: this.sex,
+            onChanged: (value) {
+              setState(() {
+                this.sex = value;
+              });
+            },
+            selected: this.sex == 2,
+            title: Text('女'),
+            subtitle: Text('性别'),
+            secondary: Icon(Icons.help),
+          ),
+        ],
+      ),
+    );
+  }
+}
+```
+
+![6.png](https://i.loli.net/2020/05/21/9L5tmwkRB61IVEl.png)
+<br/>
+
+
+## Switch
+
+Switch组件以及状态控制
+
+```dart
+
+class SwitchComponeng extends StatefulWidget {
+  SwitchComponeng({Key key}) : super(key: key);
+  _SwitchComponengState createState() => _SwitchComponengState();
+}
+
+class _SwitchComponengState extends State<SwitchComponeng> {
+  bool flag = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('radio'),
+      ),
+      body: Wrap(
+        children: <Widget>[
+          Switch(
+            value: this.flag,
+            onChanged: (value) {
+              setState(() {
+                this.flag = value;
+              });
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
+```
+
+![7f4c9aca637a4849c.png](https://file.moetu.org/images/2020/05/21/7f4c9aca637a4849c.png)
 <br/>
 
 

@@ -1,6 +1,6 @@
 ---
-title: Flutter学习(3)layout
-date: 2020-05-18
+title: Flutter学习(5)layout
+date: 2020-05-20
 keywords: dart, flutter, 移动端
 cover: https://i.loli.net/2020/05/17/z5FJLBw7kjeYhgC.png
 tags:

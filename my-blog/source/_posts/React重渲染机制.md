@@ -2,7 +2,7 @@
 title: React重渲染机制
 date: 2020-04-20
 keywords: react, 重渲染, Hook
-cover: https://i.loli.net/2020/04/15/o8uxKypfQsBtdre.png
+cover: https://s1.ax1x.com/2020/05/28/tZXg7q.jpg
 tags:
      - JavaScript
 ---

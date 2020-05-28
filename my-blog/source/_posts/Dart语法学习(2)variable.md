@@ -2,7 +2,7 @@
 title: Dart语法学习(2)variable
 date: 2020-05-03
 keywords: dart, flutter, 移动端
-cover: https://i.loli.net/2020/05/04/JWhexMEgDPTQHUI.jpg
+cover: https://s1.ax1x.com/2020/05/28/tZj62D.png
 tags:
      - 移动端
 ---

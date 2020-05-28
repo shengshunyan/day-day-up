@@ -2,7 +2,7 @@
 title: React状态管理之redux
 date: 2020-04-11
 keywords: react, 状态管理, redux
-cover: https://i.loli.net/2020/04/15/o8uxKypfQsBtdre.png
+cover: https://s1.ax1x.com/2020/05/28/tZXg7q.jpg
 tags:
      - JavaScript
 ---

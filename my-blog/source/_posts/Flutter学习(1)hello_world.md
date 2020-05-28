@@ -2,7 +2,7 @@
 title: Flutter学习(1)hello_world
 date: 2020-05-16
 keywords: dart, flutter, 移动端
-cover: https://i.loli.net/2020/05/17/z5FJLBw7kjeYhgC.png
+cover: https://s1.ax1x.com/2020/05/28/tZjPHI.png
 tags:
      - 移动端
 ---

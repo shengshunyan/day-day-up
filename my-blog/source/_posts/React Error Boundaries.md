@@ -2,7 +2,7 @@
 title: React Error Boundaries
 date: 2020-04-26
 keywords: react, Error Boundaries, 错误处理
-cover: https://i.loli.net/2020/04/15/o8uxKypfQsBtdre.png
+cover: https://s1.ax1x.com/2020/05/28/tZXg7q.jpg
 tags:
      - JavaScript
 ---

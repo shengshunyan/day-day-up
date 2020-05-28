@@ -1,42 +1,48 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
 import Child from './Child'
-import ErrorBoundary from './ErrorBoundary'
 
 // function App() {
-//     const [age, setAge] = useState(0)
+//     const [count, setCount] = useState(0)
 
 //     return (
 //         <div className="App">
-//             <p>App</p>
+//             <p>Parent: {count}</p>
+//             <button onClick={() => setCount(count + 1)}>add count</button>
 
-//             {age}
-//             <button onClick={() => setAge(age + 1)}>change theme</button>
+//             <br/>
+//             <hr/>
+//             <br/>
 
-//             <Child></Child>
+//             <Child count={count}></Child>
 //         </div>
 //     );
 // }
 
 class App extends React.Component {
     state = {
-        count: 1
+        count: 0
     }
 
+    addCount = () => {
+        const { count } = this.state
+        this.setState({ count: count + 1 })
+    }
+    
     render() {
         const { count } = this.state
 
-        if (count === 3) {
-            throw new Error('I crashed!');
-        }
-
         return (
-            <ErrorBoundary>
-                <h1>App</h1>
-                <p>{count}</p>
-                <button onClick={() => this.setState({ count: count + 1 })}>add</button>
-                <Child></Child>
-            </ErrorBoundary>
+            <div className="App">
+                <p>Parent: {count}</p>
+                <button onClick={this.addCount}>add count</button>
+
+                <br />
+                <hr />
+                <br />
+
+                <Child count={count}></Child>
+            </div>
         )
     }
 }

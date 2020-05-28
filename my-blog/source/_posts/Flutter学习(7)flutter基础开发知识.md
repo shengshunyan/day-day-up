@@ -87,3 +87,49 @@ Image(
   image: AssetImage('images/icon.jpg'),
 )
 ```
+
+<br/>
+
+
+## 打开第三方应用
+
+app内有些有打开其他app的需求，比如浏览器、地图等（需要搜索相关软件的schema，IOS和Android的不一样），可以利用dart包url_launcher提供的方法实现
+
+{% note info no-icon %}
+url_launcher包：https://pub.flutter-io.cn/packages/url_launcher
+{% endnote %}
+
+```dart
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    _launchURL() async {
+      const url = 'https://flutter.cn';
+      if (await canLaunch(url)) {
+        await launch(url);
+      } else {
+        throw 'Could not launch $url';
+      }
+    }
+
+    return MaterialApp(
+      title: 'demo',
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('demo'),
+        ),
+        body: Center(
+          child: RaisedButton(
+            onPressed: _launchURL,
+            child: Text('Show Flutter homepage'),
+          ),
+        ),
+      ),
+    );
+  }
+}
+```
+
+![tecrKe.gif](https://s1.ax1x.com/2020/05/28/tecrKe.gif)
+
+<br/>

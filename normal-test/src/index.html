@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <style type="text/css">
+        .box {
+            transition: height .3s ease-out;
+        }
+    </style>
     <script type="text/javascript" src="./util//jquery-3.4.1.js"></script>
 </head>
 
@@ -14,17 +19,19 @@
 
     <button onclick="getData()">请求</button>
 
-    <form action="/data" method="post">
-        <div>
-            <span>用户名</span>
-            <input type="text" name="username">
-        </div>
-        <div>
-            <span>密码</span>
-            <input type="password" name="password">
-        </div>
-        <button type="submit">submit</button>
-    </form>
+    <div class="box">
+        <form action="/data" method="post">
+            <div>
+                <span>用户名</span>
+                <input type="text" name="username">
+            </div>
+            <div>
+                <span>密码</span>
+                <input type="password" name="password">
+            </div>
+            <button type="submit">submit</button>
+        </form>
+    </div>
 
     <script type="text/javascript">
         console.log('page loaded');

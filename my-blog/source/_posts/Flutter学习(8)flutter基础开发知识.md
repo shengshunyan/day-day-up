@@ -1,6 +1,6 @@
 ---
 title: Flutter学习(7)flutter基础开发知识
-date: 2020-05-26
+date: 2020-05-31
 keywords: dart, flutter, 移动端
 cover: https://s1.ax1x.com/2020/05/28/tZjPHI.png
 tags:

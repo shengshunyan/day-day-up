@@ -1,5 +1,5 @@
 ---
-title: Flutter学习(7)flutter基础开发知识
+title: Flutter学习(8)flutter基础开发知识
 date: 2020-05-31
 keywords: dart, flutter, 移动端
 cover: https://s1.ax1x.com/2020/05/28/tZjPHI.png
@@ -87,6 +87,41 @@ Image(
   image: AssetImage('images/icon.jpg'),
 )
 ```
+
+{% note info no-icon %}
+图片缓存可以用cached_network_image插件
+{% endnote %}
+
+<br/>
+
+
+## Icon
+
+### 内置icon
+Material design内置的icon：https://material.io/resources/icons/?style=baseline
+
+### 自定义Icon
+
+1. 我们先构造一个类：
+  ```dart
+  const IconData(
+    this.codePoint,//必填参数，fonticon对应的16进制Unicode {
+    this.fontFamily,//字体库系列
+    this.fontPackage,//字体在那个包中，不填仅在自己程序包中查找
+    this.matchTextDirection: false,图标是否按照图标绘制方向显示
+  });
+  ```
+2. 然后我们需要向使用字体一样，在pubspec.yaml中配置我们的icon
+  ```yaml
+  fonts:
+    - family: devio
+      fonts:
+        - asset: fonts/devio.ttf
+  ```
+3. 代码中的使用
+  ```dart
+  child: new Icon(new IconData(0xf5566, fontFamily: "devio"), size: 100.0, color: Colors.blueAccent,)
+  ```
 
 <br/>
 

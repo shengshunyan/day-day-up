@@ -1,8 +1,8 @@
 ---
-title: flutter开发环境搭建
+title: Flutter开发环境搭建
 date: 2019-05-30
 tags:
-     - 大前端
+     - 移动端
 ---
 
 ## 官网安装教程

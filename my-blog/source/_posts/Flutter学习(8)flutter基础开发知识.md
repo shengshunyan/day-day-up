@@ -212,3 +212,21 @@ class MyApp extends StatelessWidget {
 ```
 
 <br/>
+
+
+## 项目优化
+
+1. 代码优化
+  - 封装冗余代码
+2. 包大小
+  - 压缩本地图片
+  - 使用单架构so
+3. 流畅性优化
+  - 按需创建页面
+  - 按需AutomaticKeepAliveClientMixin
+  - 耗时的计算放到独立的Isolate
+4. 内存优化
+  - 图片优化：根据控件大小加载指定分辨率的图片
+  - 分页加载
+  - 使用ListView.build()来复用子控件，它会只创建可视区内的元素
+  - 防止内存泄漏，dispose需要销毁的listener等

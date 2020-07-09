@@ -1,50 +1,72 @@
-import React from 'react';
-import './App.css';
-import Child from './Child'
+import React, { useState } from 'react'
+import './App.css'
+import { HashRouter as Router, Link, Route, Prompt } from 'react-router-dom'
+import { Modal, Input } from 'antd'
 
-// function App() {
-//     const [count, setCount] = useState(0)
-
-//     return (
-//         <div className="App">
-//             <p>Parent: {count}</p>
-//             <button onClick={() => setCount(count + 1)}>add count</button>
-
-//             <br/>
-//             <hr/>
-//             <br/>
-
-//             <Child count={count}></Child>
-//         </div>
-//     );
-// }
-
-class App extends React.Component {
-    state = {
-        count: 0
+function App() {
+    const getConfirmation = (msg, cb) => {
+        Modal.confirm({
+            title: '确认',
+            content: msg,
+            okText: '确认',
+            cancelText: '取消',
+            onOk() {
+                cb(true)
+            },
+            onCancel() {
+                cb(false)
+            }
+        })
     }
 
-    addCount = () => {
-        const { count } = this.state
-        this.setState({ count: count + 1 })
-    }
-    
-    render() {
-        const { count } = this.state
-
-        return (
+    return (
+        <Router getUserConfirmation={getConfirmation}>
             <div className="App">
-                <p>Parent: {count}</p>
-                <button onClick={this.addCount}>add count</button>
+                <Link to="/">Home</Link>
+                <Link to="/About">About</Link>
+                <Link to="/Product">Product</Link>
 
-                <br />
                 <hr />
-                <br />
 
-                <Child count={count}></Child>
+                <Route path="/" exact component={Home}></Route>
+                <Route path="/about" component={About}></Route>
+                <Route path="/product" component={Product}></Route>
             </div>
-        )
-    }
+        </Router>
+    )
 }
 
-export default App;
+export default App
+
+
+// pages
+const Home = () => {
+    const [text, setText] = useState('')
+    const [isEdited, setIsEdited] = useState(false)
+
+    const onInputChange = e => {
+        setText(e.target.value)
+        setIsEdited(true)
+    }
+
+    return (
+        <div>
+            <Prompt message="编辑的内容还未保存，确定要离开该页面吗?" when={isEdited} />
+            <h2>Home</h2>
+
+            <Input value={text} onChange={onInputChange} />
+        </div>
+    )
+}
+
+const About = () => (
+    <div>
+        <h2>About</h2>
+    </div>
+)
+
+const Product = () => (
+    <div>
+        <h2>Product</h2>
+    </div>
+)

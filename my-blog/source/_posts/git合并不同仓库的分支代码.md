@@ -39,7 +39,7 @@ $ git remote show origin
   ...
 ```
 
-现在需要将pony-B develop分支的代码同步到pony-B develop分支上
+现在需要将pony-B develop分支的代码同步到pony-A develop分支上
 
 <br/>
 

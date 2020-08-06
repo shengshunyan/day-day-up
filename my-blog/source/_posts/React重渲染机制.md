@@ -35,8 +35,14 @@ react组件在触发了重渲染条件之后，render函数会被再次调用渲
 
 ## class组件重渲染机制
 
-1. this.setState: 无条件重渲染，不进行新旧比较
-2. this.forceUpdate: 无条件重渲染，不进行新旧比较
+### this.setState: 
+
+无条件重渲染，不进行新旧比较
+
+### this.forceUpdate
+
+无条件重渲染，不进行新旧比较
+
 ```JavaScript
 import React from 'react'
 
@@ -73,9 +79,15 @@ class App extends React.Component {
 
 export default App;
 ```
-3. 父组件重渲染 (用set函数更新状态) 会导致所有子组件重渲染，不管有没有props传递给子组件
-    - 用React.PureComponent包裹子组件，让子组件只在传入自身的props改变时重渲染
-    - 加上shouldComponentUpdate对组件真正关注的props进行判断，可避免不必要的重渲染
+
+### 父组件重渲染
+
+父组件重渲染 (用set函数更新状态) 会导致所有子组件重渲染，不管有没有props传递给子组件
+
+优化方法：
+ - 用React.PureComponent包裹子组件，让子组件只在传入自身的props改变时重渲染
+ - 加上shouldComponentUpdate对组件真正关注的props进行判断，可避免不必要的重渲染
+
 ```JavaScript
 // App.jsx
 import React from 'react';
@@ -144,7 +156,11 @@ class Child extends React.Component {
 
 export default Child;
 ```
-4. 祖先组件context变动：Context.Provider组件value值的变化会导致Context.Provider下的所有子组件重渲染
+
+### 祖先组件context变动
+
+Context.Provider组件value值的变化会导致Context.Provider下的所有子组件重渲染
+
 ```JavaScript
 // App.jsx
 import React, { createContext } from 'react';
@@ -206,7 +222,8 @@ export default Child;
 
 ## Function组件重渲染机制
 
-1. hook设置状态
+### hook设置状态
+
 ```JavaScript
 import React, { useState } from 'react';
 
@@ -228,23 +245,35 @@ function App() {
 
 export default App;
 ```
-2. 父组件重渲染 (用set函数更新状态) 会导致所有子组件重渲染，不管有没有props传递给子组件
-    - 子组件用React.memo包裹，当传入子组件的props没有变化时，子组件不会重渲染
-    ```JavaScript
-    export default React.memo(Child)
-    ```
-    - 特别注意的是，父组件有函数要传入子组件时，每次父组件刷新，函数都会重新声明导致传入子组件的props发生变化，从而导致子组件重渲染。**解决办法：** 传入子组件的函数用useCallback包装，然后子组件用React.memo包装（详见之前博文《React新特性 & React Hook》）
+
+### 父组件重渲染 
+
+(用set函数更新状态) 会导致所有子组件重渲染，不管有没有props传递给子组件
+
+优化方法：
+ - React.memo是对props进行浅比较，基本类型(string、number等)直接比较值是否相等，引用类型（object、array）只比较引用是否一致
+ - 依赖项不变时，React.useCallback能保持函数的引用不变
+ - 依赖项不变时，React.useMemo能保持引用类型的引用不变
+
 ```JavaScript
 // App.jsx
-import React, { useState } from 'react'
+import React, { useState, useMemo, useCallback } from 'react'
 import Child from './Child'
 
 function App() {
     const [count, setCount] = useState(0)
 
-    const handleClick = () => {
+    const handleClick = useCallback(() => {
         setCount(count => count + 1)
-    }
+    }, [])
+
+    const objectData = React.useMemo(
+      () => ({
+        text: count,
+        done: false,
+      }),
+      [count]
+    )
 
     return (
         <div className="App">
@@ -259,9 +288,9 @@ function App() {
 export default App;
 
 // Child.jsx
-import React, { useEffect } from 'react';
+import React, { useEffect, memo } from 'react';
 
-const Child = ({
+const Child = useMemo(({
     count
 }) => {
     useEffect(() => {
@@ -273,11 +302,30 @@ const Child = ({
             {count}
         </div>
     );
-}
+})
 
 export default Child;
 ```
-3. 祖先组件context变动：Context.Provider组件value值的变化会导致Context.Provider下的所有子组件重渲染
+
+幸运的是 React.memo 接受第二个参数，用于自定义控制如何比较属性相等
+
+```JavaScript
+const Child = React.memo(
+function Child(props: { item: Item }) {
+    console.log("render child")
+    const { item } = props
+    return <div>name:{item.text}</div>
+}, (prev, next) => {
+    // 使用深比较比较对象相等
+    return deepEqual(prev, next)
+})
+```
+
+
+### 祖先组件context变动
+
+Context.Provider组件value值的变化会导致Context.Provider下的所有子组件重渲染
+
 ```JavaScript
 // App.jsx
 import React, { createContext, useState, useCallback } from 'react';

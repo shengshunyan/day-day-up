@@ -1,5 +1,5 @@
 ---
-title: React新特性 & React Hook
+title: React原生代码分割 & React Hook
 date: 2019-07-28
 keywords: REACT, Hook
 cover: https://i.loli.net/2020/03/14/26Pfh8OveLgnDxX.jpg
@@ -11,11 +11,9 @@ tags:
 ## 参考链接：https://zhuanlan.zhihu.com/p/67087685
 {% endnote %}
 
-## 代码分割 & 错误处理
+## 代码分割
 
 1. lazy 和 Suspense 配套使用，react原生支持代码分割；
-
-2. react错误边界处理getDerivedStateFromError和componentDidCatch；
 <!-- more -->
 ```JavaScript
 import React, { Component, lazy, Suspense } from 'react';
@@ -26,22 +24,6 @@ import './App.css';
 const About = lazy(() => import(/* webpackChunkName: "about" */'./About'));
 
 class App extends Component {
-  state = {
-    hasError: false
-  }
-
-  // 处理错误方法1
-  static getDerivedStateFromError() {
-    return {
-      hasError: true
-    }
-  }
-
-  // 处理错误方法2
-  // componentDidCatch() {
-  //   this.setState({ hasError: true })
-  // }
-
   render() {
     if (this.state.hasError) {
       return <div>error</div>
@@ -63,88 +45,8 @@ export default App;
 ```
 
 
-## 利用PureComponent或者memo优化组件，避免不必要的渲染
-
-1. class组件：PureComponent
-```JavaScript
-import React, { Component, PureComponent, memo } from 'react';
-import './App.css';
-
-// age变化会导致child组件重新渲染
-// class Child extends Component {
-//   render() {
-//     console.log('child render')
-//     return <div>age: 11</div>
-//   }
-// }
-
-// PureComponent: age变化不会导致child组件重新渲染
-class Child extends PureComponent {
-  render() {
-    console.log('child render')
-    return <div>age: 11</div>
-  }
-}
-
-class App extends Component {
-  state = {
-    age: 18
-  }
-
-  addAge = () => {
-    this.setState({
-      age: this.state.age + 1
-    })
-  }
-
-  render() {
-    return (
-      <div className="App">
-        <Child></Child>
-        <button onClick={this.addAge}>add</button>
-      </div>
-    );
-  }
-}
-
-export default App;
-```
-2. Function组件：React.memo，React.useCallback
-  - React.memo 和 React.useCallback 一定记得需要配对使用，缺了一个都可能导致性能不升反“降”
-```JavaScript
-import React, { memo, useState, useCallback } from 'react';
-import './App.css';
-
-// age变化不会导致child组件重新渲染
-const Child = memo(function() {
-  console.log('child render')
-  return <div>age: 11</div>
-})
-
-function App() {
-  const [age, setAge] = useState(18)
-  const testFn = useCallback(() => {
-        // do something
-  }, [])
-  const addAge = () => {
-    setAge(age => age + 1)
-  }
-
-return (
-      <div className="App">
-        age: {age}
-        <Child testFn={testFn}></Child>
-        <button onClick={addAge}>add</button>
-      </div>
-    );
-}
-
-export default App;
-```
-
-
-
 ## Hook API
+
 1. useEffect
     - 第二个参数(依赖数组)不传的时候，fn在第一次渲染和更新的时候都会执行
     ```JavaScript

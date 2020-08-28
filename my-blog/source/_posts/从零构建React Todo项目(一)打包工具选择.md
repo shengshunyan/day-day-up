@@ -1,5 +1,5 @@
 ---
-title: 构建React Todo项目(一)打包工具选择
+title: 从零构建React Todo项目(一)打包工具选择
 date: 2020-08-23
 keywords: JavaScript, React, Parcel
 cover: https://i.loli.net/2020/06/29/f1yJm3lD7aKsSnx.jpg

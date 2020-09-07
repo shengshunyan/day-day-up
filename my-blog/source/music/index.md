@@ -2,7 +2,7 @@
 title: 音乐就是记忆
 date: 2020-03-08 14:09:05
 type: "music"
-top_img: https://file.moetu.org/images/2020/03/08/63177db42f4dc4075.jpg
+top_img: https://i.loli.net/2020/09/07/aNQIF24Sp3MwOHV.jpg
 ---
 
 {% note info no-icon %}

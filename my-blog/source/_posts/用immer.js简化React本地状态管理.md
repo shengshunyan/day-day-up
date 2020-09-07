@@ -2,7 +2,7 @@
 title: 用immer.js简化React本地状态管理
 date: 2020-08-09
 keywords: JavaScript, React, immer.js
-cover: https://file.moetu.org/images/2020/08/09/4039331718-56cc22613b287_articlex76c43b96d0c1f9ab.gif
+cover: https://i.loli.net/2020/09/07/tlzkE8XwpMuGBcW.gif
 tags:
      - JavaScript
 ---

@@ -2,7 +2,7 @@
 title: 从零构建React Todo项目(二)添加mock服务
 date: 2020-08-28
 keywords: JavaScript, React, Parcel, mock, express
-cover: https://file.moetu.org/images/2020/08/28/5f48d9d61a9ab_5f48d9d6d1d611a696484bf725e3c.gif
+cover: https://i.loli.net/2020/09/07/M5yvXBUGnYsqEft.gif
 tags:
      - JavaScript
 ---

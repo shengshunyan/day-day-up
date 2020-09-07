@@ -2,7 +2,7 @@
 title: git合并不同仓库的分支代码
 date: 2020-07-07
 keywords: JavaScript, git, 分支，合并
-cover: https://file.moetu.org/images/2020/03/08/gitlab63371bbcd179f14a.jpg
+cover: https://i.loli.net/2020/09/07/czjVJ4ZKnB1XNFh.png
 tags:
      - note
 ---

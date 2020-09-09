@@ -110,11 +110,12 @@ default_top_img: https://i.loli.net/2020/09/07/sIh5YLp2Z1rFmGc.jpg
 
 # the default cover of the post
 default_cover: 
-  - https://file.moetu.org/images/2020/03/08/QJ912621642154c4860c233f89a1.jpg
-  - https://file.moetu.org/images/2020/03/08/QJ9124558629f2b98a72ecc9e8e0.jpg
-  - https://file.moetu.org/images/2020/03/08/QJ83744872064bbffd63ff077b70.jpg
-  - https://file.moetu.org/images/2020/03/08/102935-14711417759dfab0672bc120f66564.jpg
-  - https://file.moetu.org/images/2020/03/08/211429-1527772469160093025f14bd6b0556.jpg
+  - https://i.loli.net/2020/09/09/5k7gGhE8lBqrjKo.jpg
+  - https://i.loli.net/2020/09/09/52ekixsmPgr7WbB.jpg
+  - https://i.loli.net/2020/09/09/4lIGeRBxNyiEa2F.jpg
+  - https://i.loli.net/2020/09/09/oP8HlYkDwiRbSWI.jpg
+  - https://i.loli.net/2020/09/09/fOrLuhEM57F1xVp.jpg
+  - https://i.loli.net/2020/09/09/3EtYMCK9PsAopa8.jpg
 
 # the banner image of archive page
 # archive_img: https://file.moetu.org/images/2020/03/08/333af96ddc394df3b.jpg

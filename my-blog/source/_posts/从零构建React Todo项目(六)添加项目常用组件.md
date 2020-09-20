@@ -174,3 +174,20 @@ tags:
 <br/>
 
 
+## easy-peasy 全局状态管理
+
+### 简介
+
+Easy Peasy 提供了一个直观的API，可以快速、轻松地管理您的React应用程序的状态。
+
+### 使用
+
+1. 安装 (官网：https://easy-peasy.now.sh/)
+
+    ```bash
+    npm install --save easy-peasy
+    ```
+
+2. 基本使用
+
+    见之前的博客 [React状态管理之easy-peasy](https://www.shengshunyan.xyz/2020/04/14/React%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86%E4%B9%8Beasy-peasy/)

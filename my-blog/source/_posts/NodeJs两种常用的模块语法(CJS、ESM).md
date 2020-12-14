@@ -125,16 +125,3 @@ console.log(commonjsModule) // { key: 123, name: 'commonjs' }
 {% note info no-icon %}
 上文我们说过，import的模块需要静态分析，所以不能用于动态加载。因此，引入了import()函数，返回一个Promise对象。
 {% endnote %}
-
-
-
-
-
-
-
-<br/>
-
-```JavaScript
-
-```
-

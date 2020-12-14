@@ -170,7 +170,9 @@ demo中用的就是 **运行时集成** 的方法，每个子应用暴露出渲�
 
      微应用需要在自己的入口 js (通常就是你配置的 webpack 的 entry js) 导出 bootstrap、mount、unmount 三个生命周期钩子，以供主应用在适当的时机调用。
 
-     注意 ‘microRoot’ 是微应用原本index.html文件根节点的id
+     {% note info no-icon %}
+     注意 'microRoot' 是微应用首页index.html文件渲染根节点的id
+     {% endnote %}
 
      ```JavaScript
      // index.js
@@ -266,7 +268,7 @@ demo中用的就是 **运行时集成** 的方法，每个子应用暴露出渲�
      import { ConfigProvider } from 'antd';
    
      export const MyApp = () => (
-          <ConfigProvider getPopupContainer={() => document.getElementById('tigerContainer')}>
+          <ConfigProvider prefixCls="microPrefix" getPopupContainer={() => document.getElementById('microRoot')}>
                <App />
           </ConfigProvider>
      );

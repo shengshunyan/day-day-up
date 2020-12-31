@@ -11,6 +11,8 @@ tags:
 nginx -t -c /etc/nginx/nginx.conf
 # reload
 systemctl reload nginx
+# 或者
+nginx -s reload
 ```
 
 ## 第一章、环境准备

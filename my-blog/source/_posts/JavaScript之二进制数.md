@@ -9,7 +9,7 @@ tags:
 
 
 {% note info no-icon %}
-- 知乎[颜海镜](https://www.zhihu.com/people/yanhaijing)的文章：[聊聊JavaScript中的二进制数](https://zhuanlan.zhihu.com/p/22297104)
+参考: 知乎[颜海镜](https://www.zhihu.com/people/yanhaijing)的文章：[聊聊JavaScript中的二进制数](https://zhuanlan.zhihu.com/p/22297104)
 {% endnote %}
 
 ## 背景
@@ -291,15 +291,5 @@ a^b 相当于无进位求和，比如 1^9=8 （1001 ^ 0001 = 1000），这里的
 赶在2020年过完之前发布，这是一份倔强！
 
 <img src="https://i.loli.net/2020/12/31/bBw7tKis58Go16A.png" width = "300" height = "300" alt="图片名称" />
-
-
-
-
-
-
-<br/>
-```JavaScript
-
-```
 
 

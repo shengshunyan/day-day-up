@@ -538,3 +538,73 @@ function reConstructBinaryTree(pre, vin)
 ```
 
 <br/>
+
+
+### 跳台阶
+
+{% note primary %}
+**题目描述：**  
+
+一只青蛙一次可以跳上1级台阶，也可以跳上2级。求该青蛙跳上一个n级的台阶总共有多少种跳法（先后次序不同算不同的结果）。
+{% endnote %}
+
+示例：
+ - 输入：1
+ - 输出：1
+ - 输入：4
+ - 输出：5
+
+
+```JavaScript
+function jumpFloor(number) {
+    if (number === 1) {
+        return 1
+    }
+
+    if (number === 2) {
+        return 2
+    }
+
+    let num1 = 1
+    let num2 = 2
+    for (let i = 3; i <= number; i++) {
+        num2 = num1 + num2
+        num1 = num2 - num1
+    }
+
+    return num2
+}
+```
+
+<br/>
+
+
+### 二进制中1的个数
+
+{% note primary %}
+**题目描述：**  
+
+输入一个整数，输出该数32位二进制表示中1的个数。其中负数用补码表示。
+{% endnote %}
+
+示例：
+ - 输入：10
+ - 输出：2
+
+
+```JavaScript
+// 由于负数右移时最高位补1，因此不能采用算术右移，而使用不考虑符号位的逻辑右移。先判断最右边一位是不是1，接着右移一位，再判断，这样每次移动一位直到整数变成0为止
+function NumberOf1(n) {
+    let result = 0
+    while (n != 0) {
+        if (n & 1) {
+            result++
+        }
+        n = n >>> 1
+    }
+
+    return result
+}
+```
+
+<br/>

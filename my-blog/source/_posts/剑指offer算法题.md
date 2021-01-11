@@ -608,3 +608,67 @@ function NumberOf1(n) {
 ```
 
 <br/>
+
+
+### 数值的整数次方
+
+{% note primary %}
+**题目描述：**  
+
+给定一个double类型的浮点数base和int类型的整数exponent。求base的exponent次方。
+
+保证base和exponent不同时为0
+{% endnote %}
+
+示例：
+ - 输入：2,3
+ - 输出：8.00000
+
+{% note success %}
+思路：
+快速幂算法，举个例子：
+3 ^ 999 = 3 * 3 * 3 * … * 3
+直接乘要做998次乘法。但事实上可以这样做，先求出2 ^ k次幂：
+3 ^ 2 = 3 * 3
+3 ^ 4 = (3 ^ 2) * (3 ^ 2)
+3 ^ 8 = (3 ^ 4) * (3 ^ 4)
+3 ^ 16 = (3 ^ 8) * (3 ^ 8)
+3 ^ 32 = (3 ^ 16) * (3 ^ 16)
+3 ^ 64 = (3 ^ 32) * (3 ^ 32)
+3 ^ 128 = (3 ^ 64) * (3 ^ 64)
+3 ^ 256 = (3 ^ 128) * (3 ^ 128)
+3 ^ 512 = (3 ^ 256) * (3 ^ 256)
+再相乘：
+3 ^ 999 = 3 ^ (512 + 256 + 128 + 64 + 32 + 4 + 2 + 1) 
+= (3 ^ 512) * (3 ^ 256) * (3 ^ 128) * (3 ^ 64) * (3 ^ 32) * (3 ^ 4) * (3 ^ 2) * 3
+这样只要做16次乘法。即使加上一些辅助的存储和运算，也比直接乘高效得多（尤其如果这里底数是成百上千位的大数字的话）。
+我们发现，把999转为2进制数：1111100111，其各位就是要乘的数。这提示我们利用求二进制位的算法（其中mod是模运算）：
+{% endnote %}
+
+
+
+```JavaScript
+function Power(base, exponent) {
+    if (base === 0) {
+        return 0
+    }
+
+    if (exponent === 0) {
+        return 1
+    }
+
+    let positiveExponent = Math.abs(exponent)
+    let result = 1
+    while (positiveExponent !== 0) {
+        if (positiveExponent & 1) {
+            result = result * base
+        }
+        base = base * base
+        positiveExponent = positiveExponent >> 1
+    }
+
+    return exponent > 0 ? result : 1 / result
+}
+```
+
+<br/>

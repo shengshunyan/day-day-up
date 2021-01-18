@@ -672,3 +672,173 @@ function Power(base, exponent) {
 ```
 
 <br/>
+
+
+### 反转链表
+
+{% note primary %}
+**题目描述：**  
+
+输入一个链表，反转链表后，输出新链表的表头。
+{% endnote %}
+
+示例：
+ - 输入：{1,2,3}
+ - 输出：{3,2,1}
+ - 说明：本题目包含复杂数据结构ListNode，[点此查看相关信息](https://blog.nowcoder.net/n/954373f213e14eeab0a69ed0e9ef1b6e)
+
+
+```JavaScript
+// function ListNode(x){
+//     this.val = x;
+//     this.next = null;
+// }
+
+// const node1 = new ListNode(1)
+// const node2 = new ListNode(2)
+// const node3 = new ListNode(3)
+
+// node1.next = node2
+// node2.next = node3
+
+function ReverseList(pHead) {
+    const recursionReverse = (nodeOne, nodeTwo) => {
+        const nextNode = nodeTwo.next
+        nodeTwo.next = nodeOne
+
+        if (nextNode === null) {
+            return nodeTwo
+        }
+
+        return recursionReverse(nodeTwo, nextNode)
+    }
+
+    if (pHead === null) {
+        return null
+    }
+
+    return recursionReverse(null, pHead)
+}
+```
+
+
+### 栈的压入、弹出序列
+
+{% note primary %}
+**题目描述：**  
+
+输入两个整数序列，第一个序列表示栈的压入顺序，请判断第二个序列是否可能为该栈的弹出顺序。假设压入栈的所有数字均不相等。例如序列1,2,3,4,5是某栈的压入顺序，序列4,5,3,2,1是该压栈序列对应的一个弹出序列，但4,3,5,1,2就不可能是该压栈序列的弹出序列。（注意：这两个序列的长度是相等的）
+{% endnote %}
+
+示例：
+ - 输入：[1,2,3,4,5],[4,3,5,1,2]
+ - 输出：false
+
+
+```JavaScript
+// for循环压栈，while循环出栈
+function IsPopOrder(pushV, popV)
+{
+    const stack = []
+    let popVIndex = 0
+
+    for (let i = 0; i < pushV.length; i++) {
+        stack.push(pushV[i])
+        
+        while (stack.length > 0 && stack[stack.length - 1] === popV[popVIndex]) {
+            stack.pop()
+            popVIndex++
+        }
+    }
+    return stack.length === 0
+}
+```
+
+<br/>
+
+
+### 二叉搜索树与双向链表
+
+{% note primary %}
+**题目描述：**  
+
+输入一棵二叉搜索树，将该二叉搜索树转换成一个排序的双向链表。要求不能创建任何新的结点，只能调整树中结点指针的指向。
+{% endnote %}
+
+示例：
+ - 说明：本题目包含复杂数据结构TreeNode，[点此查看相关信息](https://blog.nowcoder.net/n/954373f213e14eeab0a69ed0e9ef1b6e)
+
+{% note success %}
+思路：基础的递归
+
+1. 构建左子树为双向链表，返回链表中一个节点
+2. 移动返回节点到最右端，与当前节点连接
+3. 构建右子树为双向链表，返回链表中一个节点
+4. 移动返回节点到最左端，与当前节点连接
+{% endnote %}
+
+```JavaScript
+// function TreeNode(x) {
+//     this.val = x;
+//     this.left = null;
+//     this.right = null;
+// }
+
+// const node2 = new TreeNode(2)
+// const node3 = new TreeNode(3)
+// const node4 = new TreeNode(4)
+// const node5 = new TreeNode(5)
+// const node6 = new TreeNode(6)
+// const node7 = new TreeNode(7)
+// const node8 = new TreeNode(8)
+
+// node5.left = node3
+// node5.right = node7
+// node3.left = node2
+// node3.right = node4
+// node7.left = node6
+// node7.right = node8
+
+// 获取链表中的某个节点，然后移动到链表的最左端返回
+function Convert(pRootOfTree) {
+    // 临界判断
+    if (pRootOfTree === null) {
+        return null
+    }
+
+    let resultNode = ConvertNode(pRootOfTree)
+    while (resultNode.left) {
+        resultNode = resultNode.left
+    }
+
+    return resultNode
+}
+
+// 构建链表
+function ConvertNode(node) {
+    if (node === null) {
+        return null
+    }
+
+    if (node.left) {
+        let returnNode = ConvertNode(node.left)
+        if (returnNode.right) {
+            returnNode = returnNode.right
+        }
+        returnNode.right = node
+        node.left = returnNode
+    }
+    if (node.right) {
+        let returnNode = ConvertNode(node.right)
+        if (returnNode.left) {
+            returnNode = returnNode.left
+        }
+        returnNode.left = node
+        node.right = returnNode
+    }
+
+    return node
+}
+```
+
+<br/>

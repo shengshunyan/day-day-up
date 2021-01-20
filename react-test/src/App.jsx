@@ -1,72 +1,32 @@
 import React, { useState } from 'react'
+import { Button, Input } from 'antd'
+
 import './App.css'
-import { HashRouter as Router, Link, Route, Prompt } from 'react-router-dom'
-import { Modal, Input } from 'antd'
 
-function App() {
-    const getConfirmation = (msg, cb) => {
-        Modal.confirm({
-            title: '确认',
-            content: msg,
-            okText: '确认',
-            cancelText: '取消',
-            onOk() {
-                cb(true)
-            },
-            onCancel() {
-                cb(false)
-            }
-        })
+function debounce(fn, time) {
+    return function (e) {
+        let that = this
+        let value = e.target.value
+        clearTimeout(fn.tid)
+        fn.tid = setTimeout(() => {
+            // console.log(2, newArgs)
+            fn.call(that, value)
+        }, time);
     }
-
-    return (
-        <Router getUserConfirmation={getConfirmation}>
-            <div className="App">
-                <Link to="/">Home</Link>
-                <Link to="/About">About</Link>
-                <Link to="/Product">Product</Link>
-
-                <hr />
-
-                <Route path="/" exact component={Home}></Route>
-                <Route path="/about" component={About}></Route>
-                <Route path="/product" component={Product}></Route>
-            </div>
-        </Router>
-    )
 }
 
-export default App
-
-
-// pages
-const Home = () => {
-    const [text, setText] = useState('')
-    const [isEdited, setIsEdited] = useState(false)
-
-    const onInputChange = e => {
-        setText(e.target.value)
-        setIsEdited(true)
-    }
+function App() {
+    const inputChange = debounce((value) => {
+        console.log(value)
+    }, 1000)
 
     return (
-        <div>
-            <Prompt message="编辑的内容还未保存，确定要离开该页面吗?" when={isEdited} />
-            <h2>Home</h2>
+        <div className="App">
+            App
 
-            <Input value={text} onChange={onInputChange} />
+            <Input onChange={inputChange} ></Input>
         </div>
     )
 }
 
-const About = () => (
-    <div>
-        <h2>About</h2>
-    </div>
-)
-
-const Product = () => (
-    <div>
-        <h2>Product</h2>
-    </div>
-)
+export default App

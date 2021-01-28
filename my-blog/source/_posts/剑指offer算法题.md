@@ -685,7 +685,6 @@ function Power(base, exponent) {
 示例：
  - 输入：{1,2,3}
  - 输出：{3,2,1}
- - 说明：本题目包含复杂数据结构ListNode，[点此查看相关信息](https://blog.nowcoder.net/n/954373f213e14eeab0a69ed0e9ef1b6e)
 
 
 ```JavaScript
@@ -931,7 +930,6 @@ function NumberOf1Between1AndN_Solution(n)
 {% endnote %}
 
 示例：
- - 说明：本题目包含复杂数据结构ListNode，[点此查看相关信息](https://blog.nowcoder.net/n/954373f213e14eeab0a69ed0e9ef1b6e)
 
 {% note success %}
 有公共节点的链表就一定有同样的尾节点
@@ -995,6 +993,87 @@ function getListLength(pHead) {
     }
 
     return length
+}
+```
+
+<br/>
+
+
+### 数字在升序数组中出现的次数
+
+{% note primary %}
+**题目描述：**  
+
+统计一个数字在升序数组中出现的次数。
+{% endnote %}
+
+示例：
+ - 输入：[1,2,3,3,3,3,4,5],3
+ - 输出：4
+
+{% note success %}
+用二分法查找数字出现的头尾索引index，再最后减一下就ok了
+{% endnote %}
+
+```JavaScript
+function GetNumberOfK(data, k) {
+    if (data.length === 0 || data[0] > k || data[data.length - 1] < k) {
+        return 0
+    }
+
+    const minIndex = getMinIndex(data, k)
+    if (minIndex < 0) {
+        return 0
+    }
+    const maxIndex = getMaxIndex(data, k)
+    return maxIndex - minIndex + 1
+}
+
+function getMinIndex(data, k) {
+    let firstIndex = 0
+    let lastIndex = data.length - 1
+    let index = Math.floor(data.length / 2)
+
+    if (data[0] === k) {
+        return 0
+    }
+    while (true) {
+        if (data[index] === k && data[index - 1] < k) {
+            return index
+        }
+        if (data[index] < k) {
+            firstIndex = index
+        }
+        if (data[index] >= k) {
+            lastIndex = index
+        }
+        if (index === Math.floor((firstIndex + lastIndex) / 2)) {
+            return -1
+        }
+        index = Math.floor((firstIndex + lastIndex) / 2)
+    }
+}
+
+function getMaxIndex(data, k) {
+    let firstIndex = 0
+    let lastIndex = data.length - 1
+    let index = Math.floor(data.length / 2)
+
+    if (data[data.length - 1] === k) {
+        return data.length - 1
+    }
+    while (true) {
+        if (data[index] === k && data[index + 1] > k) {
+            return index
+        }
+        if (data[index] > k) {
+            lastIndex = index
+        }
+        if (data[index] <= k) {
+            firstIndex = index
+        }
+        index = Math.floor((firstIndex + lastIndex) / 2)
+    }
 }
 ```
 

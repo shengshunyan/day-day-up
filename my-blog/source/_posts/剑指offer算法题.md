@@ -625,7 +625,8 @@ function NumberOf1(n) {
  - 输出：8.00000
 
 {% note success %}
-思路：
+**解题思路：**
+
 快速幂算法，举个例子：
 3 ^ 999 = 3 * 3 * 3 * … * 3
 直接乘要做998次乘法。但事实上可以这样做，先求出2 ^ k次幂：
@@ -768,7 +769,7 @@ function IsPopOrder(pushV, popV)
  - 说明：本题目包含复杂数据结构TreeNode，[点此查看相关信息](https://blog.nowcoder.net/n/954373f213e14eeab0a69ed0e9ef1b6e)
 
 {% note success %}
-思路：基础的递归
+**解题思路：**基础的递归
 
 1. 构建左子树为双向链表，返回链表中一个节点
 2. 移动返回节点到最右端，与当前节点连接
@@ -855,6 +856,8 @@ function ConvertNode(node) {
  - 输出：6
 
 {% note success %}
+**解题思路：**
+
 像类似这样的问题，我们可以通过归纳总结来获取相关的东西。
 
 首先可以先分类：
@@ -932,6 +935,8 @@ function NumberOf1Between1AndN_Solution(n)
 示例：
 
 {% note success %}
+**解题思路：**
+
 有公共节点的链表就一定有同样的尾节点
 
 先获得两个链表的长度，然后在较长的链表上先走若干步(两链表长度之差)，接着同时在两个链表上遍历，找到的第一个相同的节点就是他们的第一个公共节点。时间复杂度O(m + n)
@@ -1012,6 +1017,8 @@ function getListLength(pHead) {
  - 输出：4
 
 {% note success %}
+**解题思路：**
+
 用二分法查找数字出现的头尾索引index，再最后减一下就ok了
 {% endnote %}
 
@@ -1074,6 +1081,55 @@ function getMaxIndex(data, k) {
         }
         index = Math.floor((firstIndex + lastIndex) / 2)
     }
+}
+```
+
+<br/>
+
+
+### 和为S的连续正数序列
+
+{% note primary %}
+**题目描述：**  
+
+小明很喜欢数学,有一天他在做数学作业时,要求计算出9~16的和,他马上就写出了正确答案是100。但是他并不满足于此,他在想究竟有多少种连续的正数序列的和为100(至少包括两个数)。没多久,他就得到另一组连续正数和为100的序列:18,19,20,21,22。现在把问题交给你,你能不能也很快的找出所有和为S的连续正数序列? Good Luck!
+{% endnote %}
+
+示例：
+ - 输入：9
+ - 输出：[[2,3,4],[4,5]]
+
+{% note success %}
+**解题思路：**
+
+n项连续数字的和的表达式是：x + (x + 1) + (x + 2) + ... + (x + n - 1) = nx + n(n - 1) / 2
+
+根据 nx + n(n - 1) / 2 = sum 求解 x 的表达式：x = (sum - n(n - 1) / 2) / n
+
+n从Math.ceil(sum / 2)往下遍历，如果x是正整数，就是一组合理的解
+{% endnote %}
+
+```JavaScript
+function FindContinuousSequence(sum) {
+    const resultArr = []
+    for (let numQuantity = Math.ceil(sum / 2); numQuantity > 1; numQuantity--) {
+        const baseNum = (sum - numQuantity * (numQuantity - 1) / 2) / numQuantity
+        if (baseNum % 1 !== 0) {
+            continue
+        }
+
+        if (baseNum <= 0) {
+            continue
+        }
+
+        const resultItem = []
+        for (let i = 0; i < numQuantity; i++) {
+            resultItem.push(baseNum + i)
+        }
+        resultArr.push(resultItem)
+    }
+
+    return resultArr
 }
 ```
 

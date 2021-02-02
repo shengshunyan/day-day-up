@@ -191,3 +191,150 @@ tags:
 ![WX20210120-210542.png](https://i.loli.net/2021/01/20/4kSz2MiRIn8ehHK.png)
 
 <br/>
+
+
+## useState的简易实现
+
+1. 代码实现
+
+     ```JavaScript
+     const fiber = {
+          // 将多个hook的数据以链表形式存储，hooks指向第一个hook
+          hooks: null,
+          // 指向当前正在工作的hook
+          currentHook: null,
+          // 指向组件的第一个hook
+          firstHook: null,
+          // 组件是 mount 阶段还是 update 阶段
+          isMount: true,
+          stateNode: App,
+     }
+
+     // 构建hook.queue中存储update的环状链表
+     function dispatchAction(hook, action) {
+          const update = {
+               action,
+               next: null,
+          }
+
+          // 构建update的环状链表，queue指向最后一个update
+          if (hook.queue === null) {
+               update.next = update
+          } else {
+               update.next = hook.queue.next
+               hook.queue.next = update
+          }
+          hook.queue = update
+
+          // 触发重渲染
+          render()
+     }
+
+     function useState(initialState) {
+          let hook
+
+          if (fiber.isMount) {
+               hook = {
+                    // 环状链表，存储了最后一个update的指针
+                    queue: null,
+                    memoizedState: initialState,
+                    next: null
+               }
+
+               if (!fiber.firstHook) {
+                    fiber.firstHook = hook
+               } else {
+                    fiber.currentHook.next = hook
+               }
+               fiber.currentHook = hook
+          } else {
+               hook = fiber.currentHook
+               fiber.currentHook = fiber.currentHook.next
+
+               // 遍历hook.queue中存储的update，baseState + update = newState
+               let baseState = hook.memoizedState
+               if (hook.queue) {
+                    // hook.queue存储了最后一个update的指针，所以hook.queue.next就是第一个update的指针
+                    let firstUpdate = hook.queue.next
+
+                    do {
+                         const action = firstUpdate.action
+                         baseState = action(baseState)
+                         firstUpdate = firstUpdate.next
+                    } while (firstUpdate !== hook.queue.next)
+
+                    hook.memoizedState = baseState
+                    // 计算结束，清除update链表
+                    hook.queue = null
+               }
+          }
+
+          return [hook.memoizedState, dispatchAction.bind(null, hook)]
+     }
+
+     function render() {
+          // 重置currentHook为第一个hook
+          fiber.currentHook = fiber.firstHook
+
+          const app = fiber.stateNode()
+          fiber.isMount = false
+
+          return app
+     }
+
+     // 组件
+     function App() {
+          const [num, updateNum] = useState(0)
+          const [name, updateName] = useState('a')
+
+          console.log('------------------')
+          console.log('isMount: ', fiber.isMount)
+          console.log('num: ', num)
+          console.log('name: ', name)
+
+          return {
+               onClickNum() {
+                    updateNum(num => num + 1)
+               },
+               onClickName() {
+                    updateName(name => name + 'a')
+               },
+          }
+     }
+
+     // 初始渲染组件，赋值给app变量方便在控制台触发更新
+     window.app = render()
+     ```
+
+2. 使用说明
+
+     1. 在浏览器控制台手动调用app的方法：app.onClickNum(), app.onClickName()
+     2. 查看打印的状态变化
+     ```JavaScript
+     ------------------
+     isMount:  true
+     num:  0
+     name:  a
+
+     $ app.onClickNum()
+
+     ------------------
+     isMount:  false
+     num:  1
+     name:  a
+     undefined
+
+     $ app.onClickName()
+
+     ------------------
+     isMount:  false
+     num:  1
+     name:  aa
+     undefined
+     ```
+
+3. 核心解析：
+     - fiber是工作单元，单个组件的数据都存储在fiber数据结构中
+     - fiber.hooks存储了组件中调用的多个useState对应的hook数据，以链表的数据结构存储
+     - 单个hook中的queue存储了单次更新中多次setXXX方法触发的update的数据，以链表的数据结构存储
+     - 每次更新，遍历fiber.hooks链表，遍历hook.queue链表，计算更新后的状态

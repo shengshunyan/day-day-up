@@ -1134,3 +1134,43 @@ function FindContinuousSequence(sum) {
 ```
 
 <br/>
+
+
+### 和为S的两个数字
+
+{% note primary %}
+**题目描述：**  
+
+输入一个递增排序的数组和一个数字S，在数组中查找两个数，使得他们的和正好是S，如果有多对数字的和等于S，输出两个数的乘积最小的。
+{% endnote %}
+
+示例：
+ - 输入：[1,2,4,7,11,15],15
+ - 输出：[4,11]
+
+{% note success %}
+**解题思路：**
+
+双指针，从数组头尾开始向里逼近
+{% endnote %}
+
+```JavaScript
+function FindNumbersWithSum(array, sum) {
+    let left = 0
+    let right = array.length - 1
+
+    while (left < right) {
+        if (array[left] + array[right] < sum) {
+            left++
+        } else if (array[left] + array[right] > sum) {
+            right--
+        } else {
+            return [array[left], array[right]]
+        }
+    }
+
+    return []
+}
+```
+
+<br/>

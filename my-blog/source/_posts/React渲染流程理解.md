@@ -66,7 +66,7 @@ tags:
 1. “递”阶段 （beginWork）
 
      {% note info no-icon %}
-     a. 首先从rootFiber开始向下深度优先遍历。为遍历到的每个Fiber节点调用beginWork方法 (opens new window)。
+     a. 首先从rootFiber开始向下深度优先遍历。为遍历到的每个Fiber节点调用beginWork方法。
 
      b. 该方法会根据传入的Fiber节点创建子Fiber节点，并将这两个Fiber节点连接起来。
 
@@ -76,7 +76,7 @@ tags:
 2.  “归”阶段 （completeWork）
 
      {% note info no-icon %}
-     a. 在“归”阶段会调用completeWork (opens new window)处理Fiber节点，生成/更新对应的DOM节点
+     a. 在“归”阶段会调用completeWork处理Fiber节点，生成/更新对应的DOM节点
 
      b. 当某个Fiber节点执行完completeWork，如果其存在兄弟Fiber节点（即fiber.sibling !== null），会进入其兄弟Fiber的“递”阶段；如果不存在兄弟Fiber，会进入父级Fiber的“归”阶段
 
@@ -129,7 +129,7 @@ tags:
 
      会遍历effectList，依次执行：
 
-     a. ClassComponent会调用 componentDidMount (opens new window)或 componentDidUpdate；触发状态更新的this.setState如果赋值了第二个参数回调函数，也会在此时调用。
+     a. ClassComponent会调用 componentDidMount 或 componentDidUpdate；触发状态更新的this.setState如果赋值了第二个参数回调函数，也会在此时调用。
 
      b. 对于FunctionComponent及相关类型，他会调用useLayoutEffect hook的回调函数，调度useEffect的销毁与回调函数
 
@@ -338,3 +338,89 @@ tags:
      - fiber.hooks存储了组件中调用的多个useState对应的hook数据，以链表的数据结构存储
      - 单个hook中的queue存储了单次更新中多次setXXX方法触发的update的数据，以链表的数据结构存储
      - 每次更新，遍历fiber.hooks链表，遍历hook.queue链表，计算更新后的状态
+
+<br/>
+
+## Hook理解
+
+1. Hook的数据结构：组件中每一次 useXXX API 的调用都会创建一个hook对象，存入Fiber存储的hook链表中
+
+     ```JavaScript
+     const hook: Hook = {
+          memoizedState: null,
+
+          baseState: null,
+          baseQueue: null,
+          queue: null,
+
+          next: null,
+     };
+     ```
+
+2. memoizedState
+
+不同类型hook的memoizedState保存不同类型数据，具体如下：
+
+ - useState：对于const [state, updateState] = useState(initialState)，memoizedState保存state的值
+
+ - useReducer：对于const [state, dispatch] = useReducer(reducer, {});，memoizedState保存state的值
+
+ - useEffect：memoizedState保存包含useEffect回调函数、依赖项等的链表数据结构effect，你可以在 [这里](https://github.com/acdlite/react/blob/1fb18e22ae66fdb1dc127347e169e73948778e5a/packages/react-reconciler/src/ReactFiberHooks.new.js#L1181) 看到effect的创建过程。effect链表同时会保存在fiber.updateQueue中
+
+ - useRef：对于useRef(1)，memoizedState保存{current: 1}
+
+ - useMemo：对于useMemo(callback, [depA])，memoizedState保存[callback(), depA]
+
+ - useCallback：对于useCallback(callback, [depA])，memoizedState保存[callback, depA]。与useMemo的区别是，useCallback保存的是callback函数本身，而useMemo保存的是callback函数的执行结果
+
+有些hook是没有memoizedState的，比如：
+
+ - useContext
+
+<br/>
+
+
+### useState和useReducer
+
+{% note primary %}
+useState和useReducer极为相似，useState即reducer参数为basicStateReducer的useReducer
+{% endnote %}
+
+1. **mount时：**创建hook对象（保存初始状态），接入Fiber存储的hooks链表中
+
+2. **update时：**找到对应的hook对象，根据update对象链表计算该hook的新state并返回
+
+<br/>
+
+
+### useEffect
+
+useEffect的执行包括两个阶段：销毁函数的执行、回调函数的执行
+
+需要保证所有组件useEffect的销毁函数必须都执行完后才能执行任意一个组件的useEffect的回调函数
+
+1. **layout阶段：**创建销毁函数数组和回调函数数组
+
+2. **layout阶段之后浏览器空闲时：**消费销毁函数数组和回调函数数组，先遍历执行完销毁函数数组里的方法，再遍历执行回调函数数组里的方法
+
+<br/>
+
+
+### useRef
+
+1. 对于FunctionComponent，useRef负责创建Hook对象，保存初始数据在hook对象中，并返回对应的ref ({ current: xxx })
+
+2. 对于赋值了ref属性的HostComponent与ClassComponent，会在render阶段经历赋值Ref effectTag，在 **commit阶段** 执行对应ref操作
+
+<br/>
+
+
+### useMemo和useCallback
+
+1. 两者区别：
+     - mountMemo 会将回调函数的执行结果作为 value 保存
+     - mountCallback 会将回调函数作为 value 保存
+
+2. **mount时：**useMemo和useCallback负责创建Hook对象，保存value和依赖项（[value, deps]）在hook对象中，并返回对应的value
+
+3. **update时：**浅比较依赖项，决定是否返回新的value

@@ -1257,3 +1257,68 @@ function isNumeric(s) {
 ```
 
 <br/>
+
+
+### 链表中环的入口结点
+
+{% note primary %}
+**题目描述：**  
+
+给一个链表，若其中包含环，请找出该链表的环的入口结点，否则，输出null。
+{% endnote %}
+
+示例：
+ - 说明：本题目包含复杂数据结构ListNode，[点此查看相关信息](https://blog.nowcoder.net/n/954373f213e14eeab0a69ed0e9ef1b6e)
+
+{% note success %}
+**解题思路：**
+快慢指针相遇
+
+![WechatIMG22.jpeg](https://i.loli.net/2021/02/23/l9fIAbOuY5KsrVd.jpg)
+{% endnote %}
+
+```JavaScript
+// function ListNode(x) {
+//     this.val = x;
+//     this.next = null;
+// }
+
+// const node1 = new ListNode(1)
+// const node2 = new ListNode(2)
+// const node3 = new ListNode(3)
+// const node4 = new ListNode(4)
+// const node5 = new ListNode(5)
+// const node6 = new ListNode(6)
+
+// node1.next = node2
+// node2.next = node3
+// node3.next = node4
+// node4.next = node5
+// node5.next = node6
+// node6.next = node3
+
+function EntryNodeOfLoop(pHead) {
+    if (!pHead || !pHead.next || !pHead.next.next) return null
+
+    let slow = pHead.next
+    let fast = pHead.next.next
+    while (slow !== fast) {
+        slow = slow.next
+        fast = fast.next.next
+
+        if (!slow || !fast) {
+            return null
+        }
+    }
+
+    slow = pHead
+    while (slow !== fast) {
+        slow = slow.next
+        fast = fast.next 
+    }
+
+    return slow
+}
+```
+
+<br/>

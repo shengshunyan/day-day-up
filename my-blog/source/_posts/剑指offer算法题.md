@@ -1322,3 +1322,51 @@ function EntryNodeOfLoop(pHead) {
 ```
 
 <br/>
+
+
+### 二叉树的下一个结点
+
+{% note primary %}
+**题目描述：**  
+
+给定一个二叉树和其中的一个结点，请找出中序遍历顺序的下一个结点并且返回。注意，树中的结点不仅包含左右子结点，同时包含指向父结点的指针。
+{% endnote %}
+
+示例：
+ - 说明：本题目包含复杂数据结构TreeLinkNode，[点此查看相关信息](https://blog.nowcoder.net/n/954373f213e14eeab0a69ed0e9ef1b6e)
+
+```JavaScript
+/*function TreeLinkNode(x){
+    this.val = x;
+    this.left = null;
+    this.right = null;
+    this.next = null;
+}*/
+
+function GetNext(pNode) {
+    if (!pNode) {
+        return null
+    }
+
+    // 判断是否有右子节点
+    if (pNode.right) {
+        let nextNode = pNode.right
+        while (nextNode.left) {
+            nextNode = nextNode.left
+        }
+        return nextNode
+    }
+
+    // 向上遍历到为左子节点为止
+    while (pNode.next) {
+        if (pNode.next.left === pNode) {
+            return pNode.next
+        }
+        pNode = pNode.next
+    }
+
+    return null
+}
+```
+
+<br/>

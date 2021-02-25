@@ -1370,3 +1370,67 @@ function GetNext(pNode) {
 ```
 
 <br/>
+
+
+### 把二叉树打印成多行
+
+{% note primary %}
+**题目描述：**  
+
+从上到下按层打印二叉树，同一层结点从左至右输出。每一层输出一行。
+{% endnote %}
+
+示例：
+ - 输入：{8,6,10,5,7,9,11}
+ - 输出：[[8],[6,10],[5,7,9,11]]
+ - 说明：本题目包含复杂数据结构TreeNode，[点此查看相关信息](https://blog.nowcoder.net/n/954373f213e14eeab0a69ed0e9ef1b6e)
+
+```JavaScript
+// function TreeNode(x) {
+//     this.val = x;
+//     this.left = null;
+//     this.right = null;
+// }
+
+// const node5 = new TreeNode(5)
+// const node6 = new TreeNode(6)
+// const node7 = new TreeNode(7)
+// const node8 = new TreeNode(8)
+// const node9 = new TreeNode(9)
+// const node10 = new TreeNode(10)
+// const node11 = new TreeNode(11)
+
+// node8.left = node6
+// node8.right = node10
+// node6.left = node5
+// node6.right = node7
+// node10.left = node9
+// node10.right = node11
+
+function Print(pRoot) {
+    if (!pRoot) {
+        return []
+    }
+
+    const nodeList = [[pRoot]]
+    while (true) {
+        const currentItem = nodeList[nodeList.length - 1]
+        const nextItem = []
+        for (let i = 0; i < currentItem.length; i++) {
+            if (currentItem[i].left) {
+                nextItem.push(currentItem[i].left)
+            }
+            if (currentItem[i].right) {
+                nextItem.push(currentItem[i].right)
+            }
+        }
+        if (nextItem.length === 0) {
+            break
+        }
+        nodeList.push(nextItem)
+    }
+    return nodeList.map(item => item.map(childItem => childItem.val))
+}
+```
+
+<br/>

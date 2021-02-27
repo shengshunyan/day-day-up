@@ -109,6 +109,7 @@ Jest官网：https://jestjs.io/docs/en/getting-started.html
 {% note primary %}
 Testing Library官网：https://testing-library.com/docs/
 React Testing Library Tutorial：https://www.robinwieruch.de/react-testing-library
+使用 React Testing Library 和 Jest 完成单元测试：https://segmentfault.com/a/1190000022054307
 {% endnote %}
 
 1. 安装相关依赖：

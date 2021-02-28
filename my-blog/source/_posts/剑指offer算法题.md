@@ -152,6 +152,59 @@ function jumpFloorII(number)
 <br/>
 
 
+### 合并两个排序的链表
+
+{% note primary %}
+**题目描述：**  
+
+输入两个单调递增的链表，输出两个链表合成后的链表，当然我们需要合成后的链表满足单调不减规则。
+{% endnote %}
+
+示例：
+ - 输入：{1,3,5},{2,4,6}
+ - 输出：{1,2,3,4,5,6}
+ - 说明：本题目包含复杂数据结构ListNode，[点此查看相关信息](https://blog.nowcoder.net/n/954373f213e14eeab0a69ed0e9ef1b6e)
+
+```JavaScript
+// function ListNode(x) {
+//     this.val = x;
+//     this.next = null;
+// }
+
+// const node1 = new ListNode(1)
+// const node3 = new ListNode(3)
+// const node5 = new ListNode(5)
+// node1.next = node3
+// node3.next = node5
+
+// const node2 = new ListNode(2)
+// const node4 = new ListNode(4)
+// const node6 = new ListNode(6)
+// node2.next = node4
+// node4.next = node6
+
+function Merge(pHead1, pHead2) {
+    if (!pHead1) {
+        return pHead2;
+    }
+    if (!pHead2) {
+        return pHead1;
+    }
+    let head;
+    if (pHead1.val < pHead2.val) {
+        head = pHead1;
+        head.next = Merge(pHead1.next, pHead2);
+    } else {
+        head = pHead2;
+        head.next = Merge(pHead1, pHead2.next);
+    }
+    return head;
+}
+```
+
+<br/>
+
+
 ### 二叉树的镜像
 
 {% note primary %}

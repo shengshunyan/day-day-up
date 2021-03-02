@@ -147,7 +147,7 @@ work­flow 文件采用 YAML 格式，文件名可以任意取，但是后缀名
      "scripts": {
           "start": "rm -rf .dev/ && node build/dev.js",
           "build": "rm -rf dist/ && parcel build src/index.html --no-source-maps",
-          "lint": "eslint src --fix",
+          "lint": "eslint src --fix && stylelint src/**/*.scss --fix",
           "test": "jest"
      }
      ```
@@ -213,3 +213,158 @@ work­flow 文件采用 YAML 格式，文件名可以任意取，但是后缀名
 4. 查看todo项目线上地址，资源已更新
 
     ![WX20210228-165441@2x.png](https://i.loli.net/2021/02/28/wDuNiOvk98ys4Ra.png)
+
+<br/>
+
+
+## 为todo项目添加git hook
+
+Git钩子脚本对于在提交代码审查之前识别简单问题很有用。我们在每次提交时都运行钩子，以自动指出代码中的问题，例如缺少分号，尾随空白和调试语句。通过在代码审阅之前指出这些问题，代码审阅者可以专注于更改的体系结构，而不会浪费琐碎的样式问题。
+
+### pre-commit
+
+{% note primary %}
+husky 文档：https://github.com/typicode/husky/tree/main/docs
+{% endnote %}
+
+项目要使用git进行代码提交时，使用叫pre-commit的git钩子，在调用git commit 命令时自动执行某些脚本检测代码，若检测出错，则阻止commit代码，也就无法push，保证了出错代码只在我们本地，不会把问题提交到远程仓库
+
+1. 安装和初始化 husky （简化git hook应用的库）
+
+    ```bash
+    npm install husky --save-dev && npx husky init
+    ```
+
+2. 上一步 init 的时候默认初始化了 pre-commit hook，修改一下 .husky/pre-commit文件的内容
+
+    ```bash
+    #!/bin/sh
+    . "$(dirname "$0")/_/husky.sh"
+
+    npm run lint
+    ```
+
+3. 查看效果：每次commit提交的时候，会先运行 npm run lint 检查代码格式有没问题
+
+    ```bash
+    $ git commit -m "feat(git): add the commit lint"              
+
+    > parcel-test@1.0.0 lint
+    > eslint src --fix && stylelint src/**/*.scss --fix
+
+    [master fa699ee] feat(git): add the commit lint
+    4 files changed, 56 insertions(+), 1 deletion(-)
+    create mode 100755 .husky/commit-msg
+    create mode 100644 commitlint.config.js
+    ```
+
+### commit-msg
+
+{% note primary %}
+前端代码风格自动化系列（二）之Commitlint：https://segmentfault.com/a/1190000017790694
+{% endnote %}
+
+在有了Husky赋能之后，我们有能力在Git的钩子里做一些事情，首先不得不提的是代码的提交规范和规范的校验，优雅的提交，方便团队协作和快速定位问题。
+
+1. 安装 commitlint 相关依赖包
+
+    ```bash
+    npm install --save-dev @commitlint/config-conventional @commitlint/cli
+    ```
+
+2. 项目根目录下添加配置文件 .commitlintrc.js
+
+    ```JavaScript
+    module.exports = {
+        extends: ['@commitlint/config-conventional']
+    }
+    ```
+
+3. husky 添加 commit-msg hook
+
+    ```bash
+    npx husky add .husky/commit-msg "node_modules/.bin/commitlint -e $HUSKY_GIT_PARAMS"
+    ```
+
+4. 查看效果：commit message 不符合规范格式的时候会提交失败
+
+    **失败**
+
+    ```bash
+    $ git commit -m "add deploy file"               
+
+    > parcel-test@1.0.0 lint
+    > eslint src --fix && stylelint src/**/*.scss --fix
+
+    ⧗   input: add deploy file
+    ✖   subject may not be empty [subject-empty]
+    ✖   type may not be empty [type-empty]
+
+    ✖   found 2 problems, 0 warnings
+    ⓘ   Get help: https://github.com/conventional-changelog/commitlint/#what-is-commitlint
+
+    husky - commit-msg hook exited with code 1 (error)
+    ```
+
+    **成功**
+
+    ```bash
+    $ git commit -m "chore(build): add the local deploy file"
+
+    > parcel-test@1.0.0 lint
+    > eslint src --fix && stylelint src/**/*.scss --fix
+
+    [master b580d1f] chore(build): add the local deploy file
+    3 files changed, 30 insertions(+), 2 deletions(-)
+    rename commitlint.config.js => .commitlintrc.js (100%)
+    create mode 100644 build/local-deploy.js
+    ```
+
+5. commit message 的规范格式请查看项目 [README.md](https://github.com/shengshunyan/react-scaffold/blob/master/README.md#git-commit-message-%E8%A7%84%E8%8C%83) 说明
+
+<br/>
+
+
+## 为todo项目添加本机部署脚本
+
+有时候线上仓库的CICD出现问题，调试比较耗时间，可以先用本机的部署脚本部署前端资源
+
+1. 新建部署脚本文件 /build/local-deploy.js
+
+    ```JavaScript
+    const path = require('path')
+    const childProcess = require('child_process')
+
+    const option = {
+        host: '129.204.110.90',
+        username: 'root',
+        remoteDir: '/opt/application/todo'
+    }
+
+    const cmd = `ssh ${option.username}@${option.host} 'rm -rf ${option.remoteDir}; mkdir ${option.remoteDir}';
+        scp -r ${path.join(__dirname.replace(/build$/, 'dist'), '*')} ${option.username}@${option.host}:${option.remoteDir}`
+
+    console.log('开始上传前端包...')
+
+    childProcess.exec(cmd, (error, stdout) => {
+        if (!error){
+            console.log('上传完成', stdout)
+        } else {
+            console.log('err=', error)
+        }
+    })
+    ```
+
+2. package.json 文件的 scripts 配置中添加部署命令
+
+    ```json
+    {
+        "deploy": "rm -rf dist/ && parcel build src/index.html --no-source-maps && node ./build/local-deploy.js"
+    }
+    ```
+
+3. 本机部署
+
+    ```bash
+    npm run deploy
+    ```

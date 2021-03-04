@@ -1586,3 +1586,61 @@ function cutRope(number) {
 
 <br/>
 
+
+### 顺时针打印矩阵
+
+{% note primary %}
+**题目描述：**  
+
+输入一个矩阵，按照从外向里以顺时针的顺序依次打印出每一个数字，例如，如果输入如下4 X 4矩阵： 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 则依次打印出数字1,2,3,4,8,12,16,15,14,13,9,5,6,7,11,10.
+{% endnote %}
+
+示例：
+ - 输入：[[1,2],[3,4]]
+ - 输出：[1,2,4,3]
+
+{% note success %}
+**解题思路：**
+左右上下四个指针往内渐逼
+{% endnote %}
+
+```JavaScript
+function cutRope(number) {
+    const arr = []
+    let left = 0
+    let right = matrix[0].length - 1
+    let top = 0
+    let bottom = matrix.length - 1
+
+    while (left <= right && top <= bottom) {
+        for (let i = left;i <= right; i++) {
+            arr.push(matrix[top][i])
+        }
+        top++
+        
+        for (let i = top; i <= bottom; i++) {
+            arr.push(matrix[i][right])
+        }
+        right--
+
+        if (left > right || top > bottom) {
+            break
+        }
+    
+        for (let i = right; i >= left; i--) {
+            arr.push(matrix[bottom][i])
+        }
+        bottom--
+    
+        for (let i = bottom; i >= top; i--) {
+            arr.push(matrix[i][left])
+        }
+        left++
+    }
+
+    return arr
+}
+```
+
+<br/>
+

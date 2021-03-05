@@ -1538,6 +1538,62 @@ function cutRope(number) {
 <br/>
 
 
+### 链表中倒数第k个结点
+
+{% note primary %}
+**题目描述：**  
+
+输入一个链表，输出该链表中倒数第k个结点。
+{% endnote %}
+
+示例：
+ - 输入：{1,2,3,4,5},1
+ - 输出：{5}
+
+```JavaScript
+// function ListNode(x) {
+//     this.val = x;
+//     this.next = null;
+// }
+
+// const node1 = new ListNode(1)
+// const node2 = new ListNode(2)
+// const node3 = new ListNode(3)
+// const node4 = new ListNode(4)
+// const node5 = new ListNode(5)
+
+// node1.next = node2
+// node2.next = node3
+// node3.next = node4
+// node4.next = node5
+
+function FindKthToTail(pHead, k) {
+    if (!pHead) return null
+
+    let slowIndex = pHead
+    let quickIndex = pHead
+
+    while (k > 0) {
+        if (!quickIndex) {
+            return null
+        }
+
+        quickIndex = quickIndex.next
+        k--
+    }
+
+    while (quickIndex) {
+        slowIndex = slowIndex.next
+        quickIndex = quickIndex.next
+    }
+
+    return slowIndex
+}
+```
+
+<br/>
+
+
 ## 较难
 
 ### 二维数组中的查找

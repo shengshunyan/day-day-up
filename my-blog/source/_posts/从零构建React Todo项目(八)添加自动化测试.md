@@ -1,7 +1,7 @@
 ---
-title: 从零构建React Todo项目(八)添加单元测试
+title: 从零构建React Todo项目(八)添加自动化测试
 date: 2021-02-26
-keywords: JavaScript, React, 单元测试
+keywords: JavaScript, React, 单元测试, 集成测试
 cover: https://i.loli.net/2020/09/07/M5yvXBUGnYsqEft.gif
 tags:
      - JavaScript
@@ -9,6 +9,10 @@ tags:
 
 {% note info no-icon %}
 项目地址：https://github.com/shengshunyan/react-scaffold
+puppeteer：https://github.com/puppeteer/puppeteer
+结合项目来谈谈 Puppeteer：https://zhuanlan.zhihu.com/p/76237595
+jest：https://www.jestjs.cn/docs/puppeteer
+jest-puppeteer：https://github.com/smooth-code/jest-puppeteer
 {% endnote %}
 
 
@@ -18,12 +22,12 @@ tags:
 
 但是，互联网时代也急剧地改变了许多软件设计，开发和发布的方式。开发者面临的问题是，需求越来越多，应用越来越复杂，时不时会有一种失控的的感觉，并在心中大喊一句：“我太南了！”。严重的时候甚至会出现我改了一行代码，却不清楚其影响范围情况。这种时候，就需要测试的方式，来保障我们应用的质量和稳定性了。
 
-接下来，让我们学习下，如何给 React 应用写单元测试吧🎁
+接下来，让我们学习下，如何给 React 应用写自动化测试（单元测试、集成测试）吧🎁
 
 <br/>
 
 
-## 给纯函数(utils)添加单元测试
+## 单元测试(纯函数(utils))
 
 {% note primary %}
 Jest官网：https://jestjs.io/docs/en/getting-started.html
@@ -104,7 +108,7 @@ Jest官网：https://jestjs.io/docs/en/getting-started.html
 <br/>
 
 
-## 给纯组件添加单元测试
+## 单元测试(纯组件)
 
 {% note primary %}
 Testing Library官网：https://testing-library.com/docs/
@@ -162,7 +166,7 @@ React Testing Library Tutorial：https://www.robinwieruch.de/react-testing-libra
 <br/>
 
 
-## 测试store（easy-peasy）相关的文件
+## 单元测试(store（easy-peasy）相关的文件)
 
 {% note primary %}
 easy-peasy 官网：https://easy-peasy.now.sh/docs/tutorials/testing.html
@@ -314,3 +318,128 @@ import style from './index.scss';
         },
     }
     ```
+
+<br/>
+
+
+## 集成测试
+
+除了模块单元的测试驱动开发，在系统功能测试阶段，我们希望自动化完成业务功能正确性的检测，此时我们就要考虑集成测试方案了。目前前端集成化测试自动化工具也有比较多。例如CasperJS、Nighmare、Nightwatch、Dalekjs。本节我们使用的是Puppeteer。
+
+### Puppeteer是什么
+
+Puppeteer 是 Chrome 开发团队在 2017 年发布的一个 Node.js 包，用来模拟 Chrome 浏览器的运行。
+
+ - Puppeteer 是 Node.js 工具引擎
+ - Puppeteer 提供了一系列 API，通过 Chrome DevTools Protocol 协议控制 Chromium/Chrome 浏览器的行为
+ - Puppeteer 默认情况下是以 headless 启动 Chrome 的，也可以通过参数控制启动有界面的 Chrome
+ - Puppeteer 默认绑定最新的 Chromium 版本，也可以自己设置不同版本的绑定
+ - Puppeteer 让我们不需要了解太多的底层 CDP 协议实现与浏览器的通信
+
+官方称：“Most things that you can do manually in the browser can be done using Puppeteer”，那么具体可以做些什么呢？
+
+ - 网页截图或者生成 PDF
+ - 爬取 SPA 或 SSR 网站
+ - UI 自动化测试，模拟表单提交，键盘输入，点击等行为
+ - 捕获网站的时间线，帮助诊断性能问题
+ - 创建一个最新的自动化测试环境，使用最新的 js 和最新的 Chrome 浏览器运行测试用例
+ - 测试 Chrome 扩展程序
+ - ...
+
+### 给todo项目添加
+
+1. 因为puppeteer包需要下载chrome相关包，比较大，所以单独文件夹管理依赖，在需要的时候再安装依赖和执行测试脚本。在项目根目录新建文件夹 __integration_test__ ，并初始化项目
+
+    ```bash
+    mkdir __integration_test__
+    cd __integration_test__
+    npm init -y
+    ```
+
+2. 安装相关依赖：
+
+    ```bash
+    npm install --save-dev jest jest-puppeteer puppeteer
+    ```
+
+3. package.json 文件中添加 jest 配置
+
+    ```json
+    {
+        "jest": {
+            "preset": "jest-puppeteer"
+        },
+    }
+    ```
+
+4. 添加 jest-puppeteer 配置文件 jest-puppeteer.config.js，[详细配置](https://github.com/smooth-code/jest-puppeteer/blob/master/packages/jest-environment-puppeteer/README.md)
+
+    ```JavaScript
+    module.exports = {
+        launch: {
+            // 设置为false会打开浏览器界面看到测试过程
+            headless: false,
+        },
+    };
+    ```
+
+5. 写测试脚本
+
+    __integration_test__/src/index.test.js
+    ```JavaScript
+    describe('The entry of Application', () => {
+        beforeAll(async () => {
+            // 设置大概网页能请求到并渲染的时间
+            jest.setTimeout(30000);
+            await page.goto('http://mall.shengshunyan.xyz');
+        });
+
+        it('should display three menu', async () => {
+            await expect(page).toMatchElement('.ant-layout-header');
+            await expect(page).toMatch('home');
+            await expect(page).toMatch('todo');
+            await expect(page).toMatch('Antd');
+        });
+
+        it('should display breadcrumb', async () => {
+            await expect(page).toMatchElement('.ant-breadcrumb');
+        });
+
+        it('should display content box', async () => {
+            await expect(page).toMatchElement('.site-layout-content');
+        });
+    });
+    ```
+
+6. package.json 文件中添运行测试脚本
+
+    ```json
+    {
+        "scripts": {
+            "test": "jest src"
+        },
+    }
+    ```
+
+7. 运行测试，查看结果
+
+    ```bash
+    $ npm run test
+
+    > test-package@1.0.0 test
+    > jest src
+
+    PASS  src/index.test.js (25.382 s)
+    The entry of Application
+        ✓ should display three menu (1391 ms)
+        ✓ should display breadcrumb (427 ms)
+        ✓ should display content box (422 ms)
+
+    Test Suites: 1 passed, 1 total
+    Tests:       3 passed, 3 total
+    Snapshots:   0 total
+    Time:        25.573 s
+    Ran all test suites matching /src/i.
+    ```
+
+    ![WX20210305-211136@2x.png](https://i.loli.net/2021/03/05/csl4HiL7hIrKbAz.png)

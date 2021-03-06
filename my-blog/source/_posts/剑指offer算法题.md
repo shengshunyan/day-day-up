@@ -1700,3 +1700,72 @@ function cutRope(number) {
 
 <br/>
 
+
+### 树的子结构
+
+{% note primary %}
+**题目描述：**  
+
+输入两棵二叉树A，B，判断B是不是A的子结构。（ps：我们约定空树不是任意一个树的子结构）
+{% endnote %}
+
+示例：
+ - 输入：{8,8,#,9,#,2,#,5},{8,9,#,2}
+ - 输出：true
+ - 说明：本题目包含复杂数据结构TreeNode，[点此查看相关信息](https://blog.nowcoder.net/n/954373f213e14eeab0a69ed0e9ef1b6e)
+
+{% note success %}
+**解题思路：**
+遍历到值相同的节点，再进入判断是否会是子树的逻辑
+{% endnote %}
+
+```JavaScript
+// function TreeNode(x) {
+//     this.val = x;
+//     this.left = null;
+//     this.right = null;
+// }
+
+// const node1 = new TreeNode(8)
+// const node2 = new TreeNode(8)
+// const node3 = new TreeNode(9)
+// const node4 = new TreeNode(2)
+// const node5 = new TreeNode(5)
+// node1.left = node2
+// node2.left = node3
+// node3.left = node4
+// node4.left = node5
+
+// const node6 = new TreeNode(8)
+// const node7 = new TreeNode(9)
+// const node8 = new TreeNode(2)
+// node6.left = node7
+// node7.left = node8
+
+function isSub(node1, node2) {
+    if (node2 === null) return true
+    if (node1 === null) return false
+    if (node1.val === node2.val) {
+        return isSub(node1.left, node2.left) && isSub(node1.right, node2.right)
+    } else {
+        return false
+    }
+}
+
+function HasSubtree(pRoot1, pRoot2) {
+    if (!pRoot1 || !pRoot2) {
+        return false
+    }
+
+    if (pRoot1.val === pRoot2.val) {
+        if (isSub(pRoot1, pRoot2)) {
+            return true
+        }
+    }
+
+    return HasSubtree(pRoot1.left, pRoot2) || HasSubtree(pRoot1.right, pRoot2)
+}
+```
+
+<br/>
+

@@ -1325,6 +1325,7 @@ function isNumeric(s) {
 
 {% note success %}
 **解题思路：**
+
 快慢指针相遇
 
 ![WechatIMG22.jpeg](https://i.loli.net/2021/02/23/l9fIAbOuY5KsrVd.jpg)
@@ -1503,6 +1504,7 @@ function Print(pRoot) {
 
 {% note success %}
 **解题思路：**
+
 看到这种求最优解的题型，你就应该思考一下动态规划是否适合。这个绳子我可以一次一次的剪，第一次剪成两段，这就变成两根新绳子，只要我分别知道这两根新绳子最大的乘积，那么我就知道了整条绳子的最大乘积了，这就将一个问题，划分为两个子问题了，且各子问题之间相互独立，满足最优子结构，因此可以使用动态规划
 
 首先确定边界条件和状态转移方程：
@@ -1610,6 +1612,7 @@ function FindKthToTail(pHead, k) {
 
 {% note success %}
 **解题思路：**
+
 方法一：从左下角开始查找，小了往右，大了往上
 
 方法二：从右上角开始查找，小了往下，大了往左
@@ -1657,6 +1660,7 @@ function cutRope(number) {
 
 {% note success %}
 **解题思路：**
+
 左右上下四个指针往内渐逼
 {% endnote %}
 
@@ -1716,6 +1720,7 @@ function cutRope(number) {
 
 {% note success %}
 **解题思路：**
+
 遍历到值相同的节点，再进入判断是否会是子树的逻辑
 {% endnote %}
 
@@ -1764,6 +1769,63 @@ function HasSubtree(pRoot1, pRoot2) {
     }
 
     return HasSubtree(pRoot1.left, pRoot2) || HasSubtree(pRoot1.right, pRoot2)
+}
+```
+
+<br/>
+
+
+### 二叉搜索树的后序遍历序列
+
+{% note primary %}
+**题目描述：**  
+
+输入一个整数数组，判断该数组是不是某二叉搜索树的后序遍历的结果。如果是则返回true,否则返回false。假设输入的数组的任意两个数字都互不相同。
+{% endnote %}
+
+示例：
+ - 输入：[4,8,6,12,16,14,10]
+ - 输出：true
+
+{% note success %}
+**解题思路：**
+
+先找到左右子树的分界点，从左至右第一个大于根节点的节点，然后判断最后的点是否都大于根节点；
+上一步成立之后，再递归判断各自左右子树是不是搜索二叉树
+{% endnote %}
+
+```JavaScript
+function curryVerify(sequence) {
+    let index = 0
+    const leftTree = []
+    const rightTree = []
+    const rootNode = sequence.pop()
+
+    for (;index < sequence.length; index++) {
+        if (sequence[index] > rootNode) {
+            break
+        }
+        leftTree.push(sequence[index])
+    }
+
+    for (;index < sequence.length; index++) {
+        if (sequence[index] < rootNode) {
+            return false
+        }
+        rightTree.push(sequence[index])
+    }
+
+    if (leftTree.length === 0 && rightTree.length === 0) {
+        return true  
+    }  
+
+    return curryVerify(leftTree) && curryVerify(rightTree)
+}
+
+function VerifySquenceOfBST(sequence) {
+    if (!sequence.length) return false
+
+    return curryVerify(sequence)
 }
 ```
 

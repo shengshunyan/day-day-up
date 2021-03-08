@@ -324,7 +324,7 @@ import style from './index.scss';
 
 ## 集成测试
 
-除了模块单元的测试驱动开发，在系统功能测试阶段，我们希望自动化完成业务功能正确性的检测，此时我们就要考虑集成测试方案了。目前前端集成化测试自动化工具也有比较多。例如CasperJS、Nighmare、Nightwatch、Dalekjs。本节我们使用的是Puppeteer。
+除了模块单元的测试驱动开发，在系统功能测试阶段，我们希望自动化完成业务功能正确性的检测，此时我们就要考虑集成测试方案了。目前前端集成化测试自动化工具也有比较多。例如Cypress、selenium-IDE、CasperJS、Nighmare、Nightwatch、Dalekjs。本节我们使用的是Puppeteer。
 
 ### Puppeteer是什么
 

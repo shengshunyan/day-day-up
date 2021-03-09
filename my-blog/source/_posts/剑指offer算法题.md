@@ -1831,3 +1831,64 @@ function VerifySquenceOfBST(sequence) {
 
 <br/>
 
+
+### 二叉树中和为某一值的路径
+
+{% note primary %}
+**题目描述：**  
+
+输入一颗二叉树的根节点和一个整数，按字典序打印出二叉树中结点值的和为输入整数的所有路径。路径定义为从树的根结点开始往下一直到叶结点所经过的结点形成一条路径。
+{% endnote %}
+
+示例：
+ - 输入：{10,5,12,4,7}, 22
+ - 输出：[[10,5,7],[10,12]]
+ - 输入：{10,5,12,4,7}, 15
+ - 输出：[]
+
+{% note success %}
+**解题思路：**
+
+用递归计算从叶节点开始的，各种和的路径，最终得到根节点的各种和的路径
+{% endnote %}
+
+```JavaScript
+function curryCalcCountMap(node) {
+    if (!node.left && !node.right) {
+        const countMap = {
+            [node.val]: [[node.val]]
+        }
+        return countMap
+    }
+    
+    const countMap = {}
+    if (node.left) {
+        const leftNodeCountMap = curryCalcCountMap(node.left)
+        for (let key of Object.keys(leftNodeCountMap)) {
+            countMap[Number(key) + node.val] = leftNodeCountMap[key].map(item => [node.val, ...item])
+        }
+    }
+    if (node.right) {
+        const rightNodeCountMap = curryCalcCountMap(node.right)
+        for (let key of Object.keys(rightNodeCountMap)) {
+            if (countMap[Number(key) + node.val]) {
+                countMap[Number(key) + node.val].push(...rightNodeCountMap[key].map(item => [node.val, ...item]))
+            } else {
+                countMap[Number(key) + node.val] = rightNodeCountMap[key].map(item => [node.val, ...item])
+            }
+        }
+    }
+
+    return countMap
+}
+
+function FindPath(root, expectNumber) {
+    if (!root) return []
+
+    const countMap = curryCalcCountMap(root)
+    return countMap[expectNumber] ? countMap[expectNumber] : []
+}
+```
+
+<br/>
+

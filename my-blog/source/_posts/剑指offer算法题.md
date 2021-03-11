@@ -1892,3 +1892,88 @@ function FindPath(root, expectNumber) {
 
 <br/>
 
+
+### 复杂链表的复制
+
+{% note primary %}
+**题目描述：**  
+
+输入一个复杂链表（每个节点中有节点值，以及两个指针，一个指向下一个节点，另一个特殊指针random指向一个随机节点），请对此链表进行深拷贝，并返回拷贝后的头结点。（注意，输出结果中请不要返回参数中的节点引用，否则判题程序会直接返回空）
+{% endnote %}
+
+示例：
+ - 说明：本题目包含复杂数据结构ListNode、RandomListNode，[点此查看相关信息](https://blog.nowcoder.net/n/954373f213e14eeab0a69ed0e9ef1b6e)
+
+{% note success %}
+**解题思路：**
+
+在主链路上复制节点的时候，建一个旧节点到新节点的指针，方便之后复制random指针使用
+{% endnote %}
+
+```JavaScript
+// function RandomListNode(x) {
+//     this.label = x;
+//     this.next = null;
+//     this.random = null;
+// }
+
+// const node1 = new RandomListNode(1)
+// const node2 = new RandomListNode(2)
+// const node3 = new RandomListNode(3)
+// const node4 = new RandomListNode(4)
+// node1.next = node2
+// node2.next = node3
+// node3.next = node4
+// node1.random = node3
+// node2.random = node1
+// node3.random = node4
+// node4.random = node3
+
+function Clone(pHead) {
+    let newPHead = null
+    let oldCurrentNode = pHead
+    let newCurrentNode = null
+    let newPreNode = null
+
+    // 先复制主链路节点，并在原节点上添加新节点的引用
+    while (oldCurrentNode) {
+        newCurrentNode = new RandomListNode(oldCurrentNode.label)
+        if (newPreNode) {
+            newPreNode.next = newCurrentNode
+        } else {
+            newPHead = newCurrentNode
+        }
+        newPreNode = newCurrentNode
+        oldCurrentNode.clone = newCurrentNode
+
+        oldCurrentNode = oldCurrentNode.next
+    }
+
+    // 复制节点的随机指针
+    oldCurrentNode = pHead
+    newCurrentNode = newPHead
+    while (oldCurrentNode) {
+        if (oldCurrentNode.random) {
+            newCurrentNode.random = oldCurrentNode.random.clone
+        }
+
+        oldCurrentNode = oldCurrentNode.next
+        newCurrentNode = newCurrentNode.next
+    }
+
+    // 删除原节点上对新节点的引用
+    oldCurrentNode = pHead
+    while (oldCurrentNode) {
+        if (oldCurrentNode.random && oldCurrentNode.random.clone) {
+            delete oldCurrentNode.random.clone
+        }
+
+        oldCurrentNode = oldCurrentNode.next
+    }
+
+    return newPHead
+}
+```
+
+<br/>
+

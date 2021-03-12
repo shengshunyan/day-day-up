@@ -1977,3 +1977,47 @@ function Clone(pHead) {
 
 <br/>
 
+
+### 字符串的排列
+
+{% note primary %}
+**题目描述：**  
+
+输入一个字符串(可能有字符重复,字符只包括大小写字母),按字典序打印出该字符串中字符的所有排列。例如输入字符串abc,则按字典序打印出由字符a,b,c所能排列出来的所有字符串abc,acb,bac,bca,cab和cba。
+{% endnote %}
+
+示例：
+ - 输入："ab"
+ - 输出：["ab","ba"]
+
+{% note success %}
+**解题思路：**
+
+假设输入为a、b、c，那么其实排序的总数：
+
+fun（a，b，c）= a（fun（b，c））+ b（fun（a，c））+ c（fun（b，a））
+{% endnote %}
+
+```JavaScript
+function Permutation(str)
+{
+    if (!str.length) return []
+    if (str.length === 1) return [str]
+
+    // 先对字符串字母排一下序
+    const newStr = str.split('').sort().join('')
+    const res = []
+    for (let i = 0; i < newStr.length; i++) {
+        // 字母重复，去重
+        if (newStr[i - 1] === newStr[i]) continue
+
+        const left = newStr.slice(0, i)
+        const right = newStr.slice(i + 1)
+        res.push(...Permutation(left + right).map(item => newStr[i] + item))
+    }
+    return res
+}
+```
+
+<br/>
+

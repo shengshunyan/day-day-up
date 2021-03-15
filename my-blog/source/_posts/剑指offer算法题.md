@@ -1999,8 +1999,7 @@ fun（a，b，c）= a（fun（b，c））+ b（fun（a，c））+ c（fun（b，
 {% endnote %}
 
 ```JavaScript
-function Permutation(str)
-{
+function Permutation(str) {
     if (!str.length) return []
     if (str.length === 1) return [str]
 
@@ -2015,6 +2014,46 @@ function Permutation(str)
         const right = newStr.slice(i + 1)
         res.push(...Permutation(left + right).map(item => newStr[i] + item))
     }
+    return res
+}
+```
+
+<br/>
+
+
+### 把数组排成最小的数
+
+{% note primary %}
+**题目描述：**  
+
+输入一个正整数数组，把数组里所有数字拼接起来排成一个数，打印能拼接出的所有数字中最小的一个。例如输入数组{3，32，321}，则打印出这三个数字能排成的最小数字为321323。
+{% endnote %}
+
+示例：
+ - 输入：[3,32,321]
+ - 输出："321323"
+
+{% note success %}
+**解题思路：**
+
+首先将字符串进行排序，将它们两两拼接起来，比较a+b和b+a哪个大，如果a+b>b+a，那就应该将b放在a的前面，a排在b的后面，依次类推
+{% endnote %}
+
+```JavaScript
+function PrintMinNumber(numbers) {
+    if (numbers.length === 0) return ''
+    if (numbers.length === 1) return numbers[0]
+
+    let res = ''
+    for (let i = 0; i < numbers.length; i++) {
+        for (let j = 0; j < numbers.length - 1 - i; j++) {
+            if (numbers[j] + '' + numbers[j + 1] < numbers[j + 1] + '' + numbers[j]) {
+                [numbers[j], numbers[j + 1]] = [numbers[j + 1], numbers[j]]
+            }
+        }
+        res = res + numbers[numbers.length - 1 - i]
+    }
+
     return res
 }
 ```

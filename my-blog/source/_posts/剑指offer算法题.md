@@ -2060,3 +2060,54 @@ function PrintMinNumber(numbers) {
 
 <br/>
 
+
+### 丑数
+
+{% note primary %}
+**题目描述：**  
+
+把只包含质因子2、3和5的数称作丑数（Ugly Number）。例如6、8都是丑数，但14不是，因为它包含质因子7。 习惯上我们把1当做是第一个丑数。求按从小到大的顺序的第N个丑数。
+{% endnote %}
+
+示例：
+ - 输入：7
+ - 输出：8
+
+{% note success %}
+**解题思路：**
+
+1. 按顺序将丑数保存在数组中，然后求下一个丑数；
+3. 按照题目规定，第一个丑数是1，存入数组中；
+4. 第二个丑数为1\*2，1\*3，1\*5三个中的最小值；
+5. 第三个丑数为2\*2，1\*3，1\*5三个中的最小值，依次类推，求出第N个数组。
+{% endnote %}
+
+```JavaScript
+function GetUglyNumber_Solution(index) {
+    if (index === 0) return 0    
+
+    const uglyNumberList = [1]
+    let indexTwo = 0
+    let indexThree = 0
+    let indexFive= 0
+    for (let i = 1; i < index; i++) {
+        let min = Math.min(uglyNumberList[indexTwo] * 2, uglyNumberList[indexThree] * 3, uglyNumberList[indexFive] * 5)
+
+        uglyNumberList.push(min)
+        if (min === uglyNumberList[indexTwo] * 2) {
+            indexTwo++
+        } 
+        if (min === uglyNumberList[indexThree] * 3) {
+            indexThree++
+        } 
+        if (min === uglyNumberList[indexFive] * 5) {
+            indexFive++
+        } 
+    }
+
+    return uglyNumberList[uglyNumberList.length - 1]
+}
+```
+
+<br/>
+

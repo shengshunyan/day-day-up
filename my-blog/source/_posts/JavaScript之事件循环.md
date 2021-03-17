@@ -1,5 +1,5 @@
 ---
-title: JavaScript 事件循环
+title: JavaScript之事件循环
 date: 2021-03-15
 keywords: JavaScript, event loop
 cover: https://i.loli.net/2021/03/15/6cbOQB8e7akhNPI.png
@@ -8,8 +8,8 @@ tags:
 ---
 
 {% note info no-icon %}
-原文：淘系技术[《JavaScript 事件循环：从起源到浏览器再到 Node.js》](https://mp.weixin.qq.com/s/a6aFweCiLF0Mx03fARP8qQ)
 好文收藏，谨防丢失
+原文：淘系技术[《JavaScript 事件循环：从起源到浏览器再到 Node.js》](https://mp.weixin.qq.com/s/a6aFweCiLF0Mx03fARP8qQ)
 {% endnote %}
 
 

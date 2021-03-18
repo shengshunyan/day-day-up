@@ -2167,3 +2167,46 @@ function GetUglyNumber_Solution(index) {
 
 <br/>
 
+
+### 把字符串转换成整数
+
+{% note primary %}
+**题目描述：**  
+
+将一个字符串(包括数字字母符号,可以为空)转换成一个整数，要求不能使用字符串转换整数的库函数。 数值为0或者字符串不是一个合法的数值则返回0
+{% endnote %}
+
+示例：
+ - 输入："+2147483647"
+ - 输出：2147483647
+ - 输入："1a33"
+ - 输出：0
+
+{% note success %}
+**解题思路：**
+
+1. 需要判空
+2. 运用正则表达式分组匹配
+3. 需要判断整数表达边界
+{% endnote %}
+
+```JavaScript
+function StrToInt(str) {
+    if (!str) return 0
+
+    const reg = /^([\+-]?)(\d+)$/
+    const res = str.match(reg)
+
+    if (res === null || res[2] === '0' || res[2] > Number.MAX_SAFE_INTEGER) {
+        return 0
+    }
+
+    if (res[1] === '-') {
+        return str
+    }
+    return res[2]
+}
+```
+
+<br/>
+

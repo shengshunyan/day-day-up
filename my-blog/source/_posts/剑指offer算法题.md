@@ -2269,3 +2269,65 @@ function match(str, pattern) {
 
 <br/>
 
+
+### 删除链表中重复的结点
+
+{% note primary %}
+**题目描述：**  
+
+在一个排序的链表中，存在重复的结点，请删除该链表中重复的结点，重复的结点不保留，返回链表头指针。 例如，链表1->2->3->3->4->4->5 处理后为 1->2->5
+{% endnote %}
+
+示例：
+ - 输入：{1,2,3,3,4,4,5}
+ - 输出：{1,2,5}
+
+```JavaScript
+// function ListNode(x) {
+//     this.val = x;
+//     this.next = null;
+// }
+
+// const node1 = new ListNode(1)
+// const node2 = new ListNode(2)
+// const node3 = new ListNode(3)
+// const node4 = new ListNode(3)
+// const node5 = new ListNode(4)
+// const node6 = new ListNode(4)
+// const node7 = new ListNode(5)
+
+// node1.next = node2
+// node2.next = node3
+// node3.next = node4
+// node4.next = node5
+// node5.next = node6
+// node6.next = node7
+
+function deleteDuplication(pHead) {
+    // (1) 0个或1个节点，则直接返回头节点
+    if (pHead === null || pHead.next === null) return pHead
+
+    // (1) 2个节点及以上
+    // (2) 两个节点值不一样，连接并递归后一个节点
+    if (pHead.val !== pHead.next.val) {
+        pHead.next = deleteDuplication(pHead.next)
+        return pHead
+    }
+
+    // (2) 两个节点值一样，遍历找到值不一样的节点，递归此节点
+    let tempNode = pHead.next
+    while (tempNode !== null && pHead.val === tempNode.val) {
+        tempNode = tempNode.next
+    }
+    return deleteDuplication(tempNode)
+}
+
+// let newList = deleteDuplication(node1)
+// while (newList) {
+//     console.log(newList.val)
+//     newList = newList.next
+// }
+```
+
+<br/>
+

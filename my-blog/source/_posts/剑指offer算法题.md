@@ -2331,3 +2331,48 @@ function deleteDuplication(pHead) {
 
 <br/>
 
+
+### 对称的二叉树
+
+{% note primary %}
+**题目描述：**  
+
+请实现一个函数，用来判断一棵二叉树是不是对称的。注意，如果一个二叉树同此二叉树的镜像是同样的，定义其为对称的。
+{% endnote %}
+
+示例：
+ - 输入：{8,6,6,5,7,7,5}
+ - 输出：true
+ - 输入：{8,6,9,5,7,7,5}
+ - 输出：false
+
+```JavaScript
+// function TreeNode(x) {
+//     this.val = x;
+//     this.left = null;
+//     this.right = null;
+// }
+
+// const node1 = new TreeNode(8)
+// const node2 = new TreeNode(7)
+// const node3 = new TreeNode(7)
+
+// node1.left = node2
+// node1.right = node3
+
+function isSymmetricalTrees(root1, root2) {
+    if (!root1 && !root2) return true
+
+    return Boolean(root1 && root2)
+        && root1.val === root2.val
+        && isSymmetricalTrees(root1.left, root2.right)
+        && isSymmetricalTrees(root1.right, root2.left)
+}
+
+function isSymmetrical(pRoot) {
+    return isSymmetricalTrees(pRoot, pRoot)
+}
+```
+
+<br/>
+

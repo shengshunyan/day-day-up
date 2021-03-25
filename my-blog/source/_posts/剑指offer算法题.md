@@ -2376,3 +2376,66 @@ function isSymmetrical(pRoot) {
 
 <br/>
 
+
+### 按之字形顺序打印二叉树
+
+{% note primary %}
+**题目描述：**  
+
+请实现一个函数按照之字形打印二叉树，即第一行按照从左到右的顺序打印，第二层按照从右至左的顺序打印，第三行按照从左到右的顺序打印，其他行以此类推。
+{% endnote %}
+
+示例：
+ - 输入：{8,6,10,5,7,9,11}
+ - 输出：[[8],[10,6],[5,7,9,11]]
+
+```JavaScript
+// function TreeNode(x) {
+//     this.val = x;
+//     this.left = null;
+//     this.right = null;
+// }
+
+// const node1 = new TreeNode(8)
+// const node2 = new TreeNode(7)
+// const node3 = new TreeNode(7)
+// node1.left = node2
+// node1.right = node3
+
+function Print(pRoot) {
+    if (!pRoot) return []
+    
+    // 整理节点数组
+    const nodeList = [[pRoot]]
+    while (true) {
+        const curFloor = nodeList[nodeList.length - 1]
+        const nextFloor = []
+
+        for (let i = 0; i < curFloor.length; i++) {
+            if (curFloor[i].left) {
+                nextFloor.push(curFloor[i].left)
+            }
+            if (curFloor[i].right) {
+                nextFloor.push(curFloor[i].right)
+            }
+        }
+
+        if (nextFloor.length === 0) break
+
+        nodeList.push(nextFloor)
+    }
+
+    // 将节点双数层反转，再转换成节点值
+    const nodeValList = nodeList.map((item, index) => {
+        if (index % 2 !== 0) {
+            return item.reverse().map(childItem => childItem.val)
+        }
+        return item.map(childItem => childItem.val)
+    })
+
+    return nodeValList
+}
+```
+
+<br/>
+

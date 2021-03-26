@@ -2439,3 +2439,74 @@ function Print(pRoot) {
 
 <br/>
 
+
+### 序列化二叉树
+
+{% note primary %}
+**题目描述：**  
+
+请实现两个函数，分别用来序列化和反序列化二叉树
+
+二叉树的序列化是指：把一棵二叉树按照某种遍历方式的结果以某种格式保存为字符串，从而使得内存中建立起来的二叉树可以持久保存。序列化可以基于先序、中序、后序、层序的二叉树遍历方式来进行修改，序列化的结果是一个字符串，序列化时通过 某种符号表示空节点（#），以 ！ 表示一个结点值的结束（value!）。
+
+二叉树的反序列化是指：根据某种遍历顺序得到的序列化字符串结果str，重构二叉树。
+
+例如，我们可以把一个只有根节点为1的二叉树序列化为"1,"，然后通过自己的函数来解析回这个二叉树
+{% endnote %}
+
+示例：
+ - 输入：{8,6,10,5,7,9,11}
+ - 输出：{8,6,10,5,7,9,11}
+
+{% note success %}
+**解题思路：**
+
+1. 序列化采用先序遍历，遇到空节点就用'#'表示，停止递归
+2. 反序列化也是用的先序遍历的顺序，用一个数据可变的数组存储节点，每次取数组头数据，递归建树节点，遇到'#'则停止递归
+{% endnote %}
+
+```JavaScript
+// function TreeNode(x) {
+//     this.val = x;
+//     this.left = null;
+//     this.right = null;
+// }
+
+// const node1 = new TreeNode(1)
+// const node2 = new TreeNode(2)
+// const node3 = new TreeNode(3)
+// const node4 = new TreeNode(4)
+// node1.left = node2
+// node1.right = node3
+// node2.right = node4
+
+function Serialize(pRoot) {
+    if (!pRoot) return '#'
+
+    const nodeValueList = []
+    nodeValueList.push(pRoot.val)
+    nodeValueList.push(Serialize(pRoot.left))
+    nodeValueList.push(Serialize(pRoot.right))
+
+    return nodeValueList.join(',')
+}
+
+function Deserialize(s) {
+    const nodeValueList = s.split(',')
+    function recursion() {
+        const curVal = nodeValueList.shift()
+        let node = null
+        if (curVal !== '#') {
+            node = new TreeNode(curVal)
+            node.left = recursion()
+            node.right = recursion()
+        }
+        return node
+    }
+
+    return recursion(nodeValueList)
+}
+```
+
+<br/>
+

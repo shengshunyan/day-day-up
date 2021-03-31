@@ -1,5 +1,5 @@
 ---
-title: NodeJs两种常用的模块语法(CJS、ESM)
+title: Node.js两种常用的模块语法(CJS、ESM)
 date: 2020-12-14
 keywords: NodeJs, JavaScript, 模块, CJS, ESM
 cover: https://i.loli.net/2020/12/14/I3OXARzKUBhY67s.jpg

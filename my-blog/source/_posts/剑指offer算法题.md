@@ -2510,3 +2510,51 @@ function Deserialize(s) {
 
 <br/>
 
+
+### 滑动窗口的最大值
+
+{% note primary %}
+**题目描述：**  
+
+给定一个数组和滑动窗口的大小，找出所有滑动窗口里数值的最大值。例如，如果输入数组{2,3,4,2,6,2,5,1}及滑动窗口的大小3，那么一共存在6个滑动窗口，他们的最大值分别为{4,4,6,6,6,5}； 针对数组{2,3,4,2,6,2,5,1}的滑动窗口有以下6个： {[2,3,4],2,6,2,5,1}， {2,[3,4,2],6,2,5,1}， {2,3,[4,2,6],2,5,1}， {2,3,4,[2,6,2],5,1}， {2,3,4,2,[6,2,5],1}， {2,3,4,2,6,[2,5,1]}。
+窗口大于数组长度的时候，返回空
+{% endnote %}
+
+示例：
+ - 输入：[2,3,4,2,6,2,5,1],3
+ - 输出：[4,4,6,6,6,5]
+
+{% note success %}
+**解题思路：**
+
+遍历数组的每一个元素:
+
+1. 如果queue(临时队列)为空，则直接将当前元素加入到临时queue中。
+2. 如果queue不为空，则让当前元素和queue的第一个元素比较，如果大于，则将queue的第一个元素删除，然后继续讲当前元素和queue的第一个元素比较
+3. 如果当前元素小于queue的第一个元素，则直接将当前元素加入到queue的末尾
+4. 如果queue第一个元素已经不属于当前窗口的边界，则应该将头部元素删除
+{% endnote %}
+
+```JavaScript
+function maxInWindows(num, size) {
+    if (!num.length || size <= 0 || size > num.length) return []
+
+    const queue = []
+    const res = []
+    for (let i = 0; i < num.length; i++) {
+        while (queue.length && num[i] > queue[queue.length - 1]) {
+            queue.pop()
+        }
+        queue.push(num[i])
+
+        if (i + 1 >= size) {
+            res.push(queue[0])
+            if (num[i - size + 1] === queue[0]) queue.shift()
+        }
+    }
+    return res
+}
+```
+
+<br/>
+

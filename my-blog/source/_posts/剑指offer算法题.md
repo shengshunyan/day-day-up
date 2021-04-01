@@ -1652,6 +1652,74 @@ function FindNumsAppearOnce(array) {
 <br/>
 
 
+### 矩阵中的路径
+
+{% note primary %}
+**题目描述：**  
+
+请设计一个函数，用来判断在一个矩阵中是否存在一条包含某字符串所有字符的路径。路径可以从矩阵中的任意一个格子开始，每一步可以在矩阵中向左，向右，向上，向下移动一个格子。如果一条路径经过了矩阵中的某一个格子，则该路径不能再进入该格子。 例如 [[a,b,c,e],[s,f,c,s],[a,d,e,e]] 矩阵中包含一条字符串"bcced"的路径，但是矩阵中不包含"abcb"路径，因为字符串的第一个字符b占据了矩阵中的第一行第二个格子之后，路径不能再次进入该格子。
+{% endnote %}
+
+示例：
+ - 输入：[[a,b,c,e],[s,f,c,s],[a,d,e,e]],"abcced"
+ - 输出：true
+ - 输入：[[a,b,c,e],[s,f,c,s],[a,d,e,e]],"abcb"
+ - 输出：false
+
+{% note success %}
+**解题思路：**
+
+1. 先遍历矩阵找到可行的起始点
+2. 从起始点开始沿上下左右四个方向找合适下一个点（递归）
+{% endnote %}
+
+```JavaScript
+function hasPath(matrix, word) {
+    for (let row = 0; row < matrix.length; row++) {
+        for (let column = 0; column < matrix[row].length; column++) {
+            if (matrix[row][column] !== word[0]) {
+                continue
+            }
+
+            if (isPath(row, column, word.slice(1), matrix, [row + '' + column])) {
+                return true
+            }
+        }
+    }
+
+    return false
+}
+
+function isPath(row, column, word, matrix, path) {
+    if (word.length === 0) return true
+
+    // 上 (row - 1, column)
+    if (row > 0 && !path.includes(`${row - 1}${column}`) && matrix[row - 1][column] === word[0]) {
+        if (isPath(row - 1, column, word.slice(1), matrix, [...path, `${row - 1}${column}`])) return true
+    }
+
+    // 下 (row + 1, column)
+    if (row < matrix.length - 1 && !path.includes(`${row + 1}${column}`) && matrix[row + 1][column] === word[0]) {
+        if (isPath(row + 1, column, word.slice(1), matrix, [...path, `${row + 1}${column}`])) return true
+    }
+
+    // 左 (row, column - 1)
+    if (column > 0 && !path.includes(`${row}${column - 1}`) && matrix[row][column - 1] === word[0]) {
+        if (isPath(row, column - 1, word.slice(1), matrix, [...path, `${row}${column - 1}`])) return true
+    }
+
+    // 右 (row, column + 1)
+    if (column < matrix[0].length - 1 && !path.includes(`${row}${column + 1}`) && matrix[row][column + 1] === word[0]) {
+        if (isPath(row, column + 1, word.slice(1), matrix, [...path, `${row}${column + 1}`])) return true
+    }
+
+    return false
+}
+```
+
+<br/>
+
+
 ## 较难
 
 ### 二维数组中的查找
@@ -1683,7 +1751,7 @@ function cutRope(number) {
     let i = 0
     let j = array.length - 1
 
-    while (i < array[0].length && j > 0) {
+    while (i < array[0].length && j >= 0) {
         if (array[j][i] > target) {
             j--
             continue

@@ -146,7 +146,7 @@ function PageA({
 
     useEffect(() => {
         getOptions()
-    }, [getOptions])
+    }, [])
 
     return (
         <div className="page-a">

@@ -105,15 +105,15 @@ tags:
     ```yml
     version: '3.1'
     services:
-    redis:
-      image: daocloud.io/library/redis:5.0.7
-      restart: always
-      container_name: redis
-      environment:
-        - TZ=Asia/Shanghai
-      ports:
-        - 6379:6379
-      command: ["redis-server", "/usr/local/redis/redis.conf"]
+      redis:
+        image: daocloud.io/library/redis:5.0.7
+        restart: always
+        container_name: redis
+        environment:
+            - TZ=Asia/Shanghai
+        ports:
+            - 6379:6379
+        command: ["redis-server", "/usr/local/redis/redis.conf"]
     ```
 
 2. 运行容器

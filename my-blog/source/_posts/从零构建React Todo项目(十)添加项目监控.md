@@ -196,11 +196,11 @@ tags:
 
 ### 效果查看
 
-1. 重新部署todo项目前端资源之后，访问todo项目线上地址：http://mall.shengshunyan.xyz/，可以看到发送日志上报的请求
+1. 重新部署todo项目前端资源之后，访问todo项目线上地址：http://mall.shengshunyan.xyz/, 可以看到发送日志上报的请求
 
     ![WX20210311-210629.png](https://i.loli.net/2021/03/11/mARyVDUX2M9CpTe.png)
 
-2. 访问监控服务前端页面：http://xxx.xxx.xxx.xxx:8010/webfunny/overview.html，可以查看todo项目的统计数据
+2. 访问监控服务前端页面：http://xxx.xxx.xxx.xxx:8010/webfunny/overview.html, 可以查看todo项目的统计数据
 
     ![WX20210311-210735.png](https://i.loli.net/2021/03/11/AMwli81qC2SfJHa.png)
 

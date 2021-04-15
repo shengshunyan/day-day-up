@@ -52,7 +52,7 @@ Flutter依赖一个Skia 2D图形化引擎。Skia也是Android平台和Chrome的�
 
 ## Hello World
 
-1. 按照之前[教程](https://www.shengshunyan.xyz/2019/05/30/flutter%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/)配置完flutter开发环境之后，直接使用命令创建项目
+1. 按照之前教程[《Flutter开发环境搭建》](https://www.shengshunyan.xyz/2019/05/30/Flutter%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/)配置完flutter开发环境之后，直接使用命令创建项目
 
   ```bash
   flutter create [project name]

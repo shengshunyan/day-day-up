@@ -29,7 +29,7 @@ tags:
  - 输出：3
 
 ```JavaScript
-function Add(num1, num2) {
+function fibonacci(n) {
     let a = 0
     let b = 1
 
@@ -97,23 +97,22 @@ NOTE：给出的所有元素都大于0，若数组大小为0，请返回0。
 ```JavaScript
 function minNumberInRotateArray(rotateArray)
 {
-    if (rotateArray.length === 0) {
+    if (arr.length === 0) {
         return 0
     }
 
-    let left = 1
-    let right = rotateArray.length
-
+    let left = 0
+    let right = arr.length - 1
+    
     while (left < right) {
-        let middle = Math.floor((left + right) / 2)
-        if (rotateArray[middle - 1] <= rotateArray[right - 1]) {
-            right = middle
+        const mid = Math.floor((left + right + 2) / 2) - 1
+        if (arr[mid] < arr[right]) {
+            right = mid
         } else {
-            left = middle + 1
+            left = mid + 1
         }
     }
-
-    return rotateArray[left - 1]
+    return arr[left]
 }
 ```
 

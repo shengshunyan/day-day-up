@@ -1,0 +1,1 @@
+jsonpFunc({ name: 'xiaoming', age: 14 })

@@ -1,32 +1,32 @@
 import React, { useState } from 'react'
-import { Button, Input } from 'antd'
+import kscreenshot from 'kscreenshot'
 
 import './App.css'
+// 100 200
+class App extends React.Component {
+    componentDidMount() {
+        //65指键盘中的A
+        const obj = new kscreenshot({
+            key: 65,
+            copyPath: this.copyPath,
+            // immediately: true,
+        })
 
-function debounce(fn, time) {
-    return function (e) {
-        let that = this
-        let value = e.target.value
-        clearTimeout(fn.tid)
-        fn.tid = setTimeout(() => {
-            // console.log(2, newArgs)
-            fn.call(that, value)
-        }, time);
+        console.log(obj)
+        obj.startScreenShot()
     }
-}
 
-function App() {
-    const inputChange = debounce((value) => {
-        console.log(value)
-    }, 1000)
+    copyPath = (value) => {
+        console.log('pic: ', value)
+    }
 
-    return (
-        <div className="App">
-            App
-
-            <Input onChange={inputChange} ></Input>
-        </div>
-    )
+    render() {
+        return (
+            <div className="container">
+                aaa
+            </div>
+        )
+    }
 }
 
 export default App

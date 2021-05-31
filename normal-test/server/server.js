@@ -18,7 +18,7 @@ const getData = ctx => {
     ctx.response.type = 'json';
     ctx.response.body = {
         result: 'I am a test get data!',
-        param:  ctx.query,
+        param: ctx.query,
     };
 }
 

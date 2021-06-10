@@ -1,6 +1,6 @@
 ---
-title: npm包的调试技巧
-date: 2021-06-09
+title: Npm包的调试技巧
+date: 2021-06-10
 keywords: JavaScript, npm, 模块
 cover: https://i.loli.net/2021/06/03/q1yN83J6TMlpnHz.png
 tags:

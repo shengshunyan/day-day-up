@@ -34,46 +34,17 @@
 
     <script type="text/javascript">
 
-        window.onload = function () {
-            const Ajax = {
-                // data应为'a=a1&b=b1'这种字符串格式，在jq里如果data为对象会自动将对象转成这种字符串格式
-                post: function (url, data, callback) {
-                    var xhr = new XMLHttpRequest();
-                    xhr.open('POST', url, false);
-                    // 添加http头，发送信息至服务器时内容编码类型
-                    xhr.setRequestHeader('Content-Type', 'application/json');
-                    xhr.onreadystatechange = function () {
-                        if (xhr.readyState == 4 && xhr.status == 200) {
-                            callback(JSON.parse(xhr.responseText));
-                        }
-                    }
-                    xhr.send(JSON.stringify(data));
-                }
-            }
-
-            Ajax.post('/data', { name: 'xiaoming' }, data => {
-                console.log('data: ', data)
-            })
-
-            // fetch('/data', {
-            //     method: 'POST',
-            //     headers: {
-            //         'content-type': 'application/json',
-            //     },
-            //     body: JSON.stringify({ name: 'xiaoming' }),
-            //     credentials: 'same-origin'
-            // })
-            //     .then(response => {
-            //         if (response.ok) {
-            //             return response.json()
-            //         }
-            //         return Promise.reject('server error: ' + response.status)
-            //     })
-            //     .then(data => {
-            //         console.log(data)
-            //     })
-            //     .catch(error => console.error('catch error:', error))
+        window.onerror = function(message, source, lineno, colno, error) {
+            console.log('caught error: ', error)
+            return true
         }
+
+        throw new Error('my error')
+
+
+        // window.onload = function () {
+
+        // }
 
     </script>
 </body>

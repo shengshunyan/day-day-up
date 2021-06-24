@@ -1,29 +1,25 @@
-import React, { useState } from 'react'
-import kscreenshot from 'kscreenshot'
+import React from 'react'
+import Suspense, { lazy } from './components/Suspense'
 
 import './App.css'
-// 100 200
-class App extends React.Component {
-    componentDidMount() {
-        //65指键盘中的A
-        const obj = new kscreenshot({
-            key: 65,
-            copyPath: this.copyPath,
-            // immediately: true,
+
+const LazyComponent = lazy(() => new Promise(resolve => {
+    setTimeout(() => {
+        resolve({
+            default: <div>component content</div>
         })
+    }, 1000)
+}))
 
-        console.log(obj)
-        obj.startScreenShot()
-    }
-
-    copyPath = (value) => {
-        console.log('pic: ', value)
-    }
-
+class App extends React.PureComponent {
     render() {
         return (
             <div className="container">
-                aaa
+                <h1>App</h1>
+                
+                <Suspense fallback={<div>loading</div>}>
+                    <LazyComponent />
+                </Suspense>
             </div>
         )
     }

@@ -1,7 +1,7 @@
 ---
-title: 从零创建发布一个Npm包
-date: 2021-06-03
-keywords: JavaScript, npm, 模块
+title: Npm专题(三)创建并发布包
+date: 2021-09-03
+keywords: JavaScript, npm, package
 cover: https://i.loli.net/2021/06/03/q1yN83J6TMlpnHz.png
 tags:
      - JavaScript

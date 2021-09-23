@@ -1,7 +1,4 @@
 const childProcess = require('child_process')
-const path = require('path')
-const fs = require('fs')
-
 const execCmd = function (cmd, cb) {
     childProcess.exec(cmd, (error, stdout) => {
         if (!error){

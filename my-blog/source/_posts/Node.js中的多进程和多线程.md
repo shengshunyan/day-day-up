@@ -313,7 +313,7 @@ Node.js 中的进程 Process 是一个全局对象，无需 require 直接使用
  - process.cwd()：获取当前进程工作目录，
  - process.platform：获取当前进程运行的操作系统平台
  - process.uptime()：当前进程已运行时间，例如：pm2 守护进程的 uptime 值
- - 进程事件：process.on(‘uncaughtException’, cb) 捕获异常信息、process.on(‘exit’, cb）进程推出监听
+ - 进程事件：process.on(‘uncaughtException’, cb) 捕获异常信息、process.on(‘exit’, cb）进程退出监听
  - 三个标准流：process.stdout 标准输出、process.stdin 标准输入、process.stderr 标准错误输出
  - process.title 指定进程名称，有的时候需要给进程指定一个名称
 
@@ -416,7 +416,7 @@ pm2 start app.js --env production --name test
 
 > worker_threads 的出现让 Node.js 拥有 **多工作线程**，但这个概念不同于Java等其它后端语言中的多线程。
 
-Node.js 通过提供 cluster、child_process API 创建子进程的方式来赋予Node.js “多线程”能力。但是这种创建进程的方式会牺牲共享内存，并且数据通信必须通过json进行传输。（有一定的局限性和性能问题）
+Node.js 通过提供 cluster、child_process API 创建子进程的方式来赋予Node.js “多进程”能力。但是这种创建进程的方式会牺牲共享内存，并且数据通信必须通过json进行传输。（有一定的局限性和性能问题）
 
 基于此 Node.js V10.5.0 提供了 [worker_threads](https://nodejs.org/api/worker_threads.html?source=post_page---------------------------#worker_threads_worker_threads)，它比 child_process 或 cluster更轻量级。 与child_process 或 cluster 不同，worker_threads 可以共享内存，通过传输 ArrayBuffer 实例或共享 SharedArrayBuffer 实例来实现。
 

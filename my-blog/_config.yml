@@ -109,12 +109,13 @@ aplayer:
 
 # 豆瓣
 douban:
-  user: 146126328
+  id: 146126328
   builtin: false
   # book:
   #   title: 'This is my book title'
   #   quote: 'This is my book quote'
   movie:
+    path: movies/index.html
     title: "看到不一样的生活"
     quote: "电影一小时，也许是他们的一生"
   timeout: 10000

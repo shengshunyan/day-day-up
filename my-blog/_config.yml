@@ -32,7 +32,8 @@ skip_render:
 new_post_name: :title.md # File name of new posts
 default_layout: post
 titlecase: false # Transform title into titlecase
-external_link: true # Open external links in new tab
+external_link:
+  enable: true # Open external links in new tab
 filename_case: 0
 render_drafts: false
 post_asset_folder: false
@@ -49,7 +50,7 @@ highlight:
 # per_page: Posts displayed per page. (0 = disable pagination)
 # order_by: Posts order. (Order by date descending by default)
 index_generator:
-  path: ''
+  path: ""
   per_page: 10
   order_by: -date
 
@@ -114,9 +115,9 @@ douban:
   #   title: 'This is my book title'
   #   quote: 'This is my book quote'
   movie:
-    title: '看到不一样的生活'
-    quote: '电影一小时，也许是他们的一生'
-  timeout: 10000 
+    title: "看到不一样的生活"
+    quote: "电影一小时，也许是他们的一生"
+  timeout: 10000
 
 # 本地搜索
 search:

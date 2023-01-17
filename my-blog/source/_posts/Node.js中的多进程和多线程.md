@@ -2,7 +2,7 @@
 title: Node.js中的多进程和多线程
 date: 2021-03-31
 keywords: Node.js, 多进程, 多线程
-cover: https://i.loli.net/2021/03/30/ZIYlOPU2XhqK6JS.jpg
+cover: https://s2.loli.net/2023/01/17/cQqD2HUCWafjGMB.png
 tags:
      - JavaScript
 ---

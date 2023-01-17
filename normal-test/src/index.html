@@ -2,51 +2,119 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <style type="text/css">
-        body {
-            margin: 0;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Document</title>
+  <style type="text/css">
+    body {
+      margin: 0;
+    }
 
-        /* .container {
+    /* .container {
             position: relative;
             width: 300px;
             height: 100px;
             background-color: red;
         } */
-    </style>
-    <!-- <link rel="stylesheet" href="./css/index2.css" /> -->
-    <!-- <script type="text/javascript" src="./util//jquery-3.4.1.js"></script> -->
+
+    table {
+      width: 100%;
+    }
+
+    table tr td:first-child,
+    table tr td:last-child {
+      display: block;
+      width: max-content;
+      margin: 0 !important;
+    }
+  </style>
+  <!-- <link rel="stylesheet" href="./css/index2.css" /> -->
+  <script type="text/javascript" src="./util//jquery-3.4.1.js"></script>
 </head>
 
 <body>
+  <div id="container" class="container">
+    <span class="shadow-host">
+      <a href="https://twitter.com/ireaderinokun"> Follow @ireaderinokun </a>
+    </span>
 
-    <div id="container" class="container">
-        <span class="shadow-host">
-            <a href="https://twitter.com/ireaderinokun">
-                Follow @ireaderinokun
-            </a>
-        </span>
-    </div>
+    <br />
+    <br />
+    <br />
+    <br />
 
-    <script type="text/javascript">
+    <table>
+      <tr>
+        <td>tr是行</td>
+        <td>tr是行</td>
+        <td>tr是行</td>
+      </tr>
 
-        window.onerror = function(message, source, lineno, colno, error) {
-            console.log('caught error: ', error)
-            return true
+      <tr>
+        <td>td是列</td>
+        <td>td是列</td>
+        <td>td是列</td>
+      </tr>
+    </table>
+  </div>
+
+  <script type="text/javascript">
+    // window.onerror = function (message, source, lineno, colno, error) {
+    //     console.log('caught error: ', error)
+    //     return true
+    // }
+
+    // throw new Error('my error')
+
+    window.onload = function () {
+      // const getData = async () => {
+      //     const res = await $.get('data').catch(err => console.error(err))
+      //     console.log('res: ', res)
+      // }
+      // getData()
+      // $.ajax('https://sentry-new.myshopline.com/api/0/organizations/shopline-front-end/recent-searches/?query=&type=0&limit=3', {
+      //     headers: {
+      //         Authorization: 'Bearer 021408aad19740cfbd4a24d71db587fe8090570c683d4640a13c2d06654abe69',
+      //         origin: 'https://sentry-new.myshopline.com',
+      //     },
+      //     success(res) {
+      //         console.log('res: ', res)
+      //     }
+      // })
+
+      const errorRequest = (path) =>
+        new Promise((resolve, reject) => {
+          setTimeout(() => {
+            reject(`get ${path} data error`);
+          }, 1000);
+        });
+      const rightRequest = (path) =>
+        new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve(`get ${path} data right`);
+          }, 1000);
+        });
+
+
+
+
+      const initData = async () => {
+        const getData = async () => {
+          const res = await errorRequest('person').catch(err => {
+            return err;
+          })
+          console.log('res', res)
+          return res;
         }
+        await getData().catch(err => {
+          console.log('1111', err)
+        })
+      };
 
-        throw new Error('my error')
-
-
-        // window.onload = function () {
-
-        // }
-
-    </script>
+      initData();
+    };
+  </script>
 </body>
 
 </html>

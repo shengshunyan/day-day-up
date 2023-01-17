@@ -1,20 +1,16 @@
+const getData = async () => {
+  console.log("-------- get data");
+  throw new Error("校验");
 
-const arr = [
-    { num: 10 },
-    { num: 2 },
-    { num: 3 },
-    { num: undefined },
-    { num: 100 },
-    { num: undefined },
-    { num: 6 },
-    { num: 9 },
-]
+  return 1;
+};
 
-arr.sort((a, b) => {
-    if (Number.isNaN(a.num - b.num)) {
-        return -1
-    }
-    return a.num - b.num;
-})
+const main = async () => {
+  const res = await getData().catch((err) => {
+    console.log("err: ", err);
+  });
 
-console.log(arr)
+  console.log("res: ", res);
+};
+
+main();

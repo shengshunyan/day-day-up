@@ -1,10 +1,12 @@
-import Todo from "./pages/Todo";
+// import Todo from "./pages/Todo";
+import TodoMobx from "./pages/TodoMobx";
 import "./App.css";
 
 function App() {
   return (
     <>
-      <Todo></Todo>
+      {/* <Todo></Todo> */}
+      <TodoMobx></TodoMobx>
     </>
   );
 }

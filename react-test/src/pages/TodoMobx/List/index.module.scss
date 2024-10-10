@@ -1,0 +1,9 @@
+.todo-item {
+  display: flex !important;
+  justify-content: space-between !important;
+}
+
+.todo-item-completed {
+  text-decoration: line-through;
+  color: gray !important;
+}

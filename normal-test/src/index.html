@@ -67,6 +67,36 @@
 
     // throw new Error('my error')
 
+    const listener = (event) => {
+      // console.log("event: ", event);
+
+      // if (!event.target) return;
+
+      console.log(`Failed to load ${event.target.tagName}: ${event.target.src || event.target.href}`)
+      // if (event.target.tagName === "IMG") {
+      //   console.log(`Failed to load image: ${event.target.src}`);
+      // } else if (event.target.tagName === "LINK") {
+      //   console.log(`Failed to load css: ${event.target.src}`);
+      // }
+    }
+
+    document.body.addEventListener(
+      "error",
+      listener,
+      true // useCapture - necessary for resource loading errors
+    );
+    // document.body.removeEventListener(
+    //   "error",
+    //   listener,
+    //   true // useCapture - necessary for resource loading errors
+    // );
+
+
+
+    // window.onerror = (...params) => {
+    //   console.log('onerror params: ', params)
+    // }
+
     window.onload = function () {
       // const getData = async () => {
       //     const res = await $.get('data').catch(err => console.error(err))
@@ -83,38 +113,17 @@
       //     }
       // })
 
-      const errorRequest = (path) =>
-        new Promise((resolve, reject) => {
-          setTimeout(() => {
-            reject(`get ${path} data error`);
-          }, 1000);
-        });
-      const rightRequest = (path) =>
-        new Promise((resolve, reject) => {
-          setTimeout(() => {
-            resolve(`get ${path} data right`);
-          }, 1000);
-        });
-
-
-
-
-      const initData = async () => {
-        const getData = async () => {
-          const res = await errorRequest('person').catch(err => {
-            return err;
-          })
-          console.log('res', res)
-          return res;
-        }
-        await getData().catch(err => {
-          console.log('1111', err)
-        })
-      };
-
-      initData();
+      // a.b()
     };
   </script>
+
+  <img
+    src="https://d2n979dmt31clo.cloudfront.net/image1/store/4200012349/1671534493944/4ca2f712c31b4d18accff92e5f5d964e_900x.jpg?w=800&h=400"
+    alt="" />
+
+  <link rel="stylesheet" href="https://twitter1.com/index2.css" />
+
+  <script src="https://d2n979dmt31clo.cloudfront.net/image1.js"></script>
 </body>
 
 </html>
